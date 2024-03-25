@@ -4,10 +4,12 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
+import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
+import no.nav.klage.pdfgen.service.SvarbrevService
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import org.springframework.http.HttpHeaders
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController
 class PDFGenController(
     private val pdfGenService: PDFGenService,
     private val innholdsfortegnelseService: InnholdsfortegnelseService,
+    private val svarbrevService: SvarbrevService,
 ) {
 
     companion object {
@@ -73,6 +76,29 @@ class PDFGenController(
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
         responseHeaders.add("Content-Disposition", "inline; filename=vedleggsoversikt.pdf")
+        return ResponseEntity(
+            data,
+            responseHeaders,
+            HttpStatus.OK
+        )
+    }
+
+    @Operation(
+        summary = "Generate svarbrev",
+        description = "Generate svarbrev"
+    )
+    @ResponseBody
+    @PostMapping("/svarbrev")
+    fun generateSvarbrev(
+        @RequestBody input: SvarbrevRequest,
+    ): ResponseEntity<ByteArray> {
+        logger.debug("generateSvarbrev() called. See body in secure logs")
+
+        val data = svarbrevService.getSvarbrevAsByteArray(input)
+
+        val responseHeaders = HttpHeaders()
+        responseHeaders.contentType = MediaType.APPLICATION_PDF
+        responseHeaders.add("Content-Disposition", "inline; filename=svarbrev.pdf")
         return ResponseEntity(
             data,
             responseHeaders,

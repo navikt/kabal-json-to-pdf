@@ -16,4 +16,4 @@ gradle-app.setting
 
 .idea
 
-/test.pdf
+/*.pdf

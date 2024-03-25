@@ -52,6 +52,7 @@ spec:
         - application: kabal-frontend
         - application: kabal-smart-editor-api
         - application: kabal-api
+        - application: kabin-api
   azure:
     application:
       enabled: true
