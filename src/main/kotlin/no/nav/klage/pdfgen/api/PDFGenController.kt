@@ -93,6 +93,7 @@ class PDFGenController(
         @RequestBody input: SvarbrevRequest,
     ): ResponseEntity<ByteArray> {
         logger.debug("generateSvarbrev() called. See body in secure logs")
+        secureLogger.debug("generateSvarbrev() called. Received input: {}", input)
 
         val data = svarbrevService.getSvarbrevAsByteArray(input)
 

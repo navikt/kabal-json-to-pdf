@@ -24,13 +24,96 @@ class SvarbrevService {
     )
 
     fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
-        val doc = getHTMLDocument(svarbrevRequest)
+        val doc = when (svarbrevRequest.type) {
+            SvarbrevRequest.Type.KLAGE -> getHTMLDocumentKlage(svarbrevRequest)
+            SvarbrevRequest.Type.ANKE -> getHTMLDocumentAnke(svarbrevRequest)
+            null -> getHTMLDocumentAnke(svarbrevRequest)
+        }
         val os = ByteArrayOutputStream()
         createPDFA(doc, os)
         return os.toByteArray()
     }
 
-    private fun getHTMLDocument(svarbrevRequest: SvarbrevRequest): Document {
+    private fun getHTMLDocumentKlage(svarbrevRequest: SvarbrevRequest): Document {
+        return createHTMLDocument()
+            .html {
+                head {
+                    style {
+                        unsafe {
+                            raw(
+                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                            )
+                        }
+                    }
+                    title(svarbrevRequest.title)
+                }
+                body {
+                    id = "body"
+                    classes = setOf("svarbrev")
+                    header {
+                        div {
+                            id = "header_text"
+                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
+                        }
+                        div {
+                            id = "logo"
+                            img { src = "nav_logo.png" }
+                        }
+                    }
+                    div {
+                        classes = setOf("current-date")
+                        +"Dato: ${getFormattedDate(LocalDate.now())}"
+                    }
+                    h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
+                    p {
+                        +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${getFormattedDate(svarbrevRequest.receivedDate!!)}."
+                    }
+
+                    h2 { +"Klageinstansens saksbehandlingstid" }
+                    p {
+                        +"Saksbehandlingstiden vår er vanligvis "
+                        span { +svarbrevRequest.behandlingstidInWeeks.toString() }
+                        +" uker, men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText}"
+                    }
+                    p {
+                        +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på  www.nav.no/saksbehandlingstid."
+                    }
+                    h2 { +"Klageinstansens behandling av klagen" }
+                    p {
+                        +"Vi vil vurdere alle dokumentene i saken din."
+                    }
+                    p {
+                        +"Mangler vi opplysninger, vil vi innhente disse. Får vi informasjon du ikke er kjent med, vil vi sende deg en kopi slik at du kan uttale deg. Dette gjelder også hvis vi får uttalelser fra rådgivende lege. Du får beskjed fra oss dersom dette påvirker saksbehandlingstiden."
+                    }
+                    p {
+                        +"Du får avgjørelsen tilsendt på den måten du ønsker, og som du har allerede har valgt. "
+                    }
+                    h2 { +"Du må melde fra om endringer" }
+                    p {
+                        +"Skjer det endringer du mener er viktig for saken din, må du orientere oss.  Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
+                    }
+                    p {
+                        +"Du kan logge deg inn på nav.no/kontakt og sende skriftlig melding der. Hvis du ønsker å ettersende dokumentasjon, kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                    }
+                    h2 { +"Du har rett til innsyn" }
+                    p {
+                        +"Du har rett til å se dokumentene i saken din."
+                    }
+                    h2 { +"Informasjon om fri rettshjelp" }
+                    p {
+                        +"Dette får du vite mer om hos Statsforvalteren eller advokat."
+                    }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"NAV Klageinstans"
+                    }
+                }
+            }
+    }
+
+    private fun getHTMLDocumentAnke(svarbrevRequest: SvarbrevRequest): Document {
         return createHTMLDocument()
             .html {
                 head {
@@ -99,7 +182,7 @@ class SvarbrevService {
                     }
 
                     p {
-                        +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate)}."
+                        +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate ?: svarbrevRequest.receivedDate!!)}."
                     }
 
                     h2 { +"Behandlingen av ankesaken" }
@@ -107,6 +190,11 @@ class SvarbrevService {
                         +"Saksbehandlingstiden vår er nå "
                         span { +svarbrevRequest.behandlingstidInWeeks.toString() }
                         +" uker. Du finner oversikt over saksbehandlingstidene våre på www.nav.no."
+                    }
+                    if (svarbrevRequest.customText != null) {
+                        p {
+                            +svarbrevRequest.customText
+                        }
                     }
                     p {
                         +"Dersom vi ikke endrer vedtaket du har fått, sender vi saken din til Trygderetten."
