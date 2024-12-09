@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val mockkVersion = "1.13.13"
 val logstashVersion = "8.0"
-val jsoupVersion = "1.18.1"
-val openHtmlToPdfVersion = "1.1.22"
+val jsoupVersion = "1.18.3"
+val openHtmlToPdfVersion = "1.1.23"
 val kotlinxHtmlVersion = "0.11.0"
-val springDocVersion = "2.6.0"
-val klageKodeverkVersion = "1.8.58"
+val springDocVersion = "2.7.0"
+val klageKodeverkVersion = "1.9.0"
 
 repositories {
     mavenCentral()
@@ -14,17 +14,17 @@ repositories {
 }
 
 plugins {
-    val kotlinVersion = "2.0.21"
+    val kotlinVersion = "2.1.0"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.3.5"
+    id("org.springframework.boot") version "3.4.0"
     idea
 }
 
 apply(plugin = "io.spring.dependency-management")
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
