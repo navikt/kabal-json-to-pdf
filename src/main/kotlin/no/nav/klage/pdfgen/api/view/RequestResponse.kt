@@ -57,3 +57,39 @@ data class SvarbrevRequest(
         OMGJOERINGSKRAV,
     }
 }
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class ForlengetBehandlingstidRequest(
+    val title: String,
+    val sakenGjelder: Part,
+    val klager: Part?,
+    val fullmektigFritekst: String?,
+    val ytelsenavn: String,
+    val mottattKlageinstans: LocalDate,
+    val previousBehandlingstidInfo: String?,
+    val reason: String?,
+    val behandlingstidUnits: Int?,
+    val behandlingstidUnitTypeId: String?,
+    val behandlingstidDate: String?,
+    val avsenderEnhetId: String,
+    val type: Type,
+) {
+    data class Part(
+        val name: String,
+        val fnr: String,
+    )
+
+    enum class Type {
+        KLAGE,
+        ANKE,
+        OMGJOERINGSKRAV;
+
+        fun getSakstypeDisplayName(): String {
+            return when (this) {
+                KLAGE -> "klagesak"
+                ANKE -> "ankesak"
+                OMGJOERINGSKRAV -> "omgjøringskravssak"
+            }
+        }
+    }
+}
