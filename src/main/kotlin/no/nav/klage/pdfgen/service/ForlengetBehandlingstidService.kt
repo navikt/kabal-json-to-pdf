@@ -7,6 +7,7 @@ import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.createPDFA
 import no.nav.klage.pdfgen.util.getFormattedDate
+import no.nav.klage.pdfgen.util.toFnrView
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
@@ -198,6 +199,4 @@ class ForlengetBehandlingstidService {
             this.replaceFirstChar(Char::lowercase)
         } else this
     }
-
-    private fun String.toFnrView() = this.substring(0, 6) + " " + this.substring(6)
 }
