@@ -7,6 +7,7 @@ import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.createPDFA
 import no.nav.klage.pdfgen.util.getFormattedDate
+import no.nav.klage.pdfgen.util.getYtelseDisplayText
 import no.nav.klage.pdfgen.util.toFnrView
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
@@ -96,7 +97,11 @@ class SvarbrevService {
                     }
                     br {}
                     p {
-                        +"Vi skal behandle klagen din som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${
+                        +"Vi skal behandle klagen din som gjelder ${
+                            getYtelseDisplayText(
+                                ytelseId = svarbrevRequest.ytelseId,                                
+                            )
+                        }, som vi har fått oversendt ${
                             getFormattedDate(
                                 svarbrevRequest.receivedDate!!
                             )
@@ -205,7 +210,13 @@ class SvarbrevService {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
-                    h1 { +"Nav orienterer om saksbehandlingen av anken din som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
+                    h1 {
+                        +"Nav orienterer om saksbehandlingen av anken din som gjelder ${
+                            getYtelseDisplayText(
+                                ytelseId = svarbrevRequest.ytelseId
+                            )
+                        }"
+                    }
                     br { }
                     p {
                         div {
@@ -358,7 +369,11 @@ class SvarbrevService {
                     }
                     br {}
                     p {
-                        +"Vi viser til kravet ditt om omgjøring av vedtak som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi mottok ${
+                        +"Vi viser til kravet ditt om omgjøring av vedtak som gjelder ${
+                            getYtelseDisplayText(
+                                ytelseId = svarbrevRequest.ytelseId
+                            )
+                        }, som vi mottok ${
                             getFormattedDate(
                                 svarbrevRequest.receivedDate!!
                             )
@@ -405,30 +420,5 @@ class SvarbrevService {
                     }
                 }
             }
-    }
-
-    private fun String.toSpecialCase(): String {
-        val strings = this.split(" - ")
-        return when (strings.size) {
-            1 -> {
-                this.decapitalize()
-            }
-
-            2 -> {
-                if (strings[0].equals(other = strings[1], ignoreCase = true)) {
-                    strings[0].decapitalize()
-                } else {
-                    strings[0].decapitalize() + " - " + strings[1].decapitalize()
-                }
-            }
-
-            else -> this
-        }
-    }
-
-    private fun String.decapitalize(): String {
-        return if (!this.startsWith("NAV")) {
-            this.replaceFirstChar(Char::lowercase)
-        } else this
     }
 }
