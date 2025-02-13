@@ -18,7 +18,7 @@ class GenerateForlengetBehandlingstidPDFTest {
                 sakenGjelder = ForlengetBehandlingstidRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = ForlengetBehandlingstidRequest.Part(name = "Second Last", fnr = "23456789120"),
                 fullmektigFritekst = "Fullmektig Fritekst",
-                ytelsenavn = "Sykdom i familien - Pleiepenger sykt barn",
+                ytelseId = "14",
                 mottattKlageinstans = LocalDate.now().minusMonths(1),
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.MONTHS.id,

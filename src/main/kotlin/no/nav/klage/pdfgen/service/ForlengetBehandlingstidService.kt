@@ -5,9 +5,7 @@ import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.transformers.getCss
-import no.nav.klage.pdfgen.util.createPDFA
-import no.nav.klage.pdfgen.util.getFormattedDate
-import no.nav.klage.pdfgen.util.toFnrView
+import no.nav.klage.pdfgen.util.*
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
@@ -62,7 +60,13 @@ class ForlengetBehandlingstidService {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
-                    h1 { +"Varsel om lengre saksbehandlingstid enn forventet i din ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} om ${forlengetBehandlingstidRequest.ytelsenavn.toSpecialCase()}" }
+                    h1 {
+                        +"Varsel om lengre saksbehandlingstid enn forventet i din ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} om ${
+                            getYtelseDisplayText(
+                                ytelseId = forlengetBehandlingstidRequest.ytelseId
+                            )
+                        }"
+                    }
 
                     br {}
                     p {
@@ -100,7 +104,8 @@ class ForlengetBehandlingstidService {
                     }
 
                     if (forlengetBehandlingstidRequest.previousBehandlingstidInfo != null) {
-                        p { +forlengetBehandlingstidRequest.previousBehandlingstidInfo
+                        p {
+                            +forlengetBehandlingstidRequest.previousBehandlingstidInfo
                             if (forlengetBehandlingstidRequest.previousBehandlingstidInfo.last() != '.') {
                                 +"."
                             }
@@ -117,7 +122,13 @@ class ForlengetBehandlingstidService {
                         }
                     }
                     p {
-                        +"Vi forventer at saken din vil bli behandlet innen ${getBehandlingstidText(forlengetBehandlingstidRequest)}. "
+                        +"Vi forventer at saken din vil bli behandlet innen ${
+                            getBehandlingstidText(
+                                behandlingstidUnitTypeId = forlengetBehandlingstidRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = forlengetBehandlingstidRequest.behandlingstidUnits,
+                                behandlingstidDate = forlengetBehandlingstidRequest.behandlingstidDate
+                            )
+                        }. "
                         +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på "
                         +"www.nav.no/saksbehandlingstid."
                     }
@@ -147,56 +158,5 @@ class ForlengetBehandlingstidService {
                     }
                 }
             }
-    }
-
-    private fun getBehandlingstidText(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): String {
-        if (forlengetBehandlingstidRequest.behandlingstidDate != null) {
-            return getFormattedDate(LocalDate.parse(forlengetBehandlingstidRequest.behandlingstidDate))
-        } else if (forlengetBehandlingstidRequest.behandlingstidUnits != null && forlengetBehandlingstidRequest.behandlingstidUnitTypeId != null) {
-            return forlengetBehandlingstidRequest.behandlingstidUnits.toString() + when (TimeUnitType.of(forlengetBehandlingstidRequest.behandlingstidUnitTypeId)) {
-                TimeUnitType.WEEKS -> {
-                    if (forlengetBehandlingstidRequest.behandlingstidUnits == 1) {
-                        " uke"
-                    } else {
-                        " uker"
-                    }
-                }
-
-                TimeUnitType.MONTHS -> {
-                    if (forlengetBehandlingstidRequest.behandlingstidUnits == 1) {
-                        " måned"
-                    } else {
-                        " måneder"
-                    }
-                }
-            }
-        } else {
-            throw Exception("Needs date or units and unit type")
-        }
-    }
-
-    private fun String.toSpecialCase(): String {
-        val strings = this.split(" - ")
-        return when (strings.size) {
-            1 -> {
-                this.decapitalize()
-            }
-
-            2 -> {
-                if (strings[0].equals(other = strings[1], ignoreCase = true)) {
-                    strings[0].decapitalize()
-                } else {
-                    strings[0].decapitalize() + " - " + strings[1].decapitalize()
-                }
-            }
-
-            else -> this
-        }
-    }
-
-    private fun String.decapitalize(): String {
-        return if (!this.startsWith("NAV")) {
-            this.replaceFirstChar(Char::lowercase)
-        } else this
     }
 }

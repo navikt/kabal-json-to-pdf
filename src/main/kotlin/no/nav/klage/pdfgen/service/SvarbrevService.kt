@@ -5,10 +5,7 @@ import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.transformers.getCss
-import no.nav.klage.pdfgen.util.createPDFA
-import no.nav.klage.pdfgen.util.getFormattedDate
-import no.nav.klage.pdfgen.util.getYtelseDisplayText
-import no.nav.klage.pdfgen.util.toFnrView
+import no.nav.klage.pdfgen.util.*
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
@@ -99,7 +96,7 @@ class SvarbrevService {
                     p {
                         +"Vi skal behandle klagen din som gjelder ${
                             getYtelseDisplayText(
-                                ytelseId = svarbrevRequest.ytelseId,                                
+                                ytelseId = svarbrevRequest.ytelseId,
                             )
                         }, som vi har fått oversendt ${
                             getFormattedDate(
@@ -111,7 +108,13 @@ class SvarbrevService {
                     h2 { +"Klageinstansens saksbehandlingstid" }
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
-                        span { +getBehandlingstidText(svarbrevRequest) }
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
                         +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {
@@ -158,26 +161,6 @@ class SvarbrevService {
                     }
                 }
             }
-    }
-
-    private fun getBehandlingstidText(svarbrevRequest: SvarbrevRequest): String {
-        return svarbrevRequest.behandlingstidUnits.toString() + when (TimeUnitType.of(svarbrevRequest.behandlingstidUnitTypeId)) {
-            TimeUnitType.WEEKS -> {
-                if (svarbrevRequest.behandlingstidUnits == 1) {
-                    " uke"
-                } else {
-                    " uker"
-                }
-            }
-
-            TimeUnitType.MONTHS -> {
-                if (svarbrevRequest.behandlingstidUnits == 1) {
-                    " måned"
-                } else {
-                    " måneder"
-                }
-            }
-        }
     }
 
     private fun getHTMLDocumentAnke(svarbrevRequest: SvarbrevRequest): Document {
@@ -264,7 +247,13 @@ class SvarbrevService {
                     h2 { +"Behandlingen av ankesaken" }
                     p {
                         +"Saksbehandlingstiden vår er nå "
-                        span { +getBehandlingstidText(svarbrevRequest) }
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
                         +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no/saksbehandlingstid."
                     }
                     if (svarbrevRequest.customText != null) {
@@ -383,7 +372,13 @@ class SvarbrevService {
                     h2 { +"Behandling av kravet om omgjøring" }
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
-                        span { +getBehandlingstidText(svarbrevRequest) }
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
                         +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {

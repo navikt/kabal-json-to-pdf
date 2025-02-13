@@ -64,7 +64,7 @@ data class ForlengetBehandlingstidRequest(
     val sakenGjelder: Part,
     val klager: Part?,
     val fullmektigFritekst: String?,
-    val ytelsenavn: String,
+    val ytelseId: String,
     val mottattKlageinstans: LocalDate,
     val previousBehandlingstidInfo: String?,
     val reason: String?,
