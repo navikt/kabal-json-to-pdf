@@ -99,8 +99,7 @@ class SvarbrevService {
                     p {
                         +"Vi skal behandle klagen din som gjelder ${
                             getYtelseDisplayText(
-                                ytelseId = svarbrevRequest.ytelseId,
-                                ytelsenavn = svarbrevRequest.ytelsenavn
+                                ytelseId = svarbrevRequest.ytelseId,                                
                             )
                         }, som vi har fått oversendt ${
                             getFormattedDate(
@@ -211,8 +210,7 @@ class SvarbrevService {
                     h1 {
                         +"Nav orienterer om saksbehandlingen av anken din som gjelder ${
                             getYtelseDisplayText(
-                                ytelseId = svarbrevRequest.ytelseId,
-                                ytelsenavn = svarbrevRequest.ytelsenavn
+                                ytelseId = svarbrevRequest.ytelseId
                             )
                         }"
                     }
@@ -367,8 +365,7 @@ class SvarbrevService {
                     p {
                         +"Vi viser til kravet ditt om omgjøring av vedtak som gjelder ${
                             getYtelseDisplayText(
-                                ytelseId = svarbrevRequest.ytelseId,
-                                ytelsenavn = svarbrevRequest.ytelsenavn
+                                ytelseId = svarbrevRequest.ytelseId
                             )
                         }, som vi mottok ${
                             getFormattedDate(

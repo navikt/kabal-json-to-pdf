@@ -18,14 +18,13 @@ class GenerateSvarbrevPDFTest {
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
                 ytelseId = "31",
-                ytelsenavn = "Sykdom i familien - Pleiepenger sykt barn",
                 fullmektigFritekst = "Fullmektig Fritekst",
                 ankeReceivedDate = LocalDate.now(),
                 receivedDate = LocalDate.now(),
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
-                type = SvarbrevRequest.Type.OMGJOERINGSKRAV,
+                type = SvarbrevRequest.Type.KLAGE,
                 customText = "Litt ekstra fritekst.",
             )
         )
@@ -40,7 +39,6 @@ class GenerateSvarbrevPDFTest {
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = null,
                 ytelseId = "3",
-                ytelsenavn = "Sykdom i familien - Pleiepenger sykt barn",
                 fullmektigFritekst = "Fullmektig fritekst",
                 ankeReceivedDate = null,
                 receivedDate = LocalDate.now(),
