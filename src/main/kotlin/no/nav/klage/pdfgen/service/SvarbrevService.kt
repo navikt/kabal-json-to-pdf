@@ -5,10 +5,7 @@ import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.transformers.getCss
-import no.nav.klage.pdfgen.util.createPDFA
-import no.nav.klage.pdfgen.util.getFormattedDate
-import no.nav.klage.pdfgen.util.getYtelseDisplayText
-import no.nav.klage.pdfgen.util.toFnrView
+import no.nav.klage.pdfgen.util.*
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
@@ -99,7 +96,7 @@ class SvarbrevService {
                     p {
                         +"Vi skal behandle klagen din som gjelder ${
                             getYtelseDisplayText(
-                                ytelseId = svarbrevRequest.ytelseId,                                
+                                ytelseId = svarbrevRequest.ytelseId,
                             )
                         }, som vi har fått oversendt ${
                             getFormattedDate(
@@ -111,7 +108,13 @@ class SvarbrevService {
                     h2 { +"Klageinstansens saksbehandlingstid" }
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
-                        span { +getBehandlingstidText(svarbrevRequest) }
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
                         +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {
@@ -137,7 +140,10 @@ class SvarbrevService {
                         +"Skjer det endringer du mener er viktig for saken din, må du orientere oss. Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
                     }
                     p {
-                        +"Du kan logge deg inn på nav.no/kontakt og sende skriftlig melding der. Hvis du ønsker å ettersende dokumentasjon, kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                        +"Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding der."
+                    }
+                    p {
+                        +"Om du ikke ønsker å logge deg inn på nav.no kan du kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {
@@ -155,26 +161,6 @@ class SvarbrevService {
                     }
                 }
             }
-    }
-
-    private fun getBehandlingstidText(svarbrevRequest: SvarbrevRequest): String {
-        return svarbrevRequest.behandlingstidUnits.toString() + when (TimeUnitType.of(svarbrevRequest.behandlingstidUnitTypeId)) {
-            TimeUnitType.WEEKS -> {
-                if (svarbrevRequest.behandlingstidUnits == 1) {
-                    " uke"
-                } else {
-                    " uker"
-                }
-            }
-
-            TimeUnitType.MONTHS -> {
-                if (svarbrevRequest.behandlingstidUnits == 1) {
-                    " måned"
-                } else {
-                    " måneder"
-                }
-            }
-        }
     }
 
     private fun getHTMLDocumentAnke(svarbrevRequest: SvarbrevRequest): Document {
@@ -261,7 +247,13 @@ class SvarbrevService {
                     h2 { +"Behandlingen av ankesaken" }
                     p {
                         +"Saksbehandlingstiden vår er nå "
-                        span { +getBehandlingstidText(svarbrevRequest) }
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
                         +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no/saksbehandlingstid."
                     }
                     if (svarbrevRequest.customText != null) {
@@ -284,7 +276,10 @@ class SvarbrevService {
                         +"Vi ber deg holde oss orientert om forhold som kan ha betydning for avgjørelsen av saken din. Det vil si endringer i for eksempel i medisinske forhold, arbeid, inntekt, sivilstand og lignende."
                     }
                     p {
-                        +"Du kan ettersende dokumentasjon på nav.no/klage ved å trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                        +"Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding der."
+                    }
+                    p {
+                        +"Om du ikke ønsker å logge deg inn på nav.no kan du kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {
@@ -377,7 +372,13 @@ class SvarbrevService {
                     h2 { +"Behandling av kravet om omgjøring" }
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
-                        span { +getBehandlingstidText(svarbrevRequest) }
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
                         +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {
@@ -393,7 +394,10 @@ class SvarbrevService {
                         +"Skjer det endringer du mener er viktig for saken din, må du orientere oss. Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
                     }
                     p {
-                        +"Du kan logge deg inn på nav.no/kontakt og sende skriftlig melding der. Hvis du ønsker å ettersende dokumentasjon, kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                        +"Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding der."
+                    }
+                    p {
+                        +"Om du ikke ønsker å logge deg inn på nav.no kan du kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {

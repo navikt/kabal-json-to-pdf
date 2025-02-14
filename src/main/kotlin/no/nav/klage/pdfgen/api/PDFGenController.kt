@@ -3,10 +3,12 @@ package no.nav.klage.pdfgen.api
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
+import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
+import no.nav.klage.pdfgen.service.ForlengetBehandlingstidService
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.service.SvarbrevService
@@ -27,6 +29,7 @@ class PDFGenController(
     private val pdfGenService: PDFGenService,
     private val innholdsfortegnelseService: InnholdsfortegnelseService,
     private val svarbrevService: SvarbrevService,
+    private val forlengetBehandlingstidService: ForlengetBehandlingstidService
 ) {
 
     companion object {
@@ -100,6 +103,30 @@ class PDFGenController(
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
         responseHeaders.add("Content-Disposition", "inline; filename=svarbrev.pdf")
+        return ResponseEntity(
+            data,
+            responseHeaders,
+            HttpStatus.OK
+        )
+    }
+
+    @Operation(
+        summary = "Generate forlenget behandlingstid letter",
+        description = "Generate forlenget behandlingstid letter"
+    )
+    @ResponseBody
+    @PostMapping("/forlengetbehandlingstid")
+    fun generateForlengetBehandlingstid(
+        @RequestBody input: ForlengetBehandlingstidRequest,
+    ): ResponseEntity<ByteArray> {
+        logger.debug("generateForlengetBehandlingstid() called. See body in secure logs")
+        secureLogger.debug("generateForlengetBehandlingstid() called. Received input: {}", input)
+
+        val data = forlengetBehandlingstidService.getForlengetBehandlingstidAsByteArray(input)
+
+        val responseHeaders = HttpHeaders()
+        responseHeaders.contentType = MediaType.APPLICATION_PDF
+        responseHeaders.add("Content-Disposition", "inline; filename=forlengetbehandlingstid.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
