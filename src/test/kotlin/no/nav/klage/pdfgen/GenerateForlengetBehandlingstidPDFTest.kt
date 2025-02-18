@@ -24,8 +24,8 @@ class GenerateForlengetBehandlingstidPDFTest {
                 behandlingstidUnitTypeId = TimeUnitType.MONTHS.id,
                 avsenderEnhetId = "4291",
                 type = ForlengetBehandlingstidRequest.Type.OMGJOERINGSKRAV,
-                previousBehandlingstidInfo = "I brev fra Nav sendt 16. januar 2025 fikk du informasjon om at forventet behandlingstid var 6 uker.",
-                reason = "Årsaken til det er lavere tilgang på kulepenner i forvaltningen.",
+                previousBehandlingstidInfo = null,
+                reason = null,
                 behandlingstidDate = null,
                 
             )
