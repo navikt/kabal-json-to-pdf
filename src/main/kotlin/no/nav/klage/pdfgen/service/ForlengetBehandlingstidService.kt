@@ -132,6 +132,13 @@ class ForlengetBehandlingstidService {
                         +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på "
                         +"www.nav.no/saksbehandlingstid."
                     }
+
+                    if (forlengetBehandlingstidRequest.customText != null) {
+                        p {
+                            +forlengetBehandlingstidRequest.customText
+                        }
+                    }
+
                     h2 { +"Du må melde fra om endringer" }
                     p {
                         +"Vi ber deg holde oss orientert om forhold som kan ha betydning for avgjørelsen av saken din. Det vil si endringer i for eksempel i medisinske forhold, arbeid, inntekt, sivilstand og liknende."

@@ -74,6 +74,7 @@ data class ForlengetBehandlingstidRequest(
     val behandlingstidDate: String?,
     val avsenderEnhetId: String,
     val type: Type,
+    val customText: String?,
 ) {
     data class Part(
         val name: String,
