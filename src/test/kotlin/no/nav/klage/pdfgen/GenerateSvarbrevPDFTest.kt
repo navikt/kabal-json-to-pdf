@@ -25,6 +25,7 @@ class GenerateSvarbrevPDFTest {
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
                 type = SvarbrevRequest.Type.KLAGE,
+                initialCustomText = null,
                 customText = "Litt ekstra fritekst.",
             )
         )
@@ -45,7 +46,8 @@ class GenerateSvarbrevPDFTest {
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
-                type = SvarbrevRequest.Type.ANKE,
+                type = SvarbrevRequest.Type.OMGJOERINGSKRAV,
+                initialCustomText = "Her har vi lagt inn litt ekstra informasjon.",
                 customText = null,
             )
         )

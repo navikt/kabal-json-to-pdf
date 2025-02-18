@@ -105,6 +105,12 @@ class SvarbrevService {
                         }."
                     }
 
+                    if (svarbrevRequest.initialCustomText != null) {
+                        p {
+                            +svarbrevRequest.initialCustomText
+                        }
+                    }
+
                     h2 { +"Klageinstansens saksbehandlingstid" }
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
@@ -244,6 +250,12 @@ class SvarbrevService {
                         +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate ?: svarbrevRequest.receivedDate!!)}."
                     }
 
+                    if (svarbrevRequest.initialCustomText != null) {
+                        p {
+                            +svarbrevRequest.initialCustomText
+                        }
+                    }
+
                     h2 { +"Behandlingen av ankesaken" }
                     p {
                         +"Saksbehandlingstiden vår er nå "
@@ -367,6 +379,12 @@ class SvarbrevService {
                                 svarbrevRequest.receivedDate!!
                             )
                         }."
+                    }
+
+                    if (svarbrevRequest.initialCustomText != null) {
+                        p {
+                            +svarbrevRequest.initialCustomText
+                        }
                     }
 
                     h2 { +"Behandling av kravet om omgjøring" }

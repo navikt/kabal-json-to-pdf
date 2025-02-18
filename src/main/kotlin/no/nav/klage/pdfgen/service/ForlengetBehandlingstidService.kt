@@ -61,7 +61,7 @@ class ForlengetBehandlingstidService {
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
                     h1 {
-                        +"Varsel om lengre saksbehandlingstid enn forventet i din ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} om ${
+                        +"Varsel om lengre saksbehandlingstid enn forventet i ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} om ${
                             getYtelseDisplayText(
                                 ytelseId = forlengetBehandlingstidRequest.ytelseId
                             )
@@ -96,7 +96,7 @@ class ForlengetBehandlingstidService {
                     }
 
                     p {
-                        +"Nav klageinstans mottok ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()}en din  ${
+                        +"Nav klageinstans mottok ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} ${
                             getFormattedDate(
                                 forlengetBehandlingstidRequest.mottattKlageinstans
                             )

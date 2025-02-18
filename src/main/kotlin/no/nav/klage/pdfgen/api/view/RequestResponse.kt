@@ -44,6 +44,7 @@ data class SvarbrevRequest(
     val behandlingstidUnitTypeId: String,
     val avsenderEnhetId: String,
     val type: Type?,
+    val initialCustomText: String?,
     val customText: String?,
 ) {
     data class Part(
@@ -86,9 +87,17 @@ data class ForlengetBehandlingstidRequest(
 
         fun getSakstypeDisplayName(): String {
             return when (this) {
-                KLAGE -> "klagesak"
-                ANKE -> "ankesak"
-                OMGJOERINGSKRAV -> "omgjøringskravssak"
+                KLAGE -> "klagen"
+                ANKE -> "anken"
+                OMGJOERINGSKRAV -> "omgjøringskravet"
+            }
+        }
+
+        fun getSakstypePossessive(): String {
+            return when (this) {
+                KLAGE -> "din"
+                ANKE -> "din"
+                OMGJOERINGSKRAV -> "ditt"
             }
         }
     }
