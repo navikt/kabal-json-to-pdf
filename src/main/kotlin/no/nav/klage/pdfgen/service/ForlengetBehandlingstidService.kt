@@ -136,6 +136,9 @@ class ForlengetBehandlingstidService {
                     if (forlengetBehandlingstidRequest.customText != null) {
                         p {
                             +forlengetBehandlingstidRequest.customText
+                            if (forlengetBehandlingstidRequest.customText.last() != '.') {
+                                +"."
+                            }
                         }
                     }
 
