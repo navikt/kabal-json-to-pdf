@@ -27,7 +27,7 @@ class GenerateForlengetBehandlingstidPDFTest {
                 previousBehandlingstidInfo = null,
                 reason = null,
                 behandlingstidDate = null,
-                customText = "Dette er en valgfri tekst.",
+                customText = "",
                 
             )
         )
