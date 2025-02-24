@@ -84,7 +84,7 @@ class ForlengetBehandlingstidService {
                             }
                             +forlengetBehandlingstidRequest.sakenGjelder.fnr.toFnrView()
                         }
-                        if (forlengetBehandlingstidRequest.fullmektigFritekst != null) {
+                        if (!forlengetBehandlingstidRequest.fullmektigFritekst.isNullOrBlank()) {
                             div {
                                 span {
                                     classes = setOf("bold")
@@ -103,7 +103,7 @@ class ForlengetBehandlingstidService {
                         }."
                     }
 
-                    if (forlengetBehandlingstidRequest.previousBehandlingstidInfo != null) {
+                    if (!forlengetBehandlingstidRequest.previousBehandlingstidInfo.isNullOrBlank()) {
                         p {
                             +forlengetBehandlingstidRequest.previousBehandlingstidInfo
                             if (forlengetBehandlingstidRequest.previousBehandlingstidInfo.last() != '.') {
@@ -114,7 +114,7 @@ class ForlengetBehandlingstidService {
 
                     p {
                         +"Vi beklager at saksbehandlingstiden vil bli lengre i din sak. "
-                        if (forlengetBehandlingstidRequest.reason != null) {
+                        if (!forlengetBehandlingstidRequest.reason.isNullOrBlank()) {
                             +forlengetBehandlingstidRequest.reason
                             if (forlengetBehandlingstidRequest.reason.last() != '.') {
                                 +"."
@@ -133,7 +133,7 @@ class ForlengetBehandlingstidService {
                         +"www.nav.no/saksbehandlingstid."
                     }
 
-                    if (forlengetBehandlingstidRequest.customText != null) {
+                    if (!forlengetBehandlingstidRequest.customText.isNullOrBlank()) {
                         p {
                             +forlengetBehandlingstidRequest.customText
                             if (forlengetBehandlingstidRequest.customText.last() != '.') {

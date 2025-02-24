@@ -82,7 +82,7 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                         }
-                        if (svarbrevRequest.fullmektigFritekst != null) {
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
                             div {
                                 span {
                                     classes = setOf("bold")
@@ -105,7 +105,7 @@ class SvarbrevService {
                         }."
                     }
 
-                    if (svarbrevRequest.initialCustomText != null) {
+                    if (!svarbrevRequest.initialCustomText.isNullOrBlank()) {
                         p {
                             +svarbrevRequest.initialCustomText
                         }
@@ -233,7 +233,7 @@ class SvarbrevService {
                                 +svarbrevRequest.klager.name
                             }
                         }
-                        if (svarbrevRequest.fullmektigFritekst != null) {
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
                             div {
                                 span {
                                     classes = setOf("bold")
@@ -250,7 +250,7 @@ class SvarbrevService {
                         +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate ?: svarbrevRequest.receivedDate!!)}."
                     }
 
-                    if (svarbrevRequest.initialCustomText != null) {
+                    if (!svarbrevRequest.initialCustomText.isNullOrBlank()) {
                         p {
                             +svarbrevRequest.initialCustomText
                         }
@@ -268,7 +268,7 @@ class SvarbrevService {
                         }
                         +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no/saksbehandlingstid."
                     }
-                    if (svarbrevRequest.customText != null) {
+                    if (!svarbrevRequest.customText.isNullOrBlank()) {
                         p {
                             +svarbrevRequest.customText
                         }
@@ -358,7 +358,7 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                         }
-                        if (svarbrevRequest.fullmektigFritekst != null) {
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
                             div {
                                 span {
                                     classes = setOf("bold")
@@ -381,7 +381,7 @@ class SvarbrevService {
                         }."
                     }
 
-                    if (svarbrevRequest.initialCustomText != null) {
+                    if (!svarbrevRequest.initialCustomText.isNullOrBlank()) {
                         p {
                             +svarbrevRequest.initialCustomText
                         }
