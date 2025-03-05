@@ -2,7 +2,6 @@ package no.nav.klage.pdfgen.service
 
 import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
-import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.*
@@ -103,23 +102,11 @@ class ForlengetBehandlingstidService {
                         }."
                     }
 
-                    if (!forlengetBehandlingstidRequest.previousBehandlingstidInfo.isNullOrBlank()) {
-                        p {
-                            +forlengetBehandlingstidRequest.previousBehandlingstidInfo
-                            if (forlengetBehandlingstidRequest.previousBehandlingstidInfo.last() != '.') {
-                                +"."
-                            }
-                        }
-                    }
+                    cleanupInputNewParagraph(forlengetBehandlingstidRequest.previousBehandlingstidInfo)
 
                     p {
                         +"Vi beklager at saksbehandlingstiden vil bli lengre i din sak. "
-                        if (!forlengetBehandlingstidRequest.reason.isNullOrBlank()) {
-                            +forlengetBehandlingstidRequest.reason
-                            if (forlengetBehandlingstidRequest.reason.last() != '.') {
-                                +"."
-                            }
-                        }
+                        this@body.cleanupInput(forlengetBehandlingstidRequest.reason)
                     }
                     p {
                         +"Vi forventer at saken din vil bli behandlet innen ${
@@ -133,14 +120,7 @@ class ForlengetBehandlingstidService {
                         +"www.nav.no/saksbehandlingstid."
                     }
 
-                    if (!forlengetBehandlingstidRequest.customText.isNullOrBlank()) {
-                        p {
-                            +forlengetBehandlingstidRequest.customText
-                            if (forlengetBehandlingstidRequest.customText.last() != '.') {
-                                +"."
-                            }
-                        }
-                    }
+                    cleanupInputNewParagraph(forlengetBehandlingstidRequest.customText)
 
                     h2 { +"Du må melde fra om endringer" }
                     p {
@@ -168,5 +148,29 @@ class ForlengetBehandlingstidService {
                     }
                 }
             }
+    }
+
+    private fun BODY.cleanupInputNewParagraph(
+        inputString: String?,
+    ) {
+        if (!inputString.isNullOrBlank()) {
+            p {
+                +inputString.trim()
+                if (inputString.trim().last() != '.') {
+                    +"."
+                }
+            }
+        }
+    }
+
+    private fun BODY.cleanupInput(
+        inputString: String?,
+    ) {
+        if (!inputString.isNullOrBlank()) {
+            +inputString.trim()
+            if (inputString.trim().last() != '.') {
+                +"."
+            }
+        }
     }
 }
