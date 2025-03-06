@@ -60,7 +60,7 @@ class ForlengetBehandlingstidService {
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
                     h1 {
-                        +"Varsel om lengre saksbehandlingstid enn forventet i ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} om ${
+                        +"Varsel om lengre saksbehandlingstid enn forventet i ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} som gjelder ${
                             getYtelseDisplayText(
                                 ytelseId = forlengetBehandlingstidRequest.ytelseId
                             )
