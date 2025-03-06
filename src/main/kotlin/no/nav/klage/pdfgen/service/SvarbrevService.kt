@@ -82,7 +82,7 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                         }
-                        if (svarbrevRequest.klager != null) {
+                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
                             div {
                                 span {
                                     classes = setOf("bold")
@@ -360,7 +360,7 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.name
                         }
-                        if (svarbrevRequest.klager != null) {
+                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
                             div {
                                 span {
                                     classes = setOf("bold")

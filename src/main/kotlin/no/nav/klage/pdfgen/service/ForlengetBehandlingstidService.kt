@@ -83,7 +83,7 @@ class ForlengetBehandlingstidService {
                             }
                             +forlengetBehandlingstidRequest.sakenGjelder.fnr.toFnrView()
                         }
-                        if (forlengetBehandlingstidRequest.klager != null) {
+                        if (forlengetBehandlingstidRequest.klager != null && forlengetBehandlingstidRequest.klager.fnr != forlengetBehandlingstidRequest.sakenGjelder.fnr) {
                             div {
                                 span {
                                     classes = setOf("bold")
