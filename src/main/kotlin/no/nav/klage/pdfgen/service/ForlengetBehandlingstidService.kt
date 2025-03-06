@@ -83,6 +83,15 @@ class ForlengetBehandlingstidService {
                             }
                             +forlengetBehandlingstidRequest.sakenGjelder.fnr.toFnrView()
                         }
+                        if (forlengetBehandlingstidRequest.klager != null) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"${forlengetBehandlingstidRequest.type.getKlagerDisplay()}: "
+                                }
+                                +forlengetBehandlingstidRequest.klager.name
+                            }
+                        }
                         if (!forlengetBehandlingstidRequest.fullmektigFritekst.isNullOrBlank()) {
                             div {
                                 span {

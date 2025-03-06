@@ -101,5 +101,13 @@ data class ForlengetBehandlingstidRequest(
                 OMGJOERINGSKRAV -> "ditt"
             }
         }
+
+        fun getKlagerDisplay(): String {
+            return when (this) {
+                KLAGE -> "Klager"
+                ANKE -> "Den ankende part"
+                OMGJOERINGSKRAV -> "Den som krever omgjøring"
+            }
+        }
     }
 }

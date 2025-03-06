@@ -23,9 +23,9 @@ class GenerateForlengetBehandlingstidPDFTest {
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.MONTHS.id,
                 avsenderEnhetId = "4291",
-                type = ForlengetBehandlingstidRequest.Type.OMGJOERINGSKRAV,
+                type = ForlengetBehandlingstidRequest.Type.ANKE,
                 previousBehandlingstidInfo = " Hei og hei . ",
-                reason = " og her da . ",
+                reason = " og her da  ",
                 behandlingstidDate = null,
                 customText = " og her også . ",
                 

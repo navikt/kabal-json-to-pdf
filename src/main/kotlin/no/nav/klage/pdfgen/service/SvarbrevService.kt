@@ -82,6 +82,15 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                         }
+                        if (svarbrevRequest.klager != null) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"Klager: "
+                                }
+                                +svarbrevRequest.klager.name
+                            }
+                        }
                         if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
                             div {
                                 span {
@@ -350,6 +359,15 @@ class SvarbrevService {
                                 +"Saken gjelder: "
                             }
                             +svarbrevRequest.sakenGjelder.name
+                        }
+                        if (svarbrevRequest.klager != null) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"Den som krever omgjøring: "
+                                }
+                                +svarbrevRequest.klager.name
+                            }
                         }
                         div {
                             span {
