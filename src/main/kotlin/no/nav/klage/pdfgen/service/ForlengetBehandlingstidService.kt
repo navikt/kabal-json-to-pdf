@@ -139,7 +139,7 @@ class ForlengetBehandlingstidService {
                         +"Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding der."
                     }
                     p {
-                        +"Om du ikke ønsker å logge deg inn på nav.no kan du kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                        +"Om du ikke ønsker å logge deg inn på nav.no kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {
