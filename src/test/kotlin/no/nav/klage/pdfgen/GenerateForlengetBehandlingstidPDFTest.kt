@@ -22,11 +22,11 @@ class GenerateForlengetBehandlingstidPDFTest {
                 mottattKlageinstans = LocalDate.now().minusMonths(1),
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.MONTHS.id,
+                behandlingstidDate = LocalDate.now(),
                 avsenderEnhetId = "4291",
                 type = ForlengetBehandlingstidRequest.Type.ANKE,
                 previousBehandlingstidInfo = " Hei og hei . ",
                 reason = " og her da  ",
-                behandlingstidDate = null,
                 customText = " og her også . ",
                 
             )

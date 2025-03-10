@@ -18,9 +18,9 @@ fun getYtelseDisplayText(ytelseId: String): String {
     return ytelseToDisplayName[ytelse]!!.nb.decapitalize()
 }
 
-fun getBehandlingstidText(behandlingstidDate: String?, behandlingstidUnitTypeId: String?, behandlingstidUnits: Int?): String {
+fun getBehandlingstidText(behandlingstidDate: LocalDate?, behandlingstidUnitTypeId: String?, behandlingstidUnits: Int?): String {
     if (behandlingstidDate != null) {
-        return getFormattedDate(LocalDate.parse(behandlingstidDate))
+        return getFormattedDate(behandlingstidDate)
     } else if (behandlingstidUnits != null && behandlingstidUnitTypeId != null) {
         return behandlingstidUnits.toString() + when (TimeUnitType.of(
             behandlingstidUnitTypeId
