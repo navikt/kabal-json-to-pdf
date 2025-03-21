@@ -6,7 +6,7 @@ val jsoupVersion = "1.19.1"
 val openHtmlToPdfVersion = "1.1.24"
 val kotlinxHtmlVersion = "0.12.0"
 val springDocVersion = "2.8.5"
-val klageKodeverkVersion = "1.9.22"
+val klageKodeverkVersion = "1.9.25"
 
 repositories {
     mavenCentral()
@@ -14,17 +14,17 @@ repositories {
 }
 
 plugins {
-    val kotlinVersion = "2.1.10"
+    val kotlinVersion = "2.1.20"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.4.3"
+    id("org.springframework.boot") version "3.4.4"
     idea
 }
 
 apply(plugin = "io.spring.dependency-management")
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
