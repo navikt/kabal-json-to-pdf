@@ -40,7 +40,7 @@ fun getBehandlingstidText(behandlingstidDate: LocalDate?, behandlingstidUnitType
                     " måneder"
                 }
             }
-        } + " fra du mottok dette brevet"
+        }
     } else {
         throw Exception("Needs date or units and unit type")
     }
