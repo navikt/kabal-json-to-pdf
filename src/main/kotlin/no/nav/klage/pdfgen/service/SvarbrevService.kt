@@ -130,7 +130,7 @@ class SvarbrevService {
                                 behandlingstidDate = null
                             )
                         }
-                        +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
+                        +" fra vi mottok klagen, men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {
                         div {
@@ -275,7 +275,7 @@ class SvarbrevService {
                                 behandlingstidDate = null
                             )
                         }
-                        +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no/saksbehandlingstid."
+                        +" fra vi mottok anken. Du finner oversikt over saksbehandlingstidene våre på www.nav.no/saksbehandlingstid."
                     }
                     if (!svarbrevRequest.customText.isNullOrBlank()) {
                         p {
@@ -415,7 +415,7 @@ class SvarbrevService {
                                 behandlingstidDate = null
                             )
                         }
-                        +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
+                        +" fra vi mottok kravet om omgjøring, men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {
                         div {

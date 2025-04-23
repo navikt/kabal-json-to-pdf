@@ -124,7 +124,12 @@ class ForlengetBehandlingstidService {
                                 behandlingstidUnits = forlengetBehandlingstidRequest.behandlingstidUnits,
                                 behandlingstidDate = forlengetBehandlingstidRequest.behandlingstidDate
                             )
-                        }. "
+                        }"
+                        if (forlengetBehandlingstidRequest.behandlingstidDate != null) {
+                            +". "
+                        } else {
+                            +" fra vi sendte dette brevet. "
+                        }
                         +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på "
                         +"www.nav.no/saksbehandlingstid."
                     }
