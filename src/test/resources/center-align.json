@@ -1,0 +1,196 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "threadIds": [],
+    "content": "Returadresse: Nav klageinstans nord, Postboks 7028 St. Olavs plass, 0130 Oslo",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-esel",
+    "textIdList": [
+      "56a279dd-d7b4-4442-972b-1afaf052bb56"
+    ],
+    "language": "nb",
+    "id": "1ec046d9-579e-4867-9d24-bc839a2fd6dc",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "32",
+        "32>696",
+        "GLOBAL>696"
+      ],
+      "utfallIdList": "7",
+      "templateSectionIdList": [
+        "generelt_brev>section-esel",
+        "GLOBAL>section-esel"
+      ]
+    },
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-esel",
+        "id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
+        "language": "nb",
+        "_id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
+        "children": [
+          {
+            "type": "h1",
+            "align": "left",
+            "children": [
+              {
+                "type": "placeholder",
+                "placeholder": "Dokumenttittel for generelt brev",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "type": "label-content",
+        "source": "klagerIfEqualToSakenGjelder.name",
+        "threadIds": [],
+        "label": "Klager",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "sakenGjelderIfDifferentFromKlager.name",
+        "threadIds": [],
+        "result": "FATTET ØRN MUSKEL\n",
+        "label": "Saken gjelder",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "sakenGjelder.fnr",
+        "threadIds": [],
+        "result": "148288 97927\n",
+        "label": "Fødselsnummer",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "klagerIfDifferentFromSakenGjelder.name",
+        "threadIds": [],
+        "result": "HUMORISTISK LOGG\n",
+        "label": "Klager",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "fullmektig",
+        "show": true,
+        "id": "f8e8b2fb-b33d-41a0-9458-04ffa9294c03",
+        "children": [
+          {
+            "type": "placeholder",
+            "placeholder": "Fullmektigetikett",
+            "deletable": false,
+            "children": [
+              {
+                "bold": true,
+                "text": "Fullmektig"
+              }
+            ]
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Fullmektig",
+            "deletable": false,
+            "children": [
+              {
+                "text": "FORDEKT MATVARE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "saksnummer",
+        "threadIds": [],
+        "result": "8434",
+        "label": "Saksnummer",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "align": "center",
+    "children": [
+      {
+        "text": "Oi oi oi"
+      }
+    ]
+  },
+  {
+    "type": "signature",
+    "useShortName": false,
+    "includeMedunderskriver": true,
+    "useSuffix": true,
+    "threadIds": [],
+    "saksbehandler": {
+      "name": "Kari Nordmann",
+      "title": "seniorrådgiver/saksbehandler"
+    },
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "threadIds": [],
+    "content": "Postadresse: Nav klageinstans nord // Postboks 7028 St. Olavs plass, 0130 Oslo // Telefon: 55 55 33 33 nav.no",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  }
+]

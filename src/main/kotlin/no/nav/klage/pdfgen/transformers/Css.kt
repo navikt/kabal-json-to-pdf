@@ -98,6 +98,11 @@ fun getCss(footer: String = "") = """
     .alignLeft {
         text-align: left;
     }
+    
+    .alignCenter {
+        text-align: center;
+    }
+    
     .pageBreak {
         page-break-after: always;
     }
