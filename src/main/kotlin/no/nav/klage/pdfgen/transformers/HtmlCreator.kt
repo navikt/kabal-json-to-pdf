@@ -73,6 +73,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         val applyClasses =
             if ((map["textAlign"] == "text-align-right") || (map["align"] == "right")) {
                 mutableSetOf("alignRight")
+            } else if ((map["textAlign"] == "text-align-center") || (map["align"] == "center")) {
+                mutableSetOf("alignCenter")
             } else if ((map["align"] == "left")) {
                 mutableSetOf("alignLeft")
             } else mutableSetOf()

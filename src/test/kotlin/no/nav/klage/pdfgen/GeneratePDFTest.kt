@@ -22,6 +22,13 @@ class GeneratePDF {
     }
 
     @Test
+    fun `generate pdf with center-align`() {
+        val jsonData = File(path + "center-align.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        Files.write(Path.of("center.pdf"), data)
+    }
+
+    @Test
     fun `generate pdf from fullmektig input`() {
         val jsonData = File(path + "fullmektig.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
