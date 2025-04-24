@@ -83,7 +83,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            val alignment = if (map["align"] == "right") "right" else if (map["align"] == "center") "center" else "left"
+            val alignment = if (map["align"] == "right") "right" else "left"
             inlineStyles += "margin-$alignment: ${24 * indent}pt"
         }
 
