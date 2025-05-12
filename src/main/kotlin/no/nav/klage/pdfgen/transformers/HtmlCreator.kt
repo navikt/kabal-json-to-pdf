@@ -195,7 +195,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             }
 
             "signature" -> {
-                return if (map["enabled"] == false) {
+                return if ((map["enabled"] as? Boolean) == false) {
                     emptyList()
                 } else {
                     listOf(document.create.div {
