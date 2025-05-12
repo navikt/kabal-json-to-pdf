@@ -195,30 +195,34 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             }
 
             "signature" -> {
-                return listOf(document.create.div {
-                    style = "margin-top: 24pt;"
-                    classes = setOf("wrapper")
-                    if (map.containsKey("medunderskriver")) {
-                        val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
-                        div {
-                            classes = setOf("column")
-                            div { +medunderskriver["name"].toString() }
-                            if (medunderskriver["title"] != null) {
-                                div { +medunderskriver["title"]!!.toString() }
+                return if (map["enabled"] == false) {
+                    emptyList()
+                } else {
+                    listOf(document.create.div {
+                        style = "margin-top: 24pt;"
+                        classes = setOf("wrapper")
+                        if (map.containsKey("medunderskriver")) {
+                            val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
+                            div {
+                                classes = setOf("column")
+                                div { +medunderskriver["name"].toString() }
+                                if (medunderskriver["title"] != null) {
+                                    div { +medunderskriver["title"]!!.toString() }
+                                }
                             }
                         }
-                    }
-                    if (map.containsKey("saksbehandler")) {
-                        val saksbehandler = map["saksbehandler"] as Map<String, Map<String, *>>
-                        div {
-                            classes = setOf("column")
-                            div { +saksbehandler["name"].toString() }
-                            if (saksbehandler["title"] != null) {
-                                div { +saksbehandler["title"]!!.toString() }
+                        if (map.containsKey("saksbehandler")) {
+                            val saksbehandler = map["saksbehandler"] as Map<String, Map<String, *>>
+                            div {
+                                classes = setOf("column")
+                                div { +saksbehandler["name"].toString() }
+                                if (saksbehandler["title"] != null) {
+                                    div { +saksbehandler["title"]!!.toString() }
+                                }
                             }
                         }
-                    }
-                })
+                    })
+                }
             }
 
             "fullmektig" -> {
