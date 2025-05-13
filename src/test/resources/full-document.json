@@ -9,314 +9,151 @@
   },
   {
     "type": "header",
+    "threadIds": [],
+    "content": "Returadresse: Nav klageinstans nord, Postboks 7028 St. Olavs plass, 0130 Oslo",
     "children": [
       {
         "text": ""
       }
-    ],
-    "threadIds": [],
-    "content": "Returadresse,\nNAV Klageinstans NORD!"
+    ]
   },
   {
-    "type": "maltekst",
+    "type": "maltekstseksjon",
     "section": "section-esel",
+    "textIdList": [
+      "56a279dd-d7b4-4442-972b-1afaf052bb56"
+    ],
+    "language": "nb",
+    "id": "1ec046d9-579e-4867-9d24-bc839a2fd6dc",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "32",
+        "32>699",
+        "GLOBAL>699"
+      ],
+      "utfallIdList": "1:4:5:6:7",
+      "templateSectionIdList": [
+        "generelt_brev>section-esel",
+        "GLOBAL>section-esel"
+      ]
+    },
     "children": [
       {
-        "type": "h1",
+        "type": "redigerbar-maltekst",
+        "section": "section-esel",
+        "id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
+        "language": "nb",
+        "_id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
         "children": [
           {
-            "text": "NAV Klageinstans har behandlet klagen din"
+            "type": "h1",
+            "align": "left",
+            "children": [
+              {
+                "type": "placeholder",
+                "placeholder": "Dokumenttittel for generelt brev",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
     ]
   },
   {
-    "type": "label-content",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "source": "sakenGjelder.name",
     "label": "Klager",
-    "threadIds": [],
-    "result": "KRAFTIG KAKKERLAKK"
-  },
-  {
     "type": "label-content",
+    "source": "klagerIfEqualToSakenGjelder.name",
+    "threadIds": [],
     "children": [
       {
         "text": ""
       }
-    ],
+    ]
+  },
+  {
+    "result": "FATTET ØRN MUSKEL\n",
+    "type": "label-content",
+    "source": "sakenGjelderIfDifferentFromKlager.name",
+    "threadIds": [],
+    "label": "Saken gjelder",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "result": "148288 97927\n",
+    "type": "label-content",
     "source": "sakenGjelder.fnr",
+    "threadIds": [],
     "label": "Fødselsnummer",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "result": "HUMORISTISK LOGG\n",
+    "type": "label-content",
+    "source": "klagerIfDifferentFromSakenGjelder.name",
     "threadIds": [],
-    "result": "Fødselsnummer: 024467 01749"
-  },
-  {
-    "type": "p",
-    "align": "left",
+    "label": "Klager",
     "children": [
       {
-        "text": "Fullmektig",
-        "bold": true
-      },
-      {
-        "text": ":"
+        "text": ""
       }
     ]
   },
   {
-    "type": "p",
-    "align": "left",
+    "type": "fullmektig",
+    "show": true,
+    "id": "6fb9d196-ea11-4751-9cd8-16fdbf66938c",
     "children": [
       {
-        "text": "Saken gjelder",
-        "bold": true
-      },
-      {
-        "text": ": Klagen din\t på NAV \t\tsitt vedtak av\t\t. "
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Problemstilling",
-        "bold": true
-      },
-      {
-        "text": ": Om "
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "daniels redigerbare maltekstplassholder kommer her: "
+        "type": "placeholder",
+        "placeholder": "Fullmektigetikett",
+        "deletable": false,
+        "children": [
+          {
+            "bold": true,
+            "text": "Fullmektig"
+          }
+        ]
       },
       {
         "type": "placeholder",
-        "placeholder": "PLASSHOLDER",
+        "placeholder": "Fullmektig",
+        "deletable": false,
         "children": [
           {
-            "text": "dsfgdfgd \\n dfgdfgdfg"
-          }
-        ]
-      },
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "maltekst",
-    "section": "section-mår",
-    "children": [
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Vedtak"
+            "text": "HUMORISTISK LOGG"
           }
         ]
       }
     ]
   },
   {
-    "type": "p",
-    "align": "left",
+    "type": "saksnummer",
+    "isInitialized": true,
     "children": [
-      {
-        "text": "Vi har [delvis] omgjort vedtaket, slik at ..."
-      }
-    ]
-  },
-  {
-    "type": "h2",
-    "children": [
-      {
-        "text": "I klagen din har du lagt vekt på:"
-      }
-    ]
-  },
-  {
-    "type": "ul",
-    "children": [
-      {
-        "type": "li",
-        "children": [
-          {
-            "type": "lic",
-            "children": [
-              {
-                "text": ""
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "daniels redigerbare maltekstplassholder kommer her: "
-      },
       {
         "type": "placeholder",
-        "placeholder": "PLASSHOLDER",
+        "placeholder": "Saksnummer",
+        "deletable": false,
+        "isInitialized": true,
         "children": [
           {
-            "text": "asd asda \\n sasd"
+            "text": "851"
           }
         ]
-      },
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "h2",
-    "children": [
-      {
-        "text": "I vurderingen vår har vi lagt vekt på disse dokumentene:"
-      }
-    ]
-  },
-  {
-    "type": "ul",
-    "children": [
-      {
-        "type": "li",
-        "children": [
-          {
-            "type": "lic",
-            "children": [
-              {
-                "text": ""
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "maltekst",
-    "section": "section-mus",
-    "children": [
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Vurderingen vår"
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Du søkte om"
-          },
-          {
-            "text": " penger den ",
-            "bold": false
-          },
-          {
-            "type": "placeholder",
-            "placeholder": "Fyll ut dato her",
-            "content": "",
-            "children": [
-              {
-                "text": "asdfsdfsdfsdf \\n ",
-                "bold": false
-              },
-              {
-                "bold": true,
-                "text": "sedfsdfgdfg",
-                "italic": true,
-                "underline": true
-              },
-              {
-                "bold": false,
-                "text": " "
-              },
-              {
-                "bold": true,
-                "text": "sdfsdfgdfgdfg"
-              }
-            ]
-          },
-          {
-            "text": ". Vedtaket ble fattet den "
-          },
-          {
-            "type": "placeholder",
-            "placeholder": "Skriv dato her",
-            "children": [
-              {
-                "text": "10.10.2022",
-                "bold": false
-              }
-            ]
-          },
-          {
-            "text": "."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "align": "left"
-  },
-  {
-    "type": "maltekst",
-    "section": "section-elg",
-    "children": [
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Konklusjonen vår"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Vi har kommet fram til at \t\t. Du har fått [delvis] medhold i klagen din."
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Vedtaket er gjort etter \t\t § \t.\t"
       }
     ]
   },
@@ -330,428 +167,33 @@
     ]
   },
   {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "daniels redigerbare maltekstplassholder kommer her: "
-      },
-      {
-        "type": "placeholder",
-        "placeholder": "PLASSHOLDER",
-        "children": [
-          {
-            "text": ""
-          }
-        ]
-      },
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "maltekst",
-    "section": "section-ape",
-    "children": [
-      {
-        "type": "h3",
-        "children": [
-          {
-            "text": "Du har rett til å anke"
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom fram til deg. Du finner informasjon, skjema og første side for innsending på "
-          },
-          {
-            "text": "www.nav.no/klage",
-            "underline": true
-          },
-          {
-            "text": ". "
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Anken må være underskrevet av deg."
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "I trygdesaker må du først anke til Trygderetten før du kan ta saken videre til lagmannsretten."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Velg NAV Klageinstans  <enhet/avdeling>."
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "daniels redigerbare maltekstplassholder kommer her: "
-      },
-      {
-        "type": "placeholder",
-        "placeholder": "PLASSHOLDER",
-        "children": [
-          {
-            "text": ""
-          }
-        ]
-      },
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "maltekst",
-    "section": "section-gris",
-    "children": [
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Informasjon om dekning av sakskostnader"
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Dersom vi har gjort om vedtaket til din fordel kan du ha rett til å få dekket vesentlige kostnader som har vært nødvendige for å få endret vedtaket."
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til NAV Klageinstans Sakskostnader, postboks 22, 4661 Kristiansand. "
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "maltekst",
-    "section": "section-sel",
-    "children": [
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Du har rett til innsyn"
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Du har rett til å se dokumentene i saken din."
-          }
-        ]
-      },
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Informasjon om fri rettshjelp"
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
-          }
-        ]
-      },
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Har du spørsmål?"
-          }
-        ]
-      },
-      {
-        "type": "p",
-        "align": "left",
-        "children": [
-          {
-            "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "signature",
-    "useShortName": false,
-    "enabled": true,
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
     "medunderskriver": {
-      "name": "Kari Nordmann",
-      "title": "Seniorrådgiver"
+      "name": "Christian Skrøvseth",
+      "title": "seniorrådgiver"
     },
     "saksbehandler": {
-      "name": "Christian Skrøvseth",
-      "title": "Avdelingsdirektør/saksbehandler"
-    }
+      "name": "Daniel Eriksson",
+      "title": "rådgiver/saksbehandler"
+    },
+    "type": "signature",
+    "enabled": true,
+    "useShortName": false,
+    "includeMedunderskriver": true,
+    "useSuffix": true,
+    "threadIds": [],
+    "children": [
+      {
+        "text": ""
+      }
+    ]
   },
   {
     "type": "footer",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
     "threadIds": [],
-    "content": "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 OSLO\nTelefon: 21 07 17 30\nnav.no"
-  },
-  {
-    "type": "page-break",
+    "content": "Postadresse: Nav klageinstans nord // Postboks 7028 St. Olavs plass, 0130 Oslo // Telefon: 55 55 33 33 nav.no",
     "children": [
       {
         "text": ""
-      }
-    ]
-  },
-  {
-    "type": "maltekst",
-    "section": "section-gnu",
-    "children": [
-      {
-        "type": "h2",
-        "children": [
-          {
-            "text": "Regelverket som gjelder i saken"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Folketrygdloven § 14-10 sjuende ledd (før 1. oktober 2021)",
-        "underline": true
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "\"",
-        "underline": false
-      },
-      {
-        "text": "Foreldrepenger må tas ut sammenhengende fra det tidspunkt uttaket starter, se likevel § 14-11.\""
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Folketrygdloven § 14-11 (før 1. oktober 2021)",
-        "underline": true
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "\"Uttak av foreldrepenger kan utsettes"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "a)\tnår den som mottar foreldrepenger har lovbestemt ferie,​1"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "b)\tnår den som mottar foreldrepenger er i inntektsgivende arbeid på heltid,"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "c)\tdersom stønadsmottakeren på grunn av sykdom eller skade er helt avhengig av hjelp til å ta seg av barnet eller er innlagt i helseinstitusjon,"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "d)\tdersom barnet er innlagt i helseinstitusjon."
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Ved forhold som nevnt i bokstav b, må det foreligge skriftlig avtale med arbeidsgiver. For selvstendig næringsdrivende og frilansere må det foreligge skriftlig avtale med Arbeids- og velferdsetaten."
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "children": [
-      {
-        "text": "Forhold som nevnt i bokstav c må dokumenteres med legeerklæring.\""
-      }
-    ],
-    "align": "left"
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Folketrygdloven § 14-6",
-        "underline": true
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "\"Rett til foreldrepenger opptjenes gjennom yrkesaktivitet. Både moren og faren kan opptjene rett til foreldrepenger ved å være yrkesaktiv med pensjonsgivende inntekt (§ 3-15) i minst seks av de siste ti månedene før vedkommendes uttak av foreldrepenger tar til, se §§ 14-10 første og annet ledd og 14-14 annet ledd. Ved adopsjon må moren ha opptjent rett til foreldrepenger ved omsorgsovertakelsen."
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Likestilt med yrkesaktivitet er tidsrom da det er gitt en ytelse til livsopphold i form av dagpenger under arbeidsløshet etter kapittel 4, sykepenger etter kapittel 8, stønad ved barns sykdom m.m. etter kapittel 9 eller arbeidsavklaringspenger etter kapittel 11, eller enten foreldrepenger eller svangerskapspenger etter kapitlet her."
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "Likestilt med yrkesaktivitet er også tidsrom med"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "a.\tlønn fra arbeidsgiver under permisjon i forbindelse med videre- og etterutdanning,"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "b.\tventelønn etter lov av 4. mars 1983 nr. 3 om statens tjenestemenn m.m.​1 § 13 nr. 6,"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "c.\tvartpenger etter lov av 28. juli 1949 nr. 26 om Statens pensjonskasse § 24 tredje ledd,"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "d.\tetterlønn fra arbeidsgiver,"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "e.\tavtjening av militærtjeneste eller obligatorisk sivilforsvarstjeneste,​2"
-      }
-    ]
-  },
-  {
-    "type": "p",
-    "align": "left",
-    "children": [
-      {
-        "text": "f.\tytelse i medhold av midlertidig lov om kompensasjonsytelse for selvstendig næringsdrivende og frilansere som har mistet inntekt som følge av utbrudd av covid-19.\""
       }
     ]
   }
