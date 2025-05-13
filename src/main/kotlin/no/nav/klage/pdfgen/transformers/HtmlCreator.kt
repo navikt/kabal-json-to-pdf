@@ -246,6 +246,18 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 return elements
             }
 
+            "saksnummer" -> {
+                val elements = mutableListOf<Element>()
+                elements += document.create.span {
+                    classes = setOf("bold")
+                    +"Saksnummer: "
+                }
+                elements += createElementsWithPossiblyChildren(map = children[0])
+                elements += document.create.br {}
+
+                return elements
+            }
+
             "current-date" -> {
                 return listOf(document.create.div {
                     classes = setOf("current-date")
