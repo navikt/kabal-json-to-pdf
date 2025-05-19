@@ -3,12 +3,10 @@ package no.nav.klage.pdfgen.transformers
 import kotlinx.html.*
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
-import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
-import no.nav.klage.pdfgen.util.getLogger
-import no.nav.klage.pdfgen.util.getSecureLogger
 import no.nav.klage.pdfgen.util.getFormattedDate
+import no.nav.klage.pdfgen.util.getLogger
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import java.time.LocalDate
@@ -19,7 +17,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
-        private val secureLogger = getSecureLogger()
     }
 
     private val document: Document = createHTMLDocument()
@@ -342,8 +339,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
 
         document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
-
-        secureLogger.debug(document.serialize())
         return document
     }
 
