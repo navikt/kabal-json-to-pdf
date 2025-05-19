@@ -13,7 +13,7 @@ import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.service.SvarbrevService
 import no.nav.klage.pdfgen.util.getLogger
-import no.nav.klage.pdfgen.util.getSecureLogger
+import no.nav.klage.pdfgen.util.getTeamLogger
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -35,7 +35,7 @@ class PDFGenController(
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
-        private val secureLogger = getSecureLogger()
+        private val teamLogger = getTeamLogger()
     }
 
     @Operation(
@@ -47,8 +47,8 @@ class PDFGenController(
     fun toPDF(
         @RequestBody json: String
     ): ResponseEntity<ByteArray> {
-        logger.debug("toPDF() called. See body in secure logs")
-        secureLogger.debug("toPDF() called. Received json: {}", json)
+        logger.debug("toPDF() called. See body in team-logs")
+        teamLogger.debug("toPDF() called. Received json: {}", json)
 
         val data = pdfGenService.getPDFAsByteArray(json)
 
@@ -71,8 +71,8 @@ class PDFGenController(
     fun toInnholdsfortegnelsePDF(
         @RequestBody input: InnholdsfortegnelseRequest,
     ): ResponseEntity<ByteArray> {
-        logger.debug("toInnholdsfortegnelsePDF() called. See body in secure logs")
-        secureLogger.debug("toInnholdsfortegnelsePDF() called. Received input: {}", input)
+        logger.debug("toInnholdsfortegnelsePDF() called. See body in team-logs")
+        teamLogger.debug("toInnholdsfortegnelsePDF() called. Received input: {}", input)
 
         val data = innholdsfortegnelseService.getInnholdsfortegnelsePDFAsByteArray(input)
 
@@ -95,8 +95,8 @@ class PDFGenController(
     fun generateSvarbrev(
         @RequestBody input: SvarbrevRequest,
     ): ResponseEntity<ByteArray> {
-        logger.debug("generateSvarbrev() called. See body in secure logs")
-        secureLogger.debug("generateSvarbrev() called. Received input: {}", input)
+        logger.debug("generateSvarbrev() called. See body in team-logs")
+        teamLogger.debug("generateSvarbrev() called. Received input: {}", input)
 
         val data = svarbrevService.getSvarbrevAsByteArray(input)
 
@@ -119,8 +119,8 @@ class PDFGenController(
     fun generateForlengetBehandlingstid(
         @RequestBody input: ForlengetBehandlingstidRequest,
     ): ResponseEntity<ByteArray> {
-        logger.debug("generateForlengetBehandlingstid() called. See body in secure logs")
-        secureLogger.debug("generateForlengetBehandlingstid() called. Received input: {}", input)
+        logger.debug("generateForlengetBehandlingstid() called. See body in team-logs")
+        teamLogger.debug("generateForlengetBehandlingstid() called. Received input: {}", input)
 
         val data = forlengetBehandlingstidService.getForlengetBehandlingstidAsByteArray(input)
 
@@ -142,8 +142,8 @@ class PDFGenController(
     fun validate(
         @RequestBody json: String
     ): DocumentValidationResponse {
-        logger.debug("${::validate.name} called. See body in secure logs")
-        secureLogger.debug("validate() called. Received json: {}", json)
+        logger.debug("${::validate.name} called. See body in team-logs")
+        teamLogger.debug("validate() called. Received json: {}", json)
 
         return try {
             pdfGenService.validateDocumentContent(json)
