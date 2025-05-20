@@ -16,12 +16,13 @@ class FontLogFilter : TurboFilter() {
         params: Array<out Any>?,
         throwable: Throwable?
     ): FilterReply {
-        if (level == Level.WARN &&
-            (format?.contains("6 new fonts found, font cache will be re-built") == true ||
-                    format?.contains("Building on-disk font cache, this may take a while") == true ||
-                    format?.contains("Finished building on-disk font cache, found 6 fonts") == true ||
-                    format?.contains("Using fallback font LiberationSans for base font Helvetica") == true ||
-                    format?.contains("Using fallback font LiberationSans for base font ZapfDingbats") == true)
+        if (level == Level.WARN && format != null &&
+            (format.contains("6 new fonts found, font cache will be re-built") ||
+                    format.contains("Building on-disk font cache, this may take a while") ||
+                    format.contains("Finished building on-disk font cache, found 6 fonts") ||
+                    format.contains("Using fallback font LiberationSans for base font Helvetica") ||
+                    format.contains("Using fallback font LiberationSans for base font ZapfDingbats")
+                    )
         ) {
             return FilterReply.DENY
         }
