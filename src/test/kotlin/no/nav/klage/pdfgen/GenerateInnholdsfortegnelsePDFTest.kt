@@ -2,17 +2,33 @@ package no.nav.klage.pdfgen
 
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.Type
+import no.nav.klage.pdfgen.config.PdfRendererBuilderConfig
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
+import no.nav.klage.pdfgen.service.PDFGenService
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import java.nio.file.Files
 import java.nio.file.Path
 import java.time.LocalDate
 
+@ActiveProfiles("local")
+@SpringBootTest(
+    classes = [
+        PDFGenService::class,
+        PdfRendererBuilderConfig::class,
+        InnholdsfortegnelseService::class,
+    ]
+)
 class GenerateInnholdsfortegnelsePDFTest {
+
+    @Autowired
+    lateinit var innholdsfortegnelseService: InnholdsfortegnelseService
 
     @Test
     fun `generate pdf from full input`() {
-        val data = InnholdsfortegnelseService().getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequest(
+        val data = innholdsfortegnelseService.getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequest(
             documents = listOf(
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",

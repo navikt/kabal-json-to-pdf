@@ -4,14 +4,18 @@ import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.transformers.getCss
-import no.nav.klage.pdfgen.util.*
+import no.nav.klage.pdfgen.util.getBehandlingstidText
+import no.nav.klage.pdfgen.util.getFormattedDate
+import no.nav.klage.pdfgen.util.getYtelseDisplayText
+import no.nav.klage.pdfgen.util.toFnrView
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 
 @Service
-class ForlengetBehandlingstidService {
+class ForlengetBehandlingstidService(
+    private val pdfGenService: PDFGenService,
+) {
 
     val enhetHeaderAndFooterMap = mapOf(
         "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
@@ -24,9 +28,7 @@ class ForlengetBehandlingstidService {
 
     fun getForlengetBehandlingstidAsByteArray(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): ByteArray {
         val doc = getHTMLDocument(forlengetBehandlingstidRequest = forlengetBehandlingstidRequest)
-        val os = ByteArrayOutputStream()
-        createPDFA(doc, os)
-        return os.toByteArray()
+        return pdfGenService.createPDFA(doc)
     }
 
     private fun getHTMLDocument(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): Document {

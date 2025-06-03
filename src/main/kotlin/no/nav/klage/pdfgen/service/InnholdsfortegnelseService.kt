@@ -5,22 +5,20 @@ import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.Type
 import no.nav.klage.pdfgen.transformers.getVedleggsoversiktCss
-import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayOutputStream
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Service
-class InnholdsfortegnelseService {
+class InnholdsfortegnelseService(
+    private val pdfGenService: PDFGenService,
+) {
 
     fun getInnholdsfortegnelsePDFAsByteArray(input: InnholdsfortegnelseRequest): ByteArray {
         val doc = getHTMLDocument(input)
-        val os = ByteArrayOutputStream()
-        createPDFA(doc, os)
-        return os.toByteArray()
+        return pdfGenService.createPDFA(doc)
     }
 
     private val DATE_FORMAT =

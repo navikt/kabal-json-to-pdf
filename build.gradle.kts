@@ -50,7 +50,6 @@ dependencies {
     implementation("no.nav.klage:klage-kodeverk:$klageKodeverkVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("org.springframework:spring-mock:2.0.8")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage")
     }
