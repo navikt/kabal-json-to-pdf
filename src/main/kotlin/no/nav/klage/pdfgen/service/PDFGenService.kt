@@ -34,13 +34,14 @@ class PDFGenService(
     }
 
     fun createPDFA(w3doc: Document): ByteArray {
-        val os = ByteArrayOutputStream()
-        pdfRendererBuilder
-            .withW3cDocument(w3doc, this::javaClass.javaClass.getResource("/dummy.html")!!.toExternalForm())
-            .toStream(os)
-            .buildPdfRenderer()
-            .createPDF()
-        return os.toByteArray()
+        ByteArrayOutputStream().use {
+            pdfRendererBuilder
+                .withW3cDocument(w3doc, this::javaClass.javaClass.getResource("/dummy.html")!!.toExternalForm())
+                .toStream(it)
+                .run()
+
+            return it.toByteArray()
+        }
     }
 
 }

@@ -40,7 +40,6 @@ class PdfRendererBuilderConfig {
         val fonts: Array<FontMetadata> =
             objectMapper.readValue(ClassPathResource("/fonts/config.json").inputStream)
 
-
         return PdfRendererBuilder()
             .apply {
                 for (font in fonts) {
