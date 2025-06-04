@@ -12,8 +12,10 @@ import org.apache.fontbox.ttf.TTFParser
 import org.apache.pdfbox.io.IOUtils
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.font.PDType0Font
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Scope
 import org.springframework.core.io.ClassPathResource
 
 @Configuration
@@ -28,6 +30,7 @@ class PdfRendererBuilderConfig {
     )
 
     @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     fun pdfRendererBuilder(): PdfRendererBuilder {
         val objectMapper: ObjectMapper = ObjectMapper()
             .registerKotlinModule()
