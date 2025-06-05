@@ -3,16 +3,18 @@ package no.nav.klage.pdfgen.util
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.openhtmltopdf.extend.FSSupplier
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder
+import com.openhtmltopdf.pdfboxout.PDFontSupplier
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder
 import com.openhtmltopdf.svgsupport.BatikSVGDrawer
 import no.nav.klage.pdfgen.Application
 import no.nav.klage.pdfgen.service.PDFGenService
+import org.apache.fontbox.ttf.TTFParser
 import org.apache.pdfbox.io.IOUtils
+import org.apache.pdfbox.pdmodel.PDDocument
+import org.apache.pdfbox.pdmodel.font.PDType0Font
 import org.springframework.core.io.ClassPathResource
 import org.w3c.dom.Document
-import java.io.InputStream
 import java.io.OutputStream
 
 val objectMapper: ObjectMapper = ObjectMapper()
@@ -34,7 +36,18 @@ data class FontMetadata(
 fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder()
         .apply {
             for (font in fonts) {
-                useFont(FSSupplier(getIs(font.path)), font.family, font.weight, font.style, font.subset)
+                val ttf = TTFParser().parseEmbedded(
+                    ClassPathResource("/fonts/${font.path}").inputStream
+                )
+                ttf.isEnableGsub = false
+
+                useFont(
+                    PDFontSupplier(PDType0Font.load(PDDocument(), ttf, font.subset)),
+                    font.family,
+                    font.weight,
+                    font.style,
+                    font.subset
+                )
             }
         }
         // .useFastMode() wait with fast mode until it doesn't print a bunch of errors
@@ -45,5 +58,3 @@ fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder
         .toStream(outputStream)
         .buildPdfRenderer()
         .createPDF()
-
-fun getIs(path: String): () -> InputStream { return { ClassPathResource("/fonts/$path").inputStream } }
