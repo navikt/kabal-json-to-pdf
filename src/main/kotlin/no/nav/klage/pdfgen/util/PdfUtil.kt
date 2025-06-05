@@ -15,7 +15,7 @@ import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.font.PDType0Font
 import org.springframework.core.io.ClassPathResource
 import org.w3c.dom.Document
-import java.io.OutputStream
+import java.io.ByteArrayOutputStream
 
 val objectMapper: ObjectMapper = ObjectMapper()
     .registerKotlinModule()
@@ -33,28 +33,33 @@ data class FontMetadata(
     val subset: Boolean
 )
 
-fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder()
-        .apply {
-            for (font in fonts) {
-                val ttf = TTFParser().parseEmbedded(
-                    ClassPathResource("/fonts/${font.path}").inputStream
-                )
-                ttf.isEnableGsub = false
+fun createPDFA(w3doc: Document): ByteArray {
+    ByteArrayOutputStream().use {
+        PdfRendererBuilder()
+            .apply {
+                for (font in fonts) {
+                    val ttf = TTFParser().parseEmbedded(
+                        ClassPathResource("/fonts/${font.path}").inputStream
+                    )
+                    ttf.isEnableGsub = false
 
-                useFont(
-                    PDFontSupplier(PDType0Font.load(PDDocument(), ttf, font.subset)),
-                    font.family,
-                    font.weight,
-                    font.style,
-                    font.subset
-                )
+                    useFont(
+                        PDFontSupplier(PDType0Font.load(PDDocument(), ttf, font.subset)),
+                        font.family,
+                        font.weight,
+                        font.style,
+                        font.subset
+                    )
+                }
             }
-        }
-        // .useFastMode() wait with fast mode until it doesn't print a bunch of errors
-        .useColorProfile(colorProfile)
-        .useSVGDrawer(BatikSVGDrawer())
-        .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
-        .withW3cDocument(w3doc, PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm())
-        .toStream(outputStream)
-        .buildPdfRenderer()
-        .createPDF()
+            // .useFastMode() wait with fast mode until it doesn't print a bunch of errors
+            .useColorProfile(colorProfile)
+            .useSVGDrawer(BatikSVGDrawer())
+            .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
+            .withW3cDocument(w3doc, PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm())
+            .toStream(it)
+            .run()
+
+        return it.toByteArray()
+    }
+}
