@@ -44,18 +44,17 @@ fun createPDFA(w3doc: Document): ByteArray {
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object FontConfig {
 
-    val baseUri: String = PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm()
+    val baseUri: String = PDFGenService::class.java.getResource("/dummy.html").toExternalForm()
 
     val fontsWithTTF: List<FontWithSupplier> by lazy {
         val fonts: Array<FontMetadata> =
             jacksonObjectMapper().readValue(ClassPathResource("/fonts/config.json").inputStream)
-        val doc = PDDocument()
         fonts.map {
-            getFontWithTTF(font = it, doc = doc)
+            getFontWithTTF(font = it)
         }
     }
 
-    fun getFontWithTTF(font: FontMetadata, doc: PDDocument): FontWithSupplier {
+    fun getFontWithTTF(font: FontMetadata): FontWithSupplier {
         val ttf = TTFParser().parseEmbedded(
             ClassPathResource("/fonts/${font.path}").inputStream
         )
@@ -66,7 +65,7 @@ object FontConfig {
             weight = font.weight,
             style = font.style,
             subset = font.subset,
-            pdFontSupplier = PDFontSupplier(PDType0Font.load(doc, ttf, font.subset)),
+            pdFontSupplier = PDFontSupplier(PDType0Font.load(PDDocument(), ttf, font.subset)),
         )
     }
 }
