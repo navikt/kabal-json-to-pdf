@@ -1,8 +1,7 @@
 package no.nav.klage.pdfgen.util
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder
 import com.openhtmltopdf.pdfboxout.PDFontSupplier
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder
@@ -17,34 +16,13 @@ import org.springframework.core.io.ClassPathResource
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
 
-val objectMapper: ObjectMapper = ObjectMapper()
-    .registerKotlinModule()
-
-val colorProfile: ByteArray = IOUtils.toByteArray(Application::class.java.getResourceAsStream("/sRGB2014.icc"))
-
-val fonts: Array<FontMetadata> =
-    objectMapper.readValue(ClassPathResource("/fonts/config.json").inputStream)
-
-data class FontMetadata(
-    val family: String,
-    val path: String,
-    val weight: Int,
-    val style: BaseRendererBuilder.FontStyle,
-    val subset: Boolean
-)
-
 fun createPDFA(w3doc: Document): ByteArray {
-    ByteArrayOutputStream().use {
+    ByteArrayOutputStream().use { outputStream ->
         PdfRendererBuilder()
             .apply {
-                for (font in fonts) {
-                    val ttf = TTFParser().parseEmbedded(
-                        ClassPathResource("/fonts/${font.path}").inputStream
-                    )
-                    ttf.isEnableGsub = false
-
+                for (font in FontConfig.fontsWithTTF) {
                     useFont(
-                        PDFontSupplier(PDType0Font.load(PDDocument(), ttf, font.subset)),
+                        font.pdFontSupplier,
                         font.family,
                         font.weight,
                         font.style,
@@ -52,14 +30,61 @@ fun createPDFA(w3doc: Document): ByteArray {
                     )
                 }
             }
-            // .useFastMode() wait with fast mode until it doesn't print a bunch of errors
             .useColorProfile(colorProfile)
             .useSVGDrawer(BatikSVGDrawer())
             .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
-            .withW3cDocument(w3doc, PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm())
-            .toStream(it)
+            .withW3cDocument(w3doc, FontConfig.baseUri)
+            .toStream(outputStream)
             .run()
 
-        return it.toByteArray()
+        return outputStream.toByteArray()
     }
 }
+
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+object FontConfig {
+
+    val baseUri: String = PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm()
+
+    val fontsWithTTF: List<FontWithSupplier> by lazy {
+        val fonts: Array<FontMetadata> =
+            jacksonObjectMapper().readValue(ClassPathResource("/fonts/config.json").inputStream)
+        val doc = PDDocument()
+        fonts.map {
+            getFontWithTTF(font = it, doc = doc)
+        }
+    }
+
+    fun getFontWithTTF(font: FontMetadata, doc: PDDocument): FontWithSupplier {
+        val ttf = TTFParser().parseEmbedded(
+            ClassPathResource("/fonts/${font.path}").inputStream
+        )
+        ttf.isEnableGsub = false
+
+        return FontWithSupplier(
+            family = font.family,
+            weight = font.weight,
+            style = font.style,
+            subset = font.subset,
+            pdFontSupplier = PDFontSupplier(PDType0Font.load(doc, ttf, font.subset)),
+        )
+    }
+}
+
+data class FontWithSupplier(
+    val family: String,
+    val weight: Int,
+    val style: BaseRendererBuilder.FontStyle,
+    val subset: Boolean,
+    val pdFontSupplier: PDFontSupplier,
+)
+
+val colorProfile: ByteArray = IOUtils.toByteArray(Application::class.java.getResourceAsStream("/sRGB2014.icc"))
+
+data class FontMetadata(
+    val family: String,
+    val path: String,
+    val weight: Int,
+    val style: BaseRendererBuilder.FontStyle,
+    val subset: Boolean,
+)
