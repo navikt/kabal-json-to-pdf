@@ -7,7 +7,6 @@ import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.*
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 
 @Service
@@ -24,9 +23,7 @@ class ForlengetBehandlingstidService {
 
     fun getForlengetBehandlingstidAsByteArray(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): ByteArray {
         val doc = getHTMLDocument(forlengetBehandlingstidRequest = forlengetBehandlingstidRequest)
-        val os = ByteArrayOutputStream()
-        createPDFA(doc, os)
-        return os.toByteArray()
+        return createPDFA(doc)
     }
 
     private fun getHTMLDocument(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): Document {

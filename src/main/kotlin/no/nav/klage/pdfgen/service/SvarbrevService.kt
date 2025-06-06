@@ -2,13 +2,11 @@ package no.nav.klage.pdfgen.service
 
 import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
-import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.*
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 
 @Service
@@ -30,9 +28,7 @@ class SvarbrevService {
             SvarbrevRequest.Type.OMGJOERINGSKRAV -> getHTMLDocumentOmgjoeringskrav(svarbrevRequest)
             null -> getHTMLDocumentAnke(svarbrevRequest)
         }
-        val os = ByteArrayOutputStream()
-        createPDFA(doc, os)
-        return os.toByteArray()
+        return createPDFA(doc)
     }
 
     private fun getHTMLDocumentKlage(svarbrevRequest: SvarbrevRequest): Document {

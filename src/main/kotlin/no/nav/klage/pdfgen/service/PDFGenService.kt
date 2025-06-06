@@ -5,16 +5,13 @@ import no.nav.klage.pdfgen.transformers.HtmlCreator
 import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayOutputStream
 
 @Service
 class PDFGenService {
 
     fun getPDFAsByteArray(json: String): ByteArray {
         val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
-        val os = ByteArrayOutputStream()
-        createPDFA(doc, os)
-        return os.toByteArray()
+        return createPDFA(doc)
     }
 
     fun validateDocumentContent(json: String) {
