@@ -1,49 +1,81 @@
 package no.nav.klage.pdfgen.util
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.openhtmltopdf.extend.FSSupplier
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder
+import com.openhtmltopdf.pdfboxout.PDFontSupplier
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder
 import com.openhtmltopdf.svgsupport.BatikSVGDrawer
-import no.nav.klage.pdfgen.Application
-import no.nav.klage.pdfgen.service.PDFGenService
-import org.apache.pdfbox.io.IOUtils
+import org.apache.fontbox.ttf.TTFParser
+import org.apache.pdfbox.pdmodel.PDDocument
+import org.apache.pdfbox.pdmodel.font.PDType0Font
 import org.springframework.core.io.ClassPathResource
 import org.w3c.dom.Document
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.ByteArrayOutputStream
 
-val objectMapper: ObjectMapper = ObjectMapper()
-    .registerKotlinModule()
+private val colorprofile = ClassPathResource("/sRGB2014.icc").contentAsByteArray
+private val baseUri = ClassPathResource("/dummy.html").uri.toString()
+private val fonts: Array<FontMetadata> = jacksonObjectMapper().readValue(ClassPathResource("/fonts/config.json").contentAsByteArray)
 
-val colorProfile: ByteArray = IOUtils.toByteArray(Application::class.java.getResourceAsStream("/sRGB2014.icc"))
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun createPDFA(w3doc: Document): ByteArray {
+    ByteArrayOutputStream().use { outputStream ->
+        PdfRendererBuilder()
+            .apply {
+                for (font in fontsWithTTF()) {
+                    useFont(
+                        font.pdFontSupplier,
+                        font.family,
+                        font.weight,
+                        font.style,
+                        font.subset
+                    )
+                }
+            }
+            .useColorProfile(colorprofile)
+            .useSVGDrawer(BatikSVGDrawer())
+            .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
+            .withW3cDocument(w3doc, baseUri)
+            .toStream(outputStream)
+            .run()
 
-val fonts: Array<FontMetadata> =
-    objectMapper.readValue(ClassPathResource("/fonts/config.json").inputStream)
+        return outputStream.toByteArray()
+    }
+}
 
-data class FontMetadata(
+private fun fontsWithTTF(): List<FontWithSupplier> {
+    return fonts.map { font ->
+        getFontWithTTF(font = font)
+    }
+}
+
+private fun getFontWithTTF(font: FontMetadata): FontWithSupplier {
+    val ttf = TTFParser().parseEmbedded(
+        ClassPathResource("/fonts/${font.path}").inputStream
+    )
+    ttf.isEnableGsub = false
+
+    return FontWithSupplier(
+        family = font.family,
+        weight = font.weight,
+        style = font.style,
+        subset = font.subset,
+        pdFontSupplier = PDFontSupplier(PDType0Font.load(PDDocument(), ttf, font.subset)),
+    )
+}
+
+private data class FontWithSupplier(
+    val family: String,
+    val weight: Int,
+    val style: BaseRendererBuilder.FontStyle,
+    val subset: Boolean,
+    val pdFontSupplier: PDFontSupplier,
+)
+
+private data class FontMetadata(
     val family: String,
     val path: String,
     val weight: Int,
     val style: BaseRendererBuilder.FontStyle,
-    val subset: Boolean
+    val subset: Boolean,
 )
-
-fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder()
-        .apply {
-            for (font in fonts) {
-                useFont(FSSupplier(getIs(font.path)), font.family, font.weight, font.style, font.subset)
-            }
-        }
-        // .useFastMode() wait with fast mode until it doesn't print a bunch of errors
-        .useColorProfile(colorProfile)
-        .useSVGDrawer(BatikSVGDrawer())
-        .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
-        .withW3cDocument(w3doc, PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm())
-        .toStream(outputStream)
-        .buildPdfRenderer()
-        .createPDF()
-
-fun getIs(path: String): () -> InputStream { return { ClassPathResource("/fonts/$path").inputStream } }
