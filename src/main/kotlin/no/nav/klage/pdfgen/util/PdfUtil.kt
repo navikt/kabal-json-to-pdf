@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream
 
 private val colorprofile = ClassPathResource("/sRGB2014.icc").contentAsByteArray
 private val baseUri = ClassPathResource("/dummy.html").uri.toString()
+private val fonts: Array<FontMetadata> = jacksonObjectMapper().readValue(ClassPathResource("/fonts/config.json").contentAsByteArray)
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 fun createPDFA(w3doc: Document): ByteArray {
@@ -43,8 +44,6 @@ fun createPDFA(w3doc: Document): ByteArray {
 }
 
 private fun fontsWithTTF(): List<FontWithSupplier> {
-    val fonts: Array<FontMetadata> =
-        jacksonObjectMapper().readValue(ClassPathResource("/fonts/config.json").contentAsByteArray)
     return fonts.map { font ->
         getFontWithTTF(font = font)
     }
