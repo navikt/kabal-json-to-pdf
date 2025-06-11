@@ -3,12 +3,18 @@ package no.nav.klage.pdfgen
 import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.service.SvarbrevService
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import java.nio.file.Files
-import java.nio.file.Path
+import org.junit.jupiter.api.TestInstance
 import java.time.LocalDate
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateSvarbrevPDFTest {
+
+    @BeforeAll
+    fun emptyFileDiffFolder() {
+        cleanOutputFolder()
+    }
 
     @Test
     fun `generate pdf from full input`() {
@@ -29,7 +35,7 @@ class GenerateSvarbrevPDFTest {
                 customText = "Litt ekstra fritekst.",
             )
         )
-        Files.write(Path.of("svarbrev.pdf"), data)
+        comparePdf("svarbrev_klage_full", data)
     }
 
     @Test
@@ -51,7 +57,7 @@ class GenerateSvarbrevPDFTest {
                 customText = null,
             )
         )
-        Files.write(Path.of("svarbrev.pdf"), data)
+        comparePdf("svarbrev_anke_full", data)
     }
 
 }
