@@ -3,12 +3,18 @@ package no.nav.klage.pdfgen
 import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.service.ForlengetBehandlingstidService
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import java.nio.file.Files
-import java.nio.file.Path
+import org.junit.jupiter.api.TestInstance
 import java.time.LocalDate
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateForlengetBehandlingstidPDFTest {
+
+    @BeforeAll
+    fun emptyFileDiffFolder() {
+        cleanOutputFolder()
+    }
 
     @Test
     fun `generate pdf from full input`() {
@@ -31,7 +37,7 @@ class GenerateForlengetBehandlingstidPDFTest {
                 
             )
         )
-        Files.write(Path.of("forlengetbehandlingstid.pdf"), data)
+        comparePdf("forlengetbehandlingstid", data)
     }
 
 }

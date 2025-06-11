@@ -3,12 +3,18 @@ package no.nav.klage.pdfgen
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.Type
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import java.nio.file.Files
-import java.nio.file.Path
+import org.junit.jupiter.api.TestInstance
 import java.time.LocalDate
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateInnholdsfortegnelsePDFTest {
+
+    @BeforeAll
+    fun emptyFileDiffFolder() {
+        cleanOutputFolder()
+    }
 
     @Test
     fun `generate pdf from full input`() {
@@ -48,7 +54,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 ),
             ),
         ))
-        Files.write(Path.of("vedleggsoversikt.pdf"), data)
+        comparePdf("vedleggsoversikt", data)
     }
 
 }
