@@ -3,132 +3,137 @@ package no.nav.klage.pdfgen
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.PDFGenService
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Path
 
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratePDF {
 
-    val path = "src/test/resources/"
+    @BeforeAll
+    fun emptyFileDiffFolder() {
+        cleanOutputFolder()
+    }
 
     @Test
     fun `generate pdf from full input`() {
-        val jsonData = File(path + "full-document.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/full-document.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("full-document", data)
     }
 
     @Test
     fun `generate pdf with center-align`() {
-        val jsonData = File(path + "center-align.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/center-align.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("center.pdf"), data)
+        comparePdf("center-align", data)
     }
 
     @Test
     fun `generate pdf from fullmektig input`() {
-        val jsonData = File(path + "fullmektig.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/fullmektig.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("fullmektig", data)
     }
 
     @Test
     fun `generate pdf from table input`() {
-        val jsonData = File(path + "tables.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/tables.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("tables", data)
     }
 
     @Test
     fun `generate pdf from minimal input`() {
-        val jsonData = File(path + "minimal.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/minimal.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("minimal", data)
     }
 
     @Test
     fun `generate pdf with placeholder examples`() {
-        val jsonData = File(path + "incomplete-placeholder-example.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/incomplete-placeholder-example.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("incomplete-placeholder-example", data)
     }
 
     @Test
     fun `generate pdf with null in header`() {
-        val jsonData = File(path + "null-in-header.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/null-in-header.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("null-in-header", data)
     }
 
     @Test
     fun `generate pdf with regelverk type`() {
-        val jsonData = File(path + "complete-with-regelverk.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/complete-with-regelverk.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("complete-with-regelverk", data)
     }
 
     @Test
     fun `generate pdf with redigerbar maltekst`() {
-        val jsonData = File(path + "redigerbar-maltekst.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/redigerbar-maltekst.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("redigerbar-maltekst", data)
     }
 
     @Test
-    fun `input without header throws error`(){
-        val jsonData = File(path + "no-header.json").readText()
+    fun `input without header throws error`() {
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/no-header.json").readText()
         assertThrows<RuntimeException> { PDFGenService().getPDFAsByteArray(jsonData) }
     }
 
     @Test
     fun `validate pdf with incomplete placeholder throws exception`() {
-        val jsonData = File(path + "incomplete-placeholder-example.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/incomplete-placeholder-example.json").readText()
         assertThrows<EmptyPlaceholderException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 
     @Test
     fun `validate pdf with complete placeholders passes`() {
-        val jsonData = File(path + "complete-placeholder-example.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/complete-placeholder-example.json").readText()
         PDFGenService().validateDocumentContent(jsonData)
     }
 
     @Test
     fun `validate pdf with complete regelverk passes`() {
-        val jsonData = File(path + "complete-with-regelverk.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/complete-with-regelverk.json").readText()
         PDFGenService().validateDocumentContent(jsonData)
     }
 
     @Test
     fun `validate pdf with incomplete regelverk throws exception`() {
-        val jsonData = File(path + "empty-regelverk-container.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/empty-regelverk-container.json").readText()
         assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 
     @Test
     fun `validate pdf with text somewhere in regelverk passes`() {
-        val jsonData = File(path + "not-all-empty-text-regelverk.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/not-all-empty-text-regelverk.json").readText()
         PDFGenService().validateDocumentContent(jsonData)
     }
 
     @Test
     fun `validate pdf with only empty texts in regelverk throws exception`() {
-        val jsonData = File(path + "all-empty-text-regelverk.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/all-empty-text-regelverk.json").readText()
         assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 
     @Test
     fun `validate pdf passes`() {
-        val jsonData = File(path + "minimal.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/minimal.json").readText()
         PDFGenService().validateDocumentContent(jsonData)
     }
 
     @Test
     fun `generate pdf with current date on later page`() {
-        val jsonData = File(path + "tilsvarsbrev-med-oversendelsesbrev.json").readText()
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/tilsvarsbrev-med-oversendelsesbrev.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
-        Files.write(Path.of("test.pdf"), data)
+        comparePdf("tilsvarsbrev-med-oversendelsesbrev", data)
     }
 }
