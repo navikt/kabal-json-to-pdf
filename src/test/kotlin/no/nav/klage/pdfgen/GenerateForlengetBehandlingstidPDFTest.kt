@@ -11,6 +11,8 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateForlengetBehandlingstidPDFTest {
 
+    private val testDate: LocalDate = LocalDate.of(2025, 6, 11)
+
     @BeforeAll
     fun emptyFileDiffFolder() {
         cleanOutputFolder()
@@ -18,17 +20,17 @@ class GenerateForlengetBehandlingstidPDFTest {
 
     @Test
     fun `generate pdf from full input`() {
-        val data = ForlengetBehandlingstidService().getForlengetBehandlingstidAsByteArray(
+        val data = ForlengetBehandlingstidService(currentDate = testDate).getForlengetBehandlingstidAsByteArray(
             ForlengetBehandlingstidRequest(
                 title = "Forlenget behandlingstid",
                 sakenGjelder = ForlengetBehandlingstidRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = ForlengetBehandlingstidRequest.Part(name = "Second Last", fnr = "23456789120"),
                 fullmektigFritekst = "Fullmektig Fritekst",
                 ytelseId = "14",
-                mottattKlageinstans = LocalDate.now().minusMonths(1),
+                mottattKlageinstans = testDate.minusMonths(1),
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.MONTHS.id,
-                behandlingstidDate = LocalDate.now(),
+                behandlingstidDate = testDate,
                 avsenderEnhetId = "4291",
                 type = ForlengetBehandlingstidRequest.Type.ANKE,
                 previousBehandlingstidInfo = " Hei og hei . ",

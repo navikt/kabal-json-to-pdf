@@ -11,6 +11,8 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateSvarbrevPDFTest {
 
+    private val testDate: LocalDate = LocalDate.of(2025, 6, 11)
+
     @BeforeAll
     fun emptyFileDiffFolder() {
         cleanOutputFolder()
@@ -18,15 +20,15 @@ class GenerateSvarbrevPDFTest {
 
     @Test
     fun `generate pdf from full input`() {
-        val data = SvarbrevService().getSvarbrevAsByteArray(
+        val data = SvarbrevService(currentDate = testDate).getSvarbrevAsByteArray(
             SvarbrevRequest(
                 title = "Svarbrev",
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
                 ytelseId = "31",
                 fullmektigFritekst = "Fullmektig Fritekst",
-                ankeReceivedDate = LocalDate.now(),
-                receivedDate = LocalDate.now(),
+                ankeReceivedDate = testDate,
+                receivedDate = testDate,
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
@@ -40,7 +42,7 @@ class GenerateSvarbrevPDFTest {
 
     @Test
     fun `generate pdf from full anke input`() {
-        val data = SvarbrevService().getSvarbrevAsByteArray(
+        val data = SvarbrevService(currentDate = testDate).getSvarbrevAsByteArray(
             SvarbrevRequest(
                 title = "Svarbrev og hei og hei",
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
@@ -48,7 +50,7 @@ class GenerateSvarbrevPDFTest {
                 ytelseId = "3",
                 fullmektigFritekst = "Fullmektig fritekst",
                 ankeReceivedDate = null,
-                receivedDate = LocalDate.now(),
+                receivedDate = testDate,
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",

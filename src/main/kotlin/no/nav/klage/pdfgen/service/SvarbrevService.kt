@@ -10,7 +10,9 @@ import org.w3c.dom.Document
 import java.time.LocalDate
 
 @Service
-class SvarbrevService {
+class SvarbrevService(
+    private val currentDate: LocalDate = LocalDate.now(),
+) {
 
     val enhetHeaderAndFooterMap = mapOf(
         "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
@@ -59,7 +61,7 @@ class SvarbrevService {
                     }
                     div {
                         classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(LocalDate.now())}"
+                        +"Dato: ${getFormattedDate(currentDate)}"
                     }
                     h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
                     br {}
@@ -202,7 +204,7 @@ class SvarbrevService {
                     }
                     div {
                         classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(LocalDate.now())}"
+                        +"Dato: ${getFormattedDate(currentDate)}"
                     }
                     h1 {
                         +"Nav orienterer om saksbehandlingen av anken din som gjelder ${
@@ -344,7 +346,7 @@ class SvarbrevService {
                     }
                     div {
                         classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(LocalDate.now())}"
+                        +"Dato: ${getFormattedDate(currentDate)}"
                     }
                     h1 { +"Nav klageinstans har mottatt kravet ditt om omgjøring" }
                     br {}

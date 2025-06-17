@@ -11,6 +11,8 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateInnholdsfortegnelsePDFTest {
 
+    private val testDate: LocalDate = LocalDate.of(2025, 6, 11)
+
     @BeforeAll
     fun emptyFileDiffFolder() {
         cleanOutputFolder()
@@ -23,7 +25,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
                     tema = "Kompensasjon for selvstendig næringsdrivende/frilansere",
-                    dato = LocalDate.now(),
+                    dato = testDate,
                     avsenderMottaker = "Kalle Anka",
                     saksnummer = "123456",
                     type = Type.U
@@ -31,7 +33,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "ROL notat 2023",
                     tema = "Arbeidsrådgivning - psykologtjenester",
-                    dato = LocalDate.now(),
+                    dato = testDate,
                     avsenderMottaker = "Kajsa Anka",
                     saksnummer = "123456",
                     type = Type.I
@@ -39,7 +41,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Vedtak 2022",
                     tema = "Helsetjenester og ortopediske hjelpemidler",
-                    dato = LocalDate.now().minusMonths(4),
+                    dato = testDate.minusMonths(4),
                     avsenderMottaker = "Mette Wendy Lindberg Gulbrandsen",
                     saksnummer = "123456",
                     type = Type.N
@@ -47,7 +49,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
                     tema = "Foreldrepenger",
-                    dato = LocalDate.now().minusMonths(5),
+                    dato = testDate.minusMonths(5),
                     avsenderMottaker = "Knatte Anka",
                     saksnummer = "123456", 
                     type = Type.U

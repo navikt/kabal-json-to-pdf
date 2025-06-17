@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import java.io.File
+import java.time.LocalDate
 
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GeneratePDF {
+
+    private val testDate: LocalDate = LocalDate.of(2025, 6, 11)
 
     @BeforeAll
     fun emptyFileDiffFolder() {
@@ -22,63 +25,63 @@ class GeneratePDF {
     @Test
     fun `generate pdf from full input`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/full-document.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("full-document", data)
     }
 
     @Test
     fun `generate pdf with center-align`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/center-align.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("center-align", data)
     }
 
     @Test
     fun `generate pdf from fullmektig input`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/fullmektig.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("fullmektig", data)
     }
 
     @Test
     fun `generate pdf from table input`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/tables.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("tables", data)
     }
 
     @Test
     fun `generate pdf from minimal input`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/minimal.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("minimal", data)
     }
 
     @Test
     fun `generate pdf with placeholder examples`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/incomplete-placeholder-example.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("incomplete-placeholder-example", data)
     }
 
     @Test
     fun `generate pdf with null in header`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/null-in-header.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("null-in-header", data)
     }
 
     @Test
     fun `generate pdf with regelverk type`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/complete-with-regelverk.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("complete-with-regelverk", data)
     }
 
     @Test
     fun `generate pdf with redigerbar maltekst`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/redigerbar-maltekst.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("redigerbar-maltekst", data)
     }
 
@@ -133,7 +136,7 @@ class GeneratePDF {
     @Test
     fun `generate pdf with current date on later page`() {
         val jsonData = File("$TEST_JSON_TEST_DATA_PATH/tilsvarsbrev-med-oversendelsesbrev.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        val data = PDFGenService(currentDate = testDate).getPDFAsByteArray(jsonData)
         comparePdf("tilsvarsbrev-med-oversendelsesbrev", data)
     }
 }

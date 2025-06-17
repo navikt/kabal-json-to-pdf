@@ -10,7 +10,9 @@ import org.w3c.dom.Document
 import java.time.LocalDate
 
 @Service
-class ForlengetBehandlingstidService {
+class ForlengetBehandlingstidService(
+    private val currentDate: LocalDate = LocalDate.now(),
+) {
 
     val enhetHeaderAndFooterMap = mapOf(
         "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
@@ -54,7 +56,7 @@ class ForlengetBehandlingstidService {
                     }
                     div {
                         classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(LocalDate.now())}"
+                        +"Dato: ${getFormattedDate(currentDate)}"
                     }
                     h1 {
                         +"Varsel om lengre saksbehandlingstid enn forventet i ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} som gjelder ${
