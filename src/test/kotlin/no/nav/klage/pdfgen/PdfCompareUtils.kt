@@ -6,6 +6,7 @@ import org.junit.jupiter.api.fail
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.LocalDate
 import java.util.stream.Collectors
 import javax.imageio.ImageIO
 import kotlin.io.path.Path
@@ -14,6 +15,8 @@ import kotlin.io.path.name
 const val TEST_OUTPUT_PATH = "test-output"
 const val TEST_RESOURCES_PATH = "src/test/resources"
 const val TEST_JSON_TEST_DATA_PATH = "$TEST_RESOURCES_PATH/json-test-data"
+
+val TEST_DATE: LocalDate = LocalDate.of(2025, 6, 11)
 
 fun comparePdf(resource: String, actualPdfBytes: ByteArray) {
     //always write actual PDF
