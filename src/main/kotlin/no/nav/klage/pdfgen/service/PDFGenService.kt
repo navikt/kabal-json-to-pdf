@@ -5,9 +5,12 @@ import no.nav.klage.pdfgen.transformers.HtmlCreator
 import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
+import java.time.LocalDate
 
 @Service
-class PDFGenService {
+class PDFGenService(
+    private val currentDate: LocalDate = LocalDate.now(),
+) {
 
     fun getPDFAsByteArray(json: String): ByteArray {
         val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
@@ -20,7 +23,11 @@ class PDFGenService {
 
     private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false): Document {
         validateHeaderFooter(list)
-        val c = HtmlCreator(list, validationMode)
+        val c = HtmlCreator(
+            dataList = list,
+            validationMode = validationMode,
+            currentDate = currentDate,
+        )
         return c.getDoc()
     }
 

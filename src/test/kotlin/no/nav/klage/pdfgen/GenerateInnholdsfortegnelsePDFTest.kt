@@ -6,7 +6,6 @@ import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import java.time.LocalDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateInnholdsfortegnelsePDFTest {
@@ -23,7 +22,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
                     tema = "Kompensasjon for selvstendig næringsdrivende/frilansere",
-                    dato = LocalDate.now(),
+                    dato = TEST_DATE,
                     avsenderMottaker = "Kalle Anka",
                     saksnummer = "123456",
                     type = Type.U
@@ -31,7 +30,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "ROL notat 2023",
                     tema = "Arbeidsrådgivning - psykologtjenester",
-                    dato = LocalDate.now(),
+                    dato = TEST_DATE,
                     avsenderMottaker = "Kajsa Anka",
                     saksnummer = "123456",
                     type = Type.I
@@ -39,7 +38,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Vedtak 2022",
                     tema = "Helsetjenester og ortopediske hjelpemidler",
-                    dato = LocalDate.now().minusMonths(4),
+                    dato = TEST_DATE.minusMonths(4),
                     avsenderMottaker = "Mette Wendy Lindberg Gulbrandsen",
                     saksnummer = "123456",
                     type = Type.N
@@ -47,7 +46,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
                     tema = "Foreldrepenger",
-                    dato = LocalDate.now().minusMonths(5),
+                    dato = TEST_DATE.minusMonths(5),
                     avsenderMottaker = "Knatte Anka",
                     saksnummer = "123456", 
                     type = Type.U

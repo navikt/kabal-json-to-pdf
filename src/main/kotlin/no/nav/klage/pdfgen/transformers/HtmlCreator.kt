@@ -12,7 +12,11 @@ import org.w3c.dom.Element
 import java.time.LocalDate
 
 @Suppress("UNCHECKED_CAST")
-class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
+class HtmlCreator(
+    val dataList: List<Map<String, *>>,
+    val validationMode: Boolean = false,
+    val currentDate: LocalDate,
+) {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -258,7 +262,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "current-date" -> {
                 return listOf(document.create.div {
                     classes = setOf("current-date")
-                    +"Dato: ${getFormattedDate(LocalDate.now())}"
+                    +"Dato: ${getFormattedDate(currentDate)}"
                 })
             }
 
