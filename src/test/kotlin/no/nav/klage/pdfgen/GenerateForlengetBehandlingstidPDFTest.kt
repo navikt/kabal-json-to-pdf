@@ -17,7 +17,7 @@ class GenerateForlengetBehandlingstidPDFTest {
 
     @Test
     fun `generate pdf from full input`() {
-        val data = ForlengetBehandlingstidService(currentDate = TEST_DATE).getForlengetBehandlingstidAsByteArray(
+        val data = ForlengetBehandlingstidService().getForlengetBehandlingstidAsByteArray(
             ForlengetBehandlingstidRequest(
                 title = "Forlenget behandlingstid",
                 sakenGjelder = ForlengetBehandlingstidRequest.Part(name = "First Last", fnr = "12345678910"),
@@ -33,8 +33,8 @@ class GenerateForlengetBehandlingstidPDFTest {
                 previousBehandlingstidInfo = " Hei og hei . ",
                 reason = " og her da  ",
                 customText = " og her også . ",
-                
-            )
+            ),
+            currentDate = TEST_DATE,
         )
         comparePdf("forlengetbehandlingstid", data)
     }

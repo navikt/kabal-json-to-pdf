@@ -10,9 +10,7 @@ import org.w3c.dom.Document
 import java.time.LocalDate
 
 @Service
-class SvarbrevService(
-    private val currentDate: LocalDate = LocalDate.now(),
-) {
+class SvarbrevService {
 
     val enhetHeaderAndFooterMap = mapOf(
         "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
@@ -23,17 +21,35 @@ class SvarbrevService(
         "4292" to ("Returadresse,\nNav klageinstans midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" to "Postadresse: Nav klageinstans midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 55 55 33 33\\Anav.no"),
     )
 
-    fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
+    fun getSvarbrevAsByteArray(
+        svarbrevRequest: SvarbrevRequest,
+        currentDate: LocalDate = LocalDate.now(),
+    ): ByteArray {
         val doc = when (svarbrevRequest.type) {
-            SvarbrevRequest.Type.KLAGE -> getHTMLDocumentKlage(svarbrevRequest)
-            SvarbrevRequest.Type.ANKE -> getHTMLDocumentAnke(svarbrevRequest)
-            SvarbrevRequest.Type.OMGJOERINGSKRAV -> getHTMLDocumentOmgjoeringskrav(svarbrevRequest)
-            null -> getHTMLDocumentAnke(svarbrevRequest)
+            SvarbrevRequest.Type.KLAGE -> getHTMLDocumentKlage(
+                svarbrevRequest = svarbrevRequest,
+                currentDate = currentDate,
+            )
+            SvarbrevRequest.Type.ANKE -> getHTMLDocumentAnke(
+                svarbrevRequest = svarbrevRequest,
+                currentDate = currentDate,
+            )
+            SvarbrevRequest.Type.OMGJOERINGSKRAV -> getHTMLDocumentOmgjoeringskrav(
+                svarbrevRequest = svarbrevRequest,
+                currentDate = currentDate,
+            )
+            null -> getHTMLDocumentAnke(
+                svarbrevRequest = svarbrevRequest,
+                currentDate = currentDate,
+            )
         }
         return createPDFA(doc)
     }
 
-    private fun getHTMLDocumentKlage(svarbrevRequest: SvarbrevRequest): Document {
+    private fun getHTMLDocumentKlage(
+        svarbrevRequest: SvarbrevRequest,
+        currentDate: LocalDate,
+    ): Document {
         return createHTMLDocument()
             .html {
                 head {
@@ -176,7 +192,10 @@ class SvarbrevService(
             }
     }
 
-    private fun getHTMLDocumentAnke(svarbrevRequest: SvarbrevRequest): Document {
+    private fun getHTMLDocumentAnke(
+        svarbrevRequest: SvarbrevRequest,
+        currentDate: LocalDate,
+    ): Document {
         return createHTMLDocument()
             .html {
                 head {
@@ -318,7 +337,10 @@ class SvarbrevService(
             }
     }
 
-    private fun getHTMLDocumentOmgjoeringskrav(svarbrevRequest: SvarbrevRequest): Document {
+    private fun getHTMLDocumentOmgjoeringskrav(
+        svarbrevRequest: SvarbrevRequest,
+        currentDate: LocalDate,
+    ): Document {
         return createHTMLDocument()
             .html {
                 head {

@@ -8,20 +8,25 @@ import org.w3c.dom.Document
 import java.time.LocalDate
 
 @Service
-class PDFGenService(
-    private val currentDate: LocalDate = LocalDate.now(),
-) {
+class PDFGenService {
 
-    fun getPDFAsByteArray(json: String): ByteArray {
-        val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
+    fun getPDFAsByteArray(json: String, currentDate: LocalDate = LocalDate.now()): ByteArray {
+        val doc = getHTMLDocument(
+            list = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
+            currentDate = currentDate,
+        )
         return createPDFA(doc)
     }
 
     fun validateDocumentContent(json: String) {
-        getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>, true)
+        getHTMLDocument(
+            list = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
+            validationMode = true,
+            currentDate = LocalDate.now(),
+        )
     }
 
-    private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false): Document {
+    private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false, currentDate: LocalDate): Document {
         validateHeaderFooter(list)
         val c = HtmlCreator(
             dataList = list,

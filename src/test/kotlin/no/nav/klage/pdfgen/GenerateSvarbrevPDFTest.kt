@@ -17,7 +17,7 @@ class GenerateSvarbrevPDFTest {
 
     @Test
     fun `generate pdf from full input`() {
-        val data = SvarbrevService(currentDate = TEST_DATE).getSvarbrevAsByteArray(
+        val data = SvarbrevService().getSvarbrevAsByteArray(
             SvarbrevRequest(
                 title = "Svarbrev",
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
@@ -32,14 +32,15 @@ class GenerateSvarbrevPDFTest {
                 type = SvarbrevRequest.Type.KLAGE,
                 initialCustomText = null,
                 customText = "Litt ekstra fritekst.",
-            )
+            ),
+            currentDate = TEST_DATE,
         )
         comparePdf("svarbrev_klage_full", data)
     }
 
     @Test
     fun `generate pdf from full anke input`() {
-        val data = SvarbrevService(currentDate = TEST_DATE).getSvarbrevAsByteArray(
+        val data = SvarbrevService().getSvarbrevAsByteArray(
             SvarbrevRequest(
                 title = "Svarbrev og hei og hei",
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
@@ -54,7 +55,8 @@ class GenerateSvarbrevPDFTest {
                 type = SvarbrevRequest.Type.ANKE,
                 initialCustomText = "Her har vi lagt inn litt ekstra informasjon.",
                 customText = null,
-            )
+            ),
+            currentDate = TEST_DATE,
         )
         comparePdf("svarbrev_anke_full", data)
     }

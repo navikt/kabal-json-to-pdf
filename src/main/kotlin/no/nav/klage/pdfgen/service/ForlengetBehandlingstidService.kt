@@ -10,9 +10,7 @@ import org.w3c.dom.Document
 import java.time.LocalDate
 
 @Service
-class ForlengetBehandlingstidService(
-    private val currentDate: LocalDate = LocalDate.now(),
-) {
+class ForlengetBehandlingstidService {
 
     val enhetHeaderAndFooterMap = mapOf(
         "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
@@ -23,12 +21,18 @@ class ForlengetBehandlingstidService(
         "4292" to ("Returadresse,\nNav klageinstans midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" to "Postadresse: Nav klageinstans midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 55 55 33 33\\Anav.no"),
     )
 
-    fun getForlengetBehandlingstidAsByteArray(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): ByteArray {
-        val doc = getHTMLDocument(forlengetBehandlingstidRequest = forlengetBehandlingstidRequest)
+    fun getForlengetBehandlingstidAsByteArray(
+        forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest,
+        currentDate: LocalDate = LocalDate.now(),
+    ): ByteArray {
+        val doc = getHTMLDocument(
+            forlengetBehandlingstidRequest = forlengetBehandlingstidRequest,
+            currentDate = currentDate,
+        )
         return createPDFA(doc)
     }
 
-    private fun getHTMLDocument(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest): Document {
+    private fun getHTMLDocument(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest, currentDate: LocalDate): Document {
         return createHTMLDocument()
             .html {
                 head {
