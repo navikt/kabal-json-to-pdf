@@ -180,7 +180,7 @@ class HtmlCreator(
 
             "label-content" -> {
                 val result = map["result"]
-                val label = map["label"] ?: "Ukjent etikett"
+                val label = map["label"] ?: throw RuntimeException("label mangler i label-content")
 
                 if (result == null || result.toString().isEmpty()) {
                     return emptyList()
