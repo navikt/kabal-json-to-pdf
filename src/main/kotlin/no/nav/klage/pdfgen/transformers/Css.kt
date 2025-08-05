@@ -118,13 +118,13 @@ fun getCss(footer: String = "") = """
     td {
         border: 1pt solid #8F8F8F;
         word-wrap: break-word;
+        max-width: 100%;
         vertical-align: top;
         text-align: left;
         background-color: transparent;
         padding: 4pt;
         padding-left: 3pt;
         padding-right: 3pt;
-        min-width: 36pt;
     }
     tr:nth-child(odd) {
       background-color: rgb(247, 247, 247);
