@@ -21,7 +21,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "1"
+                    "text": "Denne tabellen har kolonner på hhv. 220 og 110 px"
                   }
                 ]
               }
@@ -34,14 +34,13 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "2"
+                    "text": "Denne bredden er låst, så teksten vil automatisk brekke over flere linjer"
                   }
                 ]
               }
             ]
           }
-        ],
-        "size": 38
+        ]
       },
       {
         "type": "tr",
@@ -53,7 +52,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "3"
+                    "text": "Teksten skal ikke brekke midt i ordene"
                   }
                 ]
               }
@@ -66,18 +65,17 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "4"
+                    "text": "Det skal ikke være praktisk mulig å ha bredde: 0 i colSizes"
                   }
                 ]
               }
             ]
           }
-        ],
-        "size": 75
+        ]
       }
     ],
     "colSizes": [
-      0,
+      220,
       110
     ]
   }
