@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-val mockkVersion = "1.14.4"
+val mockkVersion = "1.14.5"
 val logstashVersion = "8.1"
 val jsoupVersion = "1.21.1"
-val openHtmlToPdfVersion = "1.1.28"
+val openHtmlToPdfVersion = "1.1.29"
 val kotlinxHtmlVersion = "0.12.0"
 val springDocVersion = "2.8.9"
-val klageKodeverkVersion = "1.10.16"
+val klageKodeverkVersion = "1.10.21"
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ plugins {
     val kotlinVersion = "2.2.0"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.5.3"
+    id("org.springframework.boot") version "3.5.4"
     idea
 }
 
