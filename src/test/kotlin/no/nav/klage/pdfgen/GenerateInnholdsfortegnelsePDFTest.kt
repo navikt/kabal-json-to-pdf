@@ -18,6 +18,8 @@ class GenerateInnholdsfortegnelsePDFTest {
     @Test
     fun `generate pdf from full input`() {
         val data = InnholdsfortegnelseService().getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequest(
+            parentTitle = "Svar på innsynsbegjæring",
+            formattedParentDate = "11. juni 2025",
             documents = listOf(
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",

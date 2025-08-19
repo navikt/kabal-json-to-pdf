@@ -13,6 +13,8 @@ data class DocumentValidationResponse(
 }
 
 data class InnholdsfortegnelseRequest(
+    val parentTitle: String? = null,
+    val formattedParentDate: String? = null,
     val documents: List<Document>,
 ) {
     data class Document(
