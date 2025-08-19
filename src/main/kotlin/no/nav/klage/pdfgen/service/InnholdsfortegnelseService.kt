@@ -27,6 +27,8 @@ class InnholdsfortegnelseService {
         var counter = 1
         val totalCount = input.documents.size
 
+        val title = "Vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate}" else ""
+
         return createHTMLDocument()
             .html {
                 head {
@@ -40,7 +42,7 @@ class InnholdsfortegnelseService {
                 }
                 body {
                     id = "body"
-                    h1 { +"Vedleggsoversikt" }
+                    h1 { +title }
 
                     if (input.documents.isNotEmpty()) {
                         table {

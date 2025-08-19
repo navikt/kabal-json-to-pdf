@@ -78,7 +78,9 @@ class PDFGenController(
 
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
-        responseHeaders.add("Content-Disposition", "inline; filename=vedleggsoversikt.pdf")
+        val filename = "vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate}" else ""
+
+        responseHeaders.add("Content-Disposition", "inline; filename=$filename.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
