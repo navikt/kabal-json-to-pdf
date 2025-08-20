@@ -14,7 +14,7 @@ data class DocumentValidationResponse(
 
 data class InnholdsfortegnelseRequest(
     val parentTitle: String? = null,
-    val formattedParentDate: LocalDate? = null,
+    val parentDate: LocalDate? = null,
     val documents: List<Document>,
 ) {
     data class Document(

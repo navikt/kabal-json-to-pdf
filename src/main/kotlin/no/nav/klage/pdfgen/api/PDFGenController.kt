@@ -85,7 +85,7 @@ class PDFGenController(
         val DATE_FORMAT =
             DateTimeFormatter.ofPattern("dd. MMM yyyy", Locale("nb", "NO")).withZone(ZoneId.of("Europe/Oslo"))
 
-        val filename = "vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate.format(DATE_FORMAT)}" else ""
+        val filename = "vedleggsoversikt" + if (input.parentTitle != null && input.parentDate != null) " til \"${input.parentTitle}\", ${input.parentDate.format(DATE_FORMAT)}" else ""
 
         responseHeaders.add("Content-Disposition", "inline; filename=$filename.pdf")
         return ResponseEntity(
