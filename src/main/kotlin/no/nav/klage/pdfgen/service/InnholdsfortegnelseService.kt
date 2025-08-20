@@ -27,7 +27,7 @@ class InnholdsfortegnelseService {
         var counter = 1
         val totalCount = input.documents.size
 
-        val title = "Vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate}" else ""
+        val title = "Vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate.format(DATE_FORMAT)}" else ""
 
         return createHTMLDocument()
             .html {

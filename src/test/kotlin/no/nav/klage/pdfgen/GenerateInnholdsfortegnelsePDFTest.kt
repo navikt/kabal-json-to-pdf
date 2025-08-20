@@ -6,6 +6,7 @@ import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import java.time.LocalDate
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateInnholdsfortegnelsePDFTest {
@@ -19,7 +20,7 @@ class GenerateInnholdsfortegnelsePDFTest {
     fun `generate pdf from full input`() {
         val data = InnholdsfortegnelseService().getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequest(
             parentTitle = "Svar på innsynsbegjæring",
-            formattedParentDate = "11. juni 2025",
+            formattedParentDate = LocalDate.of(2025, 6, 11),
             documents = listOf(
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",

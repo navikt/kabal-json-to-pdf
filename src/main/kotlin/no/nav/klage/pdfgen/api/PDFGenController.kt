@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @RestController
 @Tag(name = "kabal-json-to-pdf", description = "Create PDF from JSON")
@@ -78,7 +81,11 @@ class PDFGenController(
 
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
-        val filename = "vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate}" else ""
+
+        val DATE_FORMAT =
+            DateTimeFormatter.ofPattern("dd. MMM yyyy", Locale("nb", "NO")).withZone(ZoneId.of("Europe/Oslo"))
+
+        val filename = "vedleggsoversikt" + if (input.parentTitle != null && input.formattedParentDate != null) " til \"${input.parentTitle}\", ${input.formattedParentDate.format(DATE_FORMAT)}" else ""
 
         responseHeaders.add("Content-Disposition", "inline; filename=$filename.pdf")
         return ResponseEntity(
