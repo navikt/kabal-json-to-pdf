@@ -78,6 +78,7 @@ fun getCss(footer: String = "") = """
     p {
         font-size: 12pt;
         margin-top: 1em;
+        line-height: 1.5;
     }
     .placeholder-text {
         background-color: #EFA89D;

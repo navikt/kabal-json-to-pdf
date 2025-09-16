@@ -43,7 +43,7 @@ fun getVedleggsoversiktCss() = """
 
     td, th {
         padding: 6pt;
-        word-break: keep-all;
+        word-break: normal;
         white-space: normal;
     }
     
