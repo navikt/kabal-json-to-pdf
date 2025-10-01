@@ -61,4 +61,27 @@ class GenerateSvarbrevPDFTest {
         comparePdf("svarbrev_anke_full", data)
     }
 
+    @Test
+    fun `generate begjæring om gjenopptak svarbrev`() {
+        val data = SvarbrevService().getSvarbrevAsByteArray(
+            SvarbrevRequest(
+                title = "Svarbrev",
+                sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
+                klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
+                ytelseId = "31",
+                fullmektigFritekst = "Fullmektig Fritekst",
+                ankeReceivedDate = TEST_DATE,
+                receivedDate = TEST_DATE,
+                behandlingstidUnits = 12,
+                behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
+                avsenderEnhetId = "4291",
+                type = SvarbrevRequest.Type.BEGJAERING_OM_GJENOPPTAK,
+                initialCustomText = null,
+                customText = null,
+            ),
+            currentDate = TEST_DATE,
+        )
+        comparePdf("svarbrev_gjenopptak_full", data)
+    }
+
 }
