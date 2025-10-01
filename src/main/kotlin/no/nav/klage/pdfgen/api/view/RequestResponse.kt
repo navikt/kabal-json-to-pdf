@@ -58,6 +58,7 @@ data class SvarbrevRequest(
         KLAGE,
         ANKE,
         OMGJOERINGSKRAV,
+        BEGJAERING_OM_GJENOPPTAK,
     }
 }
 

@@ -30,14 +30,22 @@ class SvarbrevService {
                 svarbrevRequest = svarbrevRequest,
                 currentDate = currentDate,
             )
+
             SvarbrevRequest.Type.ANKE -> getHTMLDocumentAnke(
                 svarbrevRequest = svarbrevRequest,
                 currentDate = currentDate,
             )
+
             SvarbrevRequest.Type.OMGJOERINGSKRAV -> getHTMLDocumentOmgjoeringskrav(
                 svarbrevRequest = svarbrevRequest,
                 currentDate = currentDate,
             )
+
+            SvarbrevRequest.Type.BEGJAERING_OM_GJENOPPTAK -> getHTMLDocumentBegjaeringOmGjenopptak(
+                svarbrevRequest = svarbrevRequest,
+                currentDate = currentDate,
+            )
+
             null -> getHTMLDocumentAnke(
                 svarbrevRequest = svarbrevRequest,
                 currentDate = currentDate,
@@ -444,6 +452,152 @@ class SvarbrevService {
                         div {
                             +"www.nav.no/saksbehandlingstid."
                         }
+                    }
+                    h2 { +"Du må melde fra om endringer" }
+                    p {
+                        +"Skjer det endringer du mener er viktig for saken din, må du orientere oss. Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
+                    }
+                    p {
+                        +"Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding der."
+                    }
+                    p {
+                        +"Om du ikke ønsker å logge deg inn på nav.no kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                    }
+                    h2 { +"Du har rett til innsyn" }
+                    p {
+                        +"Du har rett til å se dokumentene i saken din."
+                    }
+                    h2 { +"Informasjon om fri rettshjelp" }
+                    p {
+                        +"Dette får du vite mer om hos Statsforvalteren eller advokat."
+                    }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"Nav klageinstans"
+                    }
+                }
+            }
+    }
+
+    private fun getHTMLDocumentBegjaeringOmGjenopptak(
+        svarbrevRequest: SvarbrevRequest,
+        currentDate: LocalDate,
+    ): Document {
+        return createHTMLDocument()
+            .html {
+                head {
+                    style {
+                        unsafe {
+                            raw(
+                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                            )
+                        }
+                    }
+                    title(svarbrevRequest.title)
+                }
+                body {
+                    id = "body"
+                    classes = setOf("svarbrev")
+                    header {
+                        div {
+                            id = "header_text"
+                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
+                        }
+                        div {
+                            id = "logo"
+                            img { src = "nav_logo.png" }
+                        }
+                    }
+                    div {
+                        classes = setOf("current-date")
+                        +"Dato: ${getFormattedDate(currentDate)}"
+                    }
+                    h1 { +"Nav klageinstans orienterer om saksbehandlingen ved begjæring om gjenopptak" }
+                    br {}
+                    p {
+                        div {
+                            span {
+                                classes = setOf("bold")
+                                +"Saken gjelder: "
+                            }
+                            +svarbrevRequest.sakenGjelder.name
+                        }
+                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"Den som begjærer gjenopptak: "
+                                }
+                                +svarbrevRequest.klager.name
+                            }
+                        }
+                        div {
+                            span {
+                                classes = setOf("bold")
+                                +"Fødselsnummer: "
+                            }
+                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
+                        }
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"Fullmektig: "
+                                }
+                                +svarbrevRequest.fullmektigFritekst
+                            }
+                        }
+                    }
+                    br {}
+                    p {
+                        +"Vi viser til begjæringen din om gjenopptak av Trygderettens kjennelse som gjelder ${
+                            getYtelseDisplayText(
+                                ytelseId = svarbrevRequest.ytelseId
+                            )
+                        }, som vi mottok ${
+                            getFormattedDate(
+                                svarbrevRequest.receivedDate!!
+                            )
+                        }."
+                    }
+
+                    if (!svarbrevRequest.initialCustomText.isNullOrBlank()) {
+                        p {
+                            +svarbrevRequest.initialCustomText
+                        }
+                    }
+
+                    h2 { +"Behandling av krav om gjenopptak" }
+                    p {
+                        +"Saksbehandlingstiden vår er vanligvis "
+                        span {
+                            +getBehandlingstidText(
+                                behandlingstidUnitTypeId = svarbrevRequest.behandlingstidUnitTypeId,
+                                behandlingstidUnits = svarbrevRequest.behandlingstidUnits,
+                                behandlingstidDate = null
+                            )
+                        }
+                        +" fra vi mottok begjæringen om gjenopptak, men dette kan variere avhengig av hvor mange saker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
+                    }
+                    p {
+                        div {
+                            +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på"
+                        }
+                        div {
+                            +"www.nav.no/saksbehandlingstid."
+                        }
+                    }
+                    p {
+                        +"Vi skal ta vedtaket vårt, som ble vurdert i kjennelsen, opp til ny vurdering. Dersom vi ikke endrer det, sender vi saken din til Trygderetten."
+                    }
+                    h2 { +"Dersom saken går til Trygderetten" }
+                    p {
+                        +"Hvis saken din går videre til Trygderetten, vil du få kopi av oversendelsesbrevet, der vi forklarer saken og gir vår vurdering av begjæringen din om gjenopptak."
+                    }
+                    p {
+                        +"Du får da mulighet til å komme med merknader, som vil følge saken til Trygderetten."
                     }
                     h2 { +"Du må melde fra om endringer" }
                     p {
