@@ -13,12 +13,12 @@ import java.time.LocalDate
 class ForlengetBehandlingstidService {
 
     val enhetHeaderAndFooterMap = mapOf(
-        "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4293" to ("Returadresse,\nNav klageinstans øst, Postboks 2435, 3104 Tønsberg" to "Postadresse: Nav klageinstans øst // Postboks 2435 // 3104 Tønsberg\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4250" to ("Returadresse,\nNav klageinstans sør, Postboks 644 Lundsiden, 4606 Kristiansand S" to "Postadresse: Nav klageinstans sør // Postboks 644 Lundsiden // 4606 Kristiansand S\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4294" to ("Returadresse,\nNav klageinstans vest, Postboks 6245 Bedriftssenter, 5893 Bergen" to "Postadresse: Nav klageinstans vest // Postboks 6245 Bedriftssenter // 5893 Bergen\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4295" to ("Returadresse,\nNav klageinstans nord, Postboks 2363, 9271 Tromsø" to "Postadresse: Nav klageinstans nord // Postboks 2363 // 9271 Tromsø\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4292" to ("Returadresse,\nNav klageinstans midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" to "Postadresse: Nav klageinstans midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4291" to ("Returadresse,\nKlageinstans Oslo, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Oslo // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4293" to ("Returadresse,\nKlageinstans Tønsberg, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Tønsberg // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4250" to ("Returadresse,\nKlageinstans Kristiansand, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Kristiansand // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4294" to ("Returadresse,\nKlageinstans Bergen, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Bergen // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4295" to ("Returadresse,\nKlageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4292" to ("Returadresse,\nKlageinstans Trondheim, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Trondheim // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
     )
 
     fun getForlengetBehandlingstidAsByteArray(
@@ -107,7 +107,7 @@ class ForlengetBehandlingstidService {
                     }
 
                     p {
-                        +"Nav klageinstans mottok ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} ${
+                        +"Klageinstans mottok ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} ${
                             getFormattedDate(
                                 forlengetBehandlingstidRequest.mottattKlageinstans
                             )
@@ -161,7 +161,7 @@ class ForlengetBehandlingstidService {
                         classes = setOf("signature")
                         +"Med hilsen"
                         br { }
-                        +"Nav klageinstans"
+                        +"Arbeids- og velferdsdirektoratet Klageinstans"
                     }
                 }
             }

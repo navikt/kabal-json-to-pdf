@@ -15,7 +15,7 @@
       }
     ],
     "threadIds": [],
-    "content": "Returadresse,\nNAV Klageinstans Nord, Postboks 2363, 9271 Tromsø"
+    "content": "Returadresse,\nKlageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo"
   },
   {
     "type": "maltekstseksjon",
@@ -30,7 +30,7 @@
             "type": "h1",
             "children": [
               {
-                "text": "NAV Klageinstans har behandlet anken din"
+                "text": "Klageinstans har behandlet anken din"
               }
             ]
           }
@@ -222,7 +222,7 @@
             "type": "p",
             "children": [
               {
-                "text": "Du finner første side for innsending på www.nav.no/klage. Velg NAV Klageinstans "
+                "text": "Du finner første side for innsending på www.nav.no/klage. Velg Klageinstans "
               },
               {
                 "type": "placeholder",
@@ -325,7 +325,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "Hvis du ikke finner svar på nav.no, kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.\n\n\nMed hilsen\nNAV Klageinstans"
+                "text": "Hvis du ikke finner svar på nav.no, kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.\n\n\nMed hilsen\nKlageinstans"
               }
             ]
           }
@@ -508,7 +508,7 @@
                 "bold": true
               },
               {
-                "text": " NAV Klageinstans "
+                "text": " Klageinstans "
               }
             ]
           },
@@ -533,7 +533,7 @@
                 ]
               },
               {
-                "text": " over NAV Klageinstans sitt vedtak av "
+                "text": " over klageinstansen sitt vedtak av "
               },
               {
                 "type": "placeholder",
@@ -643,7 +643,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "NAV Klageinstans var enig i vedtaket."
+                "text": "Klageinstans var enig i vedtaket."
               }
             ]
           }
@@ -841,7 +841,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "Datoene det henvises til er journalføringsdato hos NAV, og ikke når dokumentet er mottatt hos NAV.  NAV Klageinstans viser til sakens dokumentasjon i sin helhet, herunder blant annet følgende dokumenter:"
+                "text": "Datoene det henvises til er journalføringsdato hos NAV, og ikke når dokumentet er mottatt hos NAV.  Klageinstans viser til sakens dokumentasjon i sin helhet, herunder blant annet følgende dokumenter:"
               }
             ]
           }
@@ -1211,7 +1211,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "NAV Klageinstans har vurdert det påankede vedtaket på nytt. "
+                "text": "Klageinstans har vurdert det påankede vedtaket på nytt. "
               }
             ]
           }
@@ -1287,7 +1287,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "NAV Klageinstans finner etter dette at det påankede vedtaket av "
+                "text": "Klageinstans finner etter dette at det påankede vedtaket av "
               },
               {
                 "type": "placeholder",
@@ -1310,7 +1310,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "NAV Klageinstans legger derfor ned slik påstand:"
+                "text": "Klageinstans legger derfor ned slik påstand:"
               }
             ]
           },
@@ -1390,7 +1390,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "NAV Klageinstans "
+                "text": "Klageinstans "
               }
             ]
           }
@@ -1430,7 +1430,7 @@
       }
     ],
     "threadIds": [],
-    "content": "Postadresse: NAV Klageinstans Nord // Postboks 2363 // 9271 Tromsø\nTelefon: 55 55 33 33\nnav.no"
+    "content": "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass // 0130 Oslo\nTelefon: 55 55 33 33\nnav.no"
   },
   {
     "type": "regelverk",
