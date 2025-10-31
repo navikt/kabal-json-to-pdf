@@ -10,7 +10,7 @@
   {
     "type": "header",
     "threadIds": [],
-    "content": "Returadresse,\nNav klageinstans Nord, Postboks 2363, 9271 Tromsø",
+    "content": "Returadresse,\nKlageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo",
     "children": [
       {
         "text": ""
@@ -48,7 +48,7 @@
             "type": "h1",
             "children": [
               {
-                "text": "Nav klageinstans har behandlet klagen din"
+                "text": "Klageinstans har behandlet klagen din"
               }
             ]
           }
@@ -697,7 +697,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet frem til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til Nav klageinstans Sakskostnader, postboks 22, 4661 Kristiansand. "
+                "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet frem til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til Klageinstans Sakskostnader, postboks 22, 4661 Kristiansand. "
               }
             ]
           }
@@ -820,7 +820,7 @@
             "indent": 0,
             "children": [
               {
-                "text": "Hvis du ikke finner svar på nav.no, kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.\n\n\nMed hilsen\nNav klageinstans"
+                "text": "Hvis du ikke finner svar på nav.no, kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.\n\n\nMed hilsen\nKlageinstans"
               }
             ]
           }
@@ -835,7 +835,7 @@
     "useSuffix": true,
     "threadIds": [],
     "saksbehandler": {
-      "name": "Nav klageinstans"
+      "name": "Klageinstans"
     },
     "children": [
       {
@@ -846,7 +846,7 @@
   {
     "type": "footer",
     "threadIds": [],
-    "content": "Postadresse: Nav klageinstans Nord // Postboks 2363 // 9271 Tromsø\nTelefon: 55 55 33 33\nnav.no",
+    "content": "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass // 0130 Oslo\nTelefon: 55 55 33 33\nnav.no",
     "children": [
       {
         "text": ""
