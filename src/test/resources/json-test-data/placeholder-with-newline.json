@@ -1,0 +1,31 @@
+[
+  {
+    "type": "p",
+    "children": [
+      {
+        "type": "placeholder",
+        "placeholder": "this is placeholder",
+        "deletable": true,
+        "children": [
+          {
+            "text": "first line"
+          },
+          {
+            "text": "\n"
+          },
+          {
+            "text": "second line"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "children": [
+      {
+        "text": "Should accept placeholder as not empty"
+      }
+    ]
+  }
+]

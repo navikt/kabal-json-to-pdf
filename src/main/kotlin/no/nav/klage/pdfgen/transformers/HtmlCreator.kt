@@ -356,7 +356,12 @@ class HtmlCreator(
 
     private fun placeholderTextMissingInChildren(map: Map<String, *>): Boolean {
         val children = map["children"] as List<Map<String, *>>
-        return children.any { it["text"] == null || it["text"].toString().trim('​').trim().isEmpty() }
+
+        val combinedText = children.joinToString(separator = "") {
+            it["text"]?.toString() ?: ""
+        }
+
+        return combinedText.trim('​').trim().isEmpty()
     }
 
     private fun setHeaderText(map: Map<String, *>) {

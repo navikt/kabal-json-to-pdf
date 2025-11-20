@@ -136,4 +136,17 @@ class GeneratePDF {
         val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
         comparePdf("tilsvarsbrev-med-oversendelsesbrev", data)
     }
+
+    @Test
+    fun `placeholder with newline as its only content`() {
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/placeholder-with-newline-only.json").readText()
+        assertThrows<EmptyPlaceholderException> { PDFGenService().validateDocumentContent(jsonData) }
+    }
+
+    @Test
+    fun `placeholder with newline text node, but with other text nodes with content`() {
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/placeholder-with-newline.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
+        comparePdf("placeholder-with-newline", data)
+    }
 }
