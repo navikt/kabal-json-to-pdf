@@ -43,7 +43,6 @@ fun getVedleggsoversiktCss() = """
 
     td, th {
         padding: 6pt;
-        word-break: normal;
         white-space: normal;
     }
     
@@ -88,4 +87,4 @@ fun getVedleggsoversiktCss() = """
     .combined-row-item:last-child {
         margin-right: 0;
     }
-    """.trimIndent() 
+    """.trimIndent()
