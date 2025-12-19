@@ -1,12 +1,8 @@
-navCallIdName: nav-callid
-
 spring:
   application:
     name: kabal-json-to-pdf
   main:
     banner-mode: OFF
-  mvc:
-    throw-exception-if-no-handler-found: true
   lifecycle:
     timeout-per-shutdown-phase: 20s
   servlet:
@@ -16,12 +12,13 @@ spring:
       max-file-size: 8MB
   codec:
     max-in-memory-size: 16MB
+  web:
+    error:
+      whitelabel:
+        enabled: false
 
 server:
   port: 7093
-  error:
-    whitelabel:
-      enabled: false
   shutdown: graceful
 
 management:
@@ -35,18 +32,7 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-  tracing:
-    baggage:
-      remote-fields:
-        - ${navCallIdName}
-      correlation:
-        fields:
-          - ${navCallIdName}
   prometheus:
     metrics:
       export:
         enabled: true
-
-allowed.origins:
-  https://kabal.intern.nav.no,
-  https://kabal.dev.nav.no
