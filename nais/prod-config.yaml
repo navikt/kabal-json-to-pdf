@@ -1,5 +1,5 @@
 ingresses:
   - https://kabal-json-to-pdf.intern.nav.no
 externalHosts:
-springProfile: prod-gcp
+springProfile: prod
 tenant: nav.no
