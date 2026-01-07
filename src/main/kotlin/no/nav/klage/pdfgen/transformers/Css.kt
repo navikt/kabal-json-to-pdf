@@ -155,6 +155,42 @@ fun getCss(footer: String = "") = """
       margin-top: 12pt;
     }
     
+    ul {
+        list-style-type: disc;
+    }
+    
+    ul ul {
+        list-style-type: circle;
+    }
+    
+    ul ul ul {
+        list-style-type: square;
+    }
+    
+    ul ul ul ul {
+        list-style-type: disc;
+    }
+    
+    ul ul ul ul ul {
+        list-style-type: circle;
+    }
+    
+    ul ul ul ul ul ul {
+        list-style-type: square;
+    }
+    
+    ul ul ul ul ul ul ul {
+        list-style-type: disc;
+    }
+    
+    ul ul ul ul ul ul ul ul {
+        list-style-type: circle;
+    }
+    
+    ul ul ul ul ul ul ul ul ul {
+        list-style-type: square;
+    }
+    
     li > ul, li > ol {
       margin-top: 0;
     }
