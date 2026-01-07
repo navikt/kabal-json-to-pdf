@@ -149,4 +149,11 @@ class GeneratePDF {
         val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
         comparePdf("placeholder-with-newline", data)
     }
+
+    @Test
+    fun `nested list`() {
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/nested-list.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
+        comparePdf("nested-list", data)
+    }
 }

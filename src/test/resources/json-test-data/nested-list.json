@@ -1,0 +1,366 @@
+[
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Andromeda"
+              }
+            ],
+            "type": "lic"
+          }
+        ],
+        "type": "li"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "text": "Melkeveien"
+              }
+            ],
+            "type": "lic"
+          },
+          {
+            "type": "ul",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "children": [
+                      {
+                        "text": "Mars"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "children": [
+                      {
+                        "text": "Jorda"
+                      }
+                    ]
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "text": "Asia"
+                              }
+                            ],
+                            "type": "lic"
+                          }
+                        ],
+                        "type": "li"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "text": "Europa"
+                              }
+                            ],
+                            "type": "lic"
+                          },
+                          {
+                            "children": [
+                              {
+                                "children": [
+                                  {
+                                    "children": [
+                                      {
+                                        "text": "Baltikum"
+                                      }
+                                    ],
+                                    "type": "lic"
+                                  }
+                                ],
+                                "type": "li"
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [
+                                      {
+                                        "text": "Skandinavia"
+                                      }
+                                    ],
+                                    "type": "lic"
+                                  },
+                                  {
+                                    "children": [
+                                      {
+                                        "children": [
+                                          {
+                                            "children": [
+                                              {
+                                                "text": "Sverige"
+                                              }
+                                            ],
+                                            "type": "lic"
+                                          }
+                                        ],
+                                        "type": "li"
+                                      },
+                                      {
+                                        "children": [
+                                          {
+                                            "children": [
+                                              {
+                                                "text": "Norge"
+                                              }
+                                            ],
+                                            "type": "lic"
+                                          },
+                                          {
+                                            "children": [
+                                              {
+                                                "children": [
+                                                  {
+                                                    "children": [
+                                                      {
+                                                        "text": "Nord-Norge"
+                                                      }
+                                                    ],
+                                                    "type": "lic"
+                                                  }
+                                                ],
+                                                "type": "li"
+                                              },
+                                              {
+                                                "children": [
+                                                  {
+                                                    "children": [
+                                                      {
+                                                        "text": "Sør-Norge"
+                                                      }
+                                                    ],
+                                                    "type": "lic"
+                                                  },
+                                                  {
+                                                    "children": [
+                                                      {
+                                                        "children": [
+                                                          {
+                                                            "children": [
+                                                              {
+                                                                "text": "Kristiansand"
+                                                              }
+                                                            ],
+                                                            "type": "lic"
+                                                          }
+                                                        ],
+                                                        "type": "li"
+                                                      },
+                                                      {
+                                                        "children": [
+                                                          {
+                                                            "children": [
+                                                              {
+                                                                "text": "Oslo"
+                                                              }
+                                                            ],
+                                                            "type": "lic"
+                                                          },
+                                                          {
+                                                            "children": [
+                                                              {
+                                                                "children": [
+                                                                  {
+                                                                    "children": [
+                                                                      {
+                                                                        "text": "Groruddalen"
+                                                                      }
+                                                                    ],
+                                                                    "type": "lic"
+                                                                  }
+                                                                ],
+                                                                "type": "li"
+                                                              },
+                                                              {
+                                                                "children": [
+                                                                  {
+                                                                    "children": [
+                                                                      {
+                                                                        "text": "Gamle Oslo"
+                                                                      }
+                                                                    ],
+                                                                    "type": "lic"
+                                                                  },
+                                                                  {
+                                                                    "children": [
+                                                                      {
+                                                                        "children": [
+                                                                          {
+                                                                            "children": [
+                                                                              {
+                                                                                "text": "Ensjø"
+                                                                              }
+                                                                            ],
+                                                                            "type": "lic"
+                                                                          }
+                                                                        ],
+                                                                        "type": "li"
+                                                                      },
+                                                                      {
+                                                                        "children": [
+                                                                          {
+                                                                            "children": [
+                                                                              {
+                                                                                "text": "Helsfyr"
+                                                                              }
+                                                                            ],
+                                                                            "type": "lic"
+                                                                          },
+                                                                          {
+                                                                            "children": [
+                                                                              {
+                                                                                "children": [
+                                                                                  {
+                                                                                    "children": [
+                                                                                      {
+                                                                                        "text": "Strømsveien"
+                                                                                      }
+                                                                                    ],
+                                                                                    "type": "lic"
+                                                                                  }
+                                                                                ],
+                                                                                "type": "li"
+                                                                              },
+                                                                              {
+                                                                                "children": [
+                                                                                  {
+                                                                                    "children": [
+                                                                                      {
+                                                                                        "text": "Fyrstikkalléen"
+                                                                                      }
+                                                                                    ],
+                                                                                    "type": "lic"
+                                                                                  },
+                                                                                  {
+                                                                                    "children": [
+                                                                                      {
+                                                                                        "children": [
+                                                                                          {
+                                                                                            "children": [
+                                                                                              {
+                                                                                                "text": "(Nå blir det bare firkanter for alle videre nivåer innover)"
+                                                                                              }
+                                                                                            ],
+                                                                                            "type": "lic"
+                                                                                          },
+                                                                                          {
+                                                                                            "children": [
+                                                                                              {
+                                                                                                "children": [
+                                                                                                  {
+                                                                                                    "children": [
+                                                                                                      {
+                                                                                                        "text": "Bare se her"
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "type": "lic"
+                                                                                                  },
+                                                                                                  {
+                                                                                                    "children": [
+                                                                                                      {
+                                                                                                        "children": [
+                                                                                                          {
+                                                                                                            "children": [
+                                                                                                              {
+                                                                                                                "text": "Hva var det jeg sa?"
+                                                                                                              }
+                                                                                                            ],
+                                                                                                            "type": "lic"
+                                                                                                          }
+                                                                                                        ],
+                                                                                                        "type": "li"
+                                                                                                      }
+                                                                                                    ],
+                                                                                                    "type": "ul"
+                                                                                                  }
+                                                                                                ],
+                                                                                                "type": "li"
+                                                                                              }
+                                                                                            ],
+                                                                                            "type": "ul"
+                                                                                          }
+                                                                                        ],
+                                                                                        "type": "li"
+                                                                                      }
+                                                                                    ],
+                                                                                    "type": "ul"
+                                                                                  }
+                                                                                ],
+                                                                                "type": "li"
+                                                                              }
+                                                                            ],
+                                                                            "type": "ul"
+                                                                          }
+                                                                        ],
+                                                                        "type": "li"
+                                                                      }
+                                                                    ],
+                                                                    "type": "ul"
+                                                                  }
+                                                                ],
+                                                                "type": "li"
+                                                              }
+                                                            ],
+                                                            "type": "ul"
+                                                          }
+                                                        ],
+                                                        "type": "li"
+                                                      }
+                                                    ],
+                                                    "type": "ul"
+                                                  }
+                                                ],
+                                                "type": "li"
+                                              }
+                                            ],
+                                            "type": "ul"
+                                          }
+                                        ],
+                                        "type": "li"
+                                      }
+                                    ],
+                                    "type": "ul"
+                                  }
+                                ],
+                                "type": "li"
+                              }
+                            ],
+                            "type": "ul"
+                          }
+                        ],
+                        "type": "li"
+                      }
+                    ],
+                    "type": "ul"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "type": "li"
+      }
+    ],
+    "type": "ul"
+  }
+]
