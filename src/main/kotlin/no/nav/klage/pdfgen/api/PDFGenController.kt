@@ -70,7 +70,7 @@ class PDFGenController(
         description = "Generate pdf from json"
     )
     @ResponseBody
-    @PostMapping("/toinnholdsfortegnelse", "/toinnholdsfortegnelse/v2")
+    @PostMapping("/toinnholdsfortegnelse")
     fun toInnholdsfortegnelsePDFV2(
     @RequestBody input: InnholdsfortegnelseRequest,
     ): ResponseEntity<ByteArray> {
