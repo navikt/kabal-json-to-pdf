@@ -2,8 +2,8 @@ package no.nav.klage.pdfgen.service
 
 import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.JournalpostMetadata.Type
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2.Document.JournalpostMetadata.Type
 import no.nav.klage.pdfgen.transformers.getVedleggsoversiktCss
 import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
@@ -15,7 +15,7 @@ import java.util.*
 @Service
 class InnholdsfortegnelseService {
 
-  fun getInnholdsfortegnelsePDFAsByteArray(input: InnholdsfortegnelseRequest): ByteArray {
+  fun getInnholdsfortegnelsePDFAsByteArray(input: InnholdsfortegnelseRequestV2): ByteArray {
     val doc = getHTMLDocument(input)
     return createPDFA(doc)
   }
@@ -25,7 +25,7 @@ class InnholdsfortegnelseService {
   private val ISO_DATE_FORMAT =
     DateTimeFormatter.ISO_LOCAL_DATE.withZone(ZoneId.of("Europe/Oslo"))
 
-  private fun getHTMLDocument(input: InnholdsfortegnelseRequest): Document {
+  private fun getHTMLDocument(input: InnholdsfortegnelseRequestV2): Document {
     val totalCount = input.documents.size
 
     val title = "Vedleggsoversikt til \"${input.parentTitle}\""
