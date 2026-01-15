@@ -1,9 +1,9 @@
 package no.nav.klage.pdfgen
 
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2.Document
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2.Document.JournalpostMetadata.Type
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2.Document.JournalpostMetadata
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.JournalpostMetadata.Type
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.JournalpostMetadata
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -20,7 +20,7 @@ class GenerateInnholdsfortegnelsePDFTest {
 
     @Test
     fun `generate pdf from full input`() {
-        val data = InnholdsfortegnelseService().getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequestV2(
+        val data = InnholdsfortegnelseService().getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequest(
             parentTitle = "Svar på innsynsbegjæring",
             parentDate = LocalDate.of(2025, 6, 11),
             documents = listOf(

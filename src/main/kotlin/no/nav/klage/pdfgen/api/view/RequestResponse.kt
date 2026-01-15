@@ -12,7 +12,7 @@ data class DocumentValidationResponse(
     )
 }
 
-data class InnholdsfortegnelseRequestV2(
+data class InnholdsfortegnelseRequest(
     val parentTitle: String,
     val parentDate: LocalDate,
     val documents: List<Document>,
@@ -34,27 +34,6 @@ data class InnholdsfortegnelseRequestV2(
             N,
         }
       }
-    }
-}
-
-data class InnholdsfortegnelseRequest(
-    val parentTitle: String,
-    val parentDate: LocalDate,
-    val documents: List<Document>,
-) {
-    data class Document(
-      val tittel: String,
-      val tema: String,
-      val dato: LocalDate,
-      val avsenderMottaker: String,
-      val saksnummer: String,
-      val type: Type,
-    ) {
-        enum class Type {
-            I,
-            U,
-            N,
-        }
     }
 }
 
