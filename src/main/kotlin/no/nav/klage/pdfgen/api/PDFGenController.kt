@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
-import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequestV2
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
@@ -71,61 +70,9 @@ class PDFGenController(
         description = "Generate pdf from json"
     )
     @ResponseBody
-    @Deprecated("Use /toinnholdsfortegnelse/v2 endpoint instead", ReplaceWith("toInnholdsfortegnelsePDFV2"), DeprecationLevel.WARNING)
-    @PostMapping("/toinnholdsfortegnelse")
-    fun toInnholdsfortegnelsePDF(
-      @RequestBody input: InnholdsfortegnelseRequest,
-    ): ResponseEntity<ByteArray> {
-        logger.debug("toInnholdsfortegnelsePDF() called. See body in team-logs")
-        teamLogger.debug("toInnholdsfortegnelsePDF() called. Received input: {}", input)
-
-        val data = innholdsfortegnelseService.getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequestV2(
-          parentTitle = input.parentTitle,
-          parentDate = input.parentDate,
-          documents = input.documents.map { doc ->
-            InnholdsfortegnelseRequestV2.Document(
-              tittel = doc.tittel,
-              journalpostMetadataList = listOf(
-                InnholdsfortegnelseRequestV2.Document.JournalpostMetadata(
-                  tema = doc.tema,
-                  dato = doc.dato,
-                  avsenderMottaker = doc.avsenderMottaker,
-                  saksnummer = doc.saksnummer,
-                  type = when (doc.type) {
-                    InnholdsfortegnelseRequest.Document.Type.I -> InnholdsfortegnelseRequestV2.Document.JournalpostMetadata.Type.I
-                    InnholdsfortegnelseRequest.Document.Type.U -> InnholdsfortegnelseRequestV2.Document.JournalpostMetadata.Type.U
-                    InnholdsfortegnelseRequest.Document.Type.N -> InnholdsfortegnelseRequestV2.Document.JournalpostMetadata.Type.N
-                  }
-                )
-              )
-            )
-          }
-        ))
-
-        val responseHeaders = HttpHeaders()
-        responseHeaders.contentType = MediaType.APPLICATION_PDF
-
-        val DATE_FORMAT =
-            DateTimeFormatter.ofPattern("dd. MMM yyyy", Locale.forLanguageTag("nb-NO")).withZone(ZoneId.of("Europe/Oslo"))
-
-        val filename = "vedleggsoversikt til \"${input.parentTitle}\", ${input.parentDate.format(DATE_FORMAT)}"
-
-        responseHeaders.add("Content-Disposition", "inline; filename=$filename.pdf")
-        return ResponseEntity(
-            data,
-            responseHeaders,
-            HttpStatus.OK
-        )
-    }
-
-  @Operation(
-        summary = "Generate pdf from json",
-        description = "Generate pdf from json"
-    )
-    @ResponseBody
-    @PostMapping("/toinnholdsfortegnelse/v2")
+    @PostMapping("/toinnholdsfortegnelse", "/toinnholdsfortegnelse/v2")
     fun toInnholdsfortegnelsePDFV2(
-      @RequestBody input: InnholdsfortegnelseRequestV2,
+    @RequestBody input: InnholdsfortegnelseRequest,
     ): ResponseEntity<ByteArray> {
         logger.debug("toInnholdsfortegnelsePDF() called. See body in team-logs")
         teamLogger.debug("toInnholdsfortegnelsePDF() called. Received input: {}", input)
