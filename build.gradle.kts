@@ -7,7 +7,7 @@ val jsoupVersion = "1.22.1"
 val openHtmlToPdfVersion = "1.1.37"
 val kotlinxHtmlVersion = "0.12.0"
 val springDocVersion = "3.0.2"
-val klageKodeverkVersion = "3.2.2"
+val klageKodeverkVersion = "3.2.4"
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ plugins {
     val kotlinVersion = "2.3.20"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "4.0.3"
+    id("org.springframework.boot") version "4.0.4"
     idea
 }
 
