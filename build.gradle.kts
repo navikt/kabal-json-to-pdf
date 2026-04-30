@@ -7,7 +7,7 @@ val jsoupVersion = "1.22.2"
 val openHtmlToPdfVersion = "1.1.37"
 val kotlinxHtmlVersion = "0.12.0"
 val springDocVersion = "3.0.3"
-val klageKodeverkVersion = "3.2.11"
+val klageKodeverkVersion = "3.2.13"
 
 repositories {
     mavenCentral()
