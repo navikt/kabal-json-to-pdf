@@ -80,7 +80,7 @@ class SvarbrevService {
                         }
                         div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
@@ -226,7 +226,7 @@ class SvarbrevService {
                         }
                         div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
@@ -371,7 +371,7 @@ class SvarbrevService {
                         }
                         div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
@@ -507,7 +507,7 @@ class SvarbrevService {
                         }
                         div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {

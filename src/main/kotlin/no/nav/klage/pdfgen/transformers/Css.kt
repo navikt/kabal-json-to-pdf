@@ -16,9 +16,10 @@ fun getCss(footer: String = "") = """
       word-wrap: break-word;
       padding: 0;
       margin: 0;
+      font-size: 11px;
+      color: black;
     }
     .column {
-      font-size: 12pt;
       display: inline-block;
       width: 50%;
     }
@@ -27,58 +28,71 @@ fun getCss(footer: String = "") = """
       font-size: 0;
       page-break-before: avoid;
     }
+    
+    /* Forskjøvet skalaen med 1 ift from https://aksel.nav.no/god-praksis/artikler/visuelle-retningslinjer-for-brev 
+       Vår h1 = deres h2, vår h2 = deres h3, vår h3 = deres h4    
+    */
     h1 {
-        font-size: 16pt;
-    }
-    .svarbrev h1 {
-        font-size: 14pt;
+        font-size: 13px;
+        letter-spacing: 25%;
     }
     h2 {
-        font-size: 14pt;
-    }
-    .svarbrev h2 {
-        font-size: 12pt;
+        font-size: 12px;
+        letter-spacing: 20%;
     }
     h3 {
-        font-size: 12pt;
+        font-size: 11px;
+        letter-spacing: 10%;
+    }
+    h1, h2, h3 {
+        margin-bottom: 6px;
+        line-height: 16px;
     }
     h1, h2, h3, h4, h5, h6 {
-        font-weight: 600;
-        margin-top: 1em;
-        margin-bottom: 0;
+        font-weight: bold;
         page-break-after: avoid;
     }
-    #header_text {
-        float: left;
-        width: 60%;        
+    
+    /* 26 px mellom brødtekst og H2, H3 eller H4 */
+    p + h1, p + h2, p + h3, p + h4,
+    ol + h1, ol + h2, ol + h3, ol + h4,
+    ul + h1, ul + h2, ul + h3, ul + h4 {
+        margin-top: 26px;
     }
+    
     header {
-        margin-bottom: 6pt;
+       margin-bottom: 48px;
     }
+    
+    #header_text {
+       float: left;
+       font-size: 9px;   
+       /* line-height: 16px; */
+    }
+    
     /* Clearfix */
     header:after{
         clear: both;
         content: "";
         display: block;
     }
-    #logo {
-        width: 30%;
-        float: right;
+    
+    #logo img {
+        height: 16px;
+        width: 50px;
     }
-    .current-date {
+    
+   #current-date {
         white-space: nowrap;
         text-align: right;
-        margin-bottom: 24pt;
-    }
-    #logo img {
-        display: block;
-        height: 60pt;
+        font-size: 9px;
         float: right;
     }
+
     p {
-        font-size: 12pt;
-        margin-top: 1em;
-        line-height: 1.5;
+        font-size: 11px;
+        margin-bottom: 1em;
+        line-height: 16px;
     }
     .placeholder-text {
         background-color: #EFA89D;
@@ -117,18 +131,19 @@ fun getCss(footer: String = "") = """
         -fs-border-rendering: no-bevel;
     }
     td {
-        border: 1pt solid #8F8F8F;
+        border: 1pt solid #c7cbd1;
         word-wrap: break-word;
         max-width: 100%;
         vertical-align: top;
         text-align: left;
         background-color: transparent;
-        padding: 4pt;
-        padding-left: 3pt;
-        padding-right: 3pt;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
     tr:nth-child(odd) {
-      background-color: rgb(247, 247, 247);
+      background-color: #f5f6f7
     }
     tr:nth-child(even) {
       background-color: #fff;
@@ -150,9 +165,8 @@ fun getCss(footer: String = "") = """
     }
     
     ol, ul {
-      padding-left: 12pt;
+      padding-left: 9px;
       margin: 0;
-      margin-top: 12pt;
     }
     
     ul {
@@ -196,32 +210,40 @@ fun getCss(footer: String = "") = """
     }
 
     .signature {
-        margin-top: 24pt;
+        margin-top: 32px;
+        margin-bottom: 40px;
     }
     
     @page {
-        margin: 20mm;
-        margin-top: 15mm;
-        size: a4;
+        margin: 64px;
+        margin-bottom: 42px;
+        width: 595px;
+        height: 842px;
+        
         padding: 0;
+        padding-bottom: 74px;
         @bottom-left {
             content: "";
         }
+        
         @bottom-right {
             font-family: "Source Sans Pro" !important;
-            font-size: 10pt;
+            font-size: 9px;
             content: "Side " counter(page) " av " counter(pages);
+            vertical-align: top;
         }
     }
     
     @page :first {
-        margin-bottom: 30mm;
+    
         @bottom-left {
             font-family: "Source Sans Pro" !important;
-            font-size: 10pt;
+            font-size: 9px;
             content: "$footer";
             white-space: pre-wrap;
+            vertical-align: top;
         }
+        
         @bottom-right {
             content: "";
         }

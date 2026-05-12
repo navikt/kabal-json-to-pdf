@@ -29,12 +29,20 @@ class HtmlCreator(
                 id = "body"
                 header {
                     div {
-                        id = "header_text"
+                        id = "logo"
+                        img { src = "nav_logo.svg" }
                     }
                     div {
-                        id = "logo"
-                        img { src = "nav_logo.png" }
+                        div {
+                            id = "header_text"
+                        }
+                        div {
+                            id = "current-date"
+                        }
                     }
+                }
+                div {
+                    id = "label-content"
                 }
             }
         }
@@ -85,7 +93,7 @@ class HtmlCreator(
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
             val alignment = if (map["align"] == "right") "right" else "left"
-            inlineStyles += "margin-$alignment: ${24 * indent}pt"
+            inlineStyles += "margin-$alignment: ${11 * indent}px"
         }
 
         if (elementType != "page-break") {
@@ -259,13 +267,6 @@ class HtmlCreator(
                 return elements
             }
 
-            "current-date" -> {
-                return listOf(document.create.div {
-                    classes = setOf("current-date")
-                    +"Dato: ${getFormattedDate(currentDate)}"
-                })
-            }
-
             "empty-void" -> document.create.div()
 
             else -> {
@@ -350,6 +351,7 @@ class HtmlCreator(
         when (map["type"]) {
             "header" -> setHeaderText(map)
             "footer" -> setFooter(map)
+            "current-date" -> setCurrentDate(map)
             else -> addElementWithPossiblyChildren(map)
         }
     }
@@ -371,6 +373,11 @@ class HtmlCreator(
 
     private fun setFooter(map: Map<String, *>) {
         footer = map["content"]?.toString()?.replace("\n", "\\A") ?: ""
+    }
+
+    private fun setCurrentDate(map: Map<String, *>) {
+        val date = document.getElementById("current-date")
+        date.textContent = "Dato: ${getFormattedDate(currentDate)}"
     }
 
     private fun isElement(node: Map<String, *>): Boolean {

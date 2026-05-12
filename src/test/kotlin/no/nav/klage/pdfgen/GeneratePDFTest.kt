@@ -156,4 +156,12 @@ class GeneratePDF {
         val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
         comparePdf("nested-list", data)
     }
+
+    @Test
+    fun `full klagevedtak`() {
+        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/full-klagevedtak.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
+        // TODO: Add correct PDF to compare with
+        comparePdf("nested-list", data)
+    }
 }
