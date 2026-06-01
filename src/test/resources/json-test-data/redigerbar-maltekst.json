@@ -1,23 +1,5 @@
 [
   {
-    "type": "current-date",
-    "children": [
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "header",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": "Header text"
-  },
-  {
     "type": "redigerbar-maltekst",
     "section": "section-elg",
     "children": [
@@ -50,15 +32,5 @@
         "align": "left"
       }
     ]
-  },
-  {
-    "type": "footer",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": "Footer text"
   }
 ]

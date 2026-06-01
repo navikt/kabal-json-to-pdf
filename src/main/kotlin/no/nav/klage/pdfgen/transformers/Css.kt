@@ -1,84 +1,115 @@
 package no.nav.klage.pdfgen.transformers
 
 import org.intellij.lang.annotations.Language
-
 @Language("css")
-fun getCss(footer: String = "") = """
+fun getCss() = """
     html {
         font-family: "Source Sans Pro" !important;
         box-sizing: border-box;
         font-weight: 400;
         letter-spacing: 0;
         white-space: pre-wrap;
+        font-size: 11px;
     }
     *, ::before, ::after {
       box-sizing: inherit;
       word-wrap: break-word;
       padding: 0;
       margin: 0;
+      color: black;
     }
-    .column {
-      font-size: 12pt;
+    .signature-column {
+      font-size: 11px;
       display: inline-block;
       width: 50%;
     }
-    /* Fjerner spacing mellom inline-blockene */
-    .wrapper {
-      font-size: 0;
+    .signature {
+      margin-top: 32px;
+      margin-bottom: 40px;
       page-break-before: avoid;
     }
+    
     h1 {
-        font-size: 16pt;
-    }
-    .svarbrev h1 {
-        font-size: 14pt;
+       font-size: 16px;
+       letter-spacing: 0.3px;
+       line-height: 20px;
+       margin-top: 48px;
+       margin-bottom: 26px;
     }
     h2 {
-        font-size: 14pt;
-    }
-    .svarbrev h2 {
-        font-size: 12pt;
+        font-size: 13px;
+        letter-spacing: 0.25px;
     }
     h3 {
-        font-size: 12pt;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+    }
+    h4 {
+        font-size: 11px;
+        letter-spacing: 0.1px;
+    }
+    h2, h3, h4 {
+        margin-bottom: 1em;
+        line-height: 16px;
+        margin-top: 26px;
     }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
-        margin-top: 1em;
-        margin-bottom: 0;
         page-break-after: avoid;
     }
-    #header_text {
-        float: left;
-        width: 60%;        
-    }
+    
     header {
-        margin-bottom: 6pt;
+        margin-bottom: 48px;
     }
+    
     /* Clearfix */
     header:after{
         clear: both;
         content: "";
         display: block;
     }
-    #logo {
-        width: 30%;
-        float: right;
+    
+    #logo img {
+        height: 16px;
+        width: 50px;
     }
-    .current-date {
+    
+   .current-date {
         white-space: nowrap;
         text-align: right;
-        margin-bottom: 24pt;
+        position: absolute;
+        bottom: 0;
+        right: 0;
     }
-    #logo img {
-        display: block;
-        height: 60pt;
-        float: right;
+    
+    .saksinfo {
+       /* For legacy cases where saksinfo has no other children than the absolutely positioned current-date */
+       min-height: 16px;
+       position: relative;
     }
+    
+    /* Override bold items in legacy saksinfo - text should never be bold in saksinfo */
+    .label-content .bold {
+       font-weight: normal;
+    }
+    
+    .label-content {
+       margin: 0;
+    }
+    
+    .label-content .label {
+       display: inline-block;
+       width: 150px;
+    }
+    
+    /* Create space between saksinfo and next paragraph in legacy templates */
+    .after-saksinfo {
+        margin-top: 26px;
+    }
+    
     p {
-        font-size: 12pt;
-        margin-top: 1em;
-        line-height: 1.5;
+        margin-bottom: 1em;
+        line-height: 16px;
     }
     .placeholder-text {
         background-color: #EFA89D;
@@ -111,24 +142,24 @@ fun getCss(footer: String = "") = """
         border-spacing: 0;
         border-collapse: collapse;
         max-width: 100%;
-        margin-top: 12pt;
-        margin-bottom: 12pt;
+        margin-bottom: 1em;
         page-break-inside: avoid;
         -fs-border-rendering: no-bevel;
     }
     td {
-        border: 1pt solid #8F8F8F;
+        border: 1px solid #c7cbd1;
         word-wrap: break-word;
         max-width: 100%;
         vertical-align: top;
         text-align: left;
         background-color: transparent;
-        padding: 4pt;
-        padding-left: 3pt;
-        padding-right: 3pt;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
     }
     tr:nth-child(odd) {
-      background-color: rgb(247, 247, 247);
+      background-color: #f5f6f7
     }
     tr:nth-child(even) {
       background-color: #fff;
@@ -138,7 +169,6 @@ fun getCss(footer: String = "") = """
     }
     td > * {
       margin-top: 0;
-      margin-bottom: 6pt;
     }
     
     td > *:last-child {
@@ -150,9 +180,9 @@ fun getCss(footer: String = "") = """
     }
     
     ol, ul {
-      padding-left: 12pt;
-      margin: 0;
-      margin-top: 12pt;
+      margin-bottom: 1em;
+      margin-left: 2em;
+      line-height: 16px;
     }
     
     ul {
@@ -192,38 +222,22 @@ fun getCss(footer: String = "") = """
     }
     
     li > ul, li > ol {
-      margin-top: 0;
+      margin-left: 1em;
     }
 
-    .signature {
-        margin-top: 24pt;
-    }
-    
     @page {
-        margin: 20mm;
-        margin-top: 15mm;
-        size: a4;
+        size: 595px 842px;
+        margin: 64px;
+        margin-bottom: 42px;
         padding: 0;
-        @bottom-left {
-            content: "";
-        }
+        padding-bottom: 74px;
+
         @bottom-right {
             font-family: "Source Sans Pro" !important;
-            font-size: 10pt;
+            font-size: 9px;
             content: "Side " counter(page) " av " counter(pages);
+            vertical-align: top;
         }
-    }
-    
-    @page :first {
-        margin-bottom: 30mm;
-        @bottom-left {
-            font-family: "Source Sans Pro" !important;
-            font-size: 10pt;
-            content: "$footer";
-            white-space: pre-wrap;
-        }
-        @bottom-right {
-            content: "";
-        }
-    }
+    }   
     """.trimIndent()
+

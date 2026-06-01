@@ -11,17 +11,7 @@ import java.time.LocalDate
 
 @Service
 class SvarbrevService {
-
-    val enhetHeaderAndFooterMap = mapOf(
-        "4291" to ("Returadresse,\nKlageinstans Oslo, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Oslo // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4293" to ("Returadresse,\nKlageinstans Tønsberg, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Tønsberg // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4250" to ("Returadresse,\nKlageinstans Kristiansand, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Kristiansand // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4294" to ("Returadresse,\nKlageinstans Bergen, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Bergen // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4295" to ("Returadresse,\nKlageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4292" to ("Returadresse,\nKlageinstans Trondheim, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Trondheim // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-    )
-
-    fun getSvarbrevAsByteArray(
+        fun getSvarbrevAsByteArray(
         svarbrevRequest: SvarbrevRequest,
         currentDate: LocalDate = LocalDate.now(),
     ): ByteArray {
@@ -64,7 +54,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                                getCss()
                             )
                         }
                     }
@@ -75,55 +65,55 @@ class SvarbrevService {
                     classes = setOf("svarbrev")
                     header {
                         div {
-                            id = "header_text"
-                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
-                        }
-                        div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
-                        classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(currentDate)}"
-                    }
-                    h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
-                    br {}
-                    p {
-                        div {
+                        classes = setOf("saksinfo")
+                        p {
+                            classes = setOf("label-content")
                             span {
-                                classes = setOf("bold")
+                                classes = setOf("label")
                                 +"Saken gjelder: "
                             }
-                            +svarbrevRequest.sakenGjelder.name
+                            span { +svarbrevRequest.sakenGjelder.name }
                         }
-                        div {
+                        p {
+                            classes = setOf("label-content")
                             span {
-                                classes = setOf("bold")
+                                classes = setOf("label")
                                 +"Fødselsnummer: "
                             }
-                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
+                            span { +svarbrevRequest.sakenGjelder.fnr.toFnrView() }
                         }
                         if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
-                            div {
+                            p {
+                                classes = setOf("label-content")
                                 span {
-                                    classes = setOf("bold")
+                                    classes = setOf("label")
                                     +"Klager: "
                                 }
-                                +svarbrevRequest.klager.name
+                                span { +svarbrevRequest.klager.name }
                             }
                         }
                         if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
-                            div {
+                            p {
+                                classes = setOf("label-content")
                                 span {
-                                    classes = setOf("bold")
+                                    classes = setOf("label")
                                     +"Fullmektig: "
                                 }
-                                +svarbrevRequest.fullmektigFritekst
+                                span { +svarbrevRequest.fullmektigFritekst }
                             }
                         }
+                        div {
+                            id = "current-date"
+                            classes = setOf("current-date")
+                            + getFormattedDate(currentDate)
+                        }
                     }
-                    br {}
+                    h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
                     p {
                         +"Vi skal behandle klagen din som gjelder ${
                             getYtelseDisplayText(
@@ -210,7 +200,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                                getCss()
                             )
                         }
                     }
@@ -221,17 +211,55 @@ class SvarbrevService {
                     classes = setOf("svarbrev")
                     header {
                         div {
-                            id = "header_text"
-                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
-                        }
-                        div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
-                        classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(currentDate)}"
+                        classes = setOf("saksinfo")
+                        p {
+                            classes = setOf("label-content")
+                            span {
+                                classes = setOf("label")
+                                +"Saken gjelder: "
+                            }
+                            span { +svarbrevRequest.sakenGjelder.name }
+                        }
+                        p {
+                            classes = setOf("label-content")
+                            span {
+                                classes = setOf("label")
+                                +"Fødselsnummer: "
+                            }
+                            span { +svarbrevRequest.sakenGjelder.fnr.toFnrView() }
+                        }
+
+
+                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
+                            p {
+                                classes = setOf("label-content")
+                                span {
+                                    classes = setOf("label")
+                                    +"Den ankende part: "
+                                }
+                                span { +svarbrevRequest.klager.name }
+                            }
+                        }
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
+                            p {
+                                classes = setOf("label-content")
+                                span {
+                                    classes = setOf("label")
+                                    +"Fullmektig: "
+                                }
+                                span { +svarbrevRequest.fullmektigFritekst }
+                            }
+                        }
+                        div {
+                            id = "current-date"
+                            classes = setOf("current-date")
+                            + getFormattedDate(currentDate)
+                        }
                     }
                     h1 {
                         +"Nav orienterer om saksbehandlingen av anken din som gjelder ${
@@ -240,46 +268,6 @@ class SvarbrevService {
                             )
                         }"
                     }
-                    br { }
-                    p {
-                        div {
-                            span {
-                                classes = setOf("bold")
-                                +"Saken gjelder: "
-                            }
-                            +svarbrevRequest.sakenGjelder.name
-                        }
-                        div {
-                            span {
-                                classes = setOf("bold")
-                                +"Fødselsnummer: "
-                            }
-                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
-                        }
-
-
-                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Den ankende part: "
-                                }
-                                +svarbrevRequest.klager.name
-                            }
-                        }
-                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Fullmektig: "
-                                }
-                                +svarbrevRequest.fullmektigFritekst
-                            }
-                        }
-                    }
-
-                    br { }
-
                     p {
                         +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate ?: svarbrevRequest.receivedDate!!)}."
                     }
@@ -355,7 +343,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                                getCss()
                             )
                         }
                     }
@@ -366,55 +354,55 @@ class SvarbrevService {
                     classes = setOf("svarbrev")
                     header {
                         div {
-                            id = "header_text"
-                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
-                        }
-                        div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
-                        classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(currentDate)}"
-                    }
-                    h1 { +"Klageinstans har mottatt kravet ditt om omgjøring" }
-                    br {}
-                    p {
-                        div {
+                        classes = setOf("saksinfo")
+                        p {
+                            classes = setOf("label-content")
                             span {
-                                classes = setOf("bold")
+                                classes = setOf("label")
                                 +"Saken gjelder: "
                             }
-                            +svarbrevRequest.sakenGjelder.name
+                            span { +svarbrevRequest.sakenGjelder.name }
                         }
                         if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
-                            div {
+                            p {
+                                classes = setOf("label-content")
                                 span {
-                                    classes = setOf("bold")
+                                    classes = setOf("label")
                                     +"Den som krever omgjøring: "
                                 }
-                                +svarbrevRequest.klager.name
+                                span { +svarbrevRequest.klager.name }
+                            }
+                        }
+                        p {
+                            classes = setOf("label-content")
+                            span {
+                                classes = setOf("label")
+                                +"Fødselsnummer: "
+                            }
+                            span { +svarbrevRequest.sakenGjelder.fnr.toFnrView() }
+                        }
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
+                            p {
+                                classes = setOf("label-content")
+                                span {
+                                    classes = setOf("label")
+                                    +"Fullmektig: "
+                                }
+                                span { +svarbrevRequest.fullmektigFritekst }
                             }
                         }
                         div {
-                            span {
-                                classes = setOf("bold")
-                                +"Fødselsnummer: "
-                            }
-                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
-                        }
-                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Fullmektig: "
-                                }
-                                +svarbrevRequest.fullmektigFritekst
-                            }
+                            id = "current-date"
+                            classes = setOf("current-date")
+                            + getFormattedDate(currentDate)
                         }
                     }
-                    br {}
+                    h1 { +"Klageinstans har mottatt kravet ditt om omgjøring" }
                     p {
                         +"Vi viser til kravet ditt om omgjøring av vedtak som gjelder ${
                             getYtelseDisplayText(
@@ -491,7 +479,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                                getCss()
                             )
                         }
                     }
@@ -502,55 +490,55 @@ class SvarbrevService {
                     classes = setOf("svarbrev")
                     header {
                         div {
-                            id = "header_text"
-                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
-                        }
-                        div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
-                        classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(currentDate)}"
-                    }
-                    h1 { +"Klageinstans orienterer om saksbehandlingen ved begjæring om gjenopptak" }
-                    br {}
-                    p {
-                        div {
+                        classes = setOf("saksinfo")
+                        p {
+                            classes = setOf("label-content")
                             span {
-                                classes = setOf("bold")
+                                classes = setOf("label")
                                 +"Saken gjelder: "
                             }
-                            +svarbrevRequest.sakenGjelder.name
+                            span { +svarbrevRequest.sakenGjelder.name }
                         }
                         if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
-                            div {
+                            p {
+                                classes = setOf("label-content")
                                 span {
-                                    classes = setOf("bold")
+                                    classes = setOf("label")
                                     +"Den som begjærer gjenopptak: "
                                 }
-                                +svarbrevRequest.klager.name
+                                span { +svarbrevRequest.klager.name }
+                            }
+                        }
+                        p {
+                            classes = setOf("label-content")
+                            span {
+                                classes = setOf("label")
+                                +"Fødselsnummer: "
+                            }
+                            span { +svarbrevRequest.sakenGjelder.fnr.toFnrView() }
+                        }
+                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
+                            p {
+                                classes = setOf("label-content")
+                                span {
+                                    classes = setOf("label")
+                                    +"Fullmektig: "
+                                }
+                                span { +svarbrevRequest.fullmektigFritekst }
                             }
                         }
                         div {
-                            span {
-                                classes = setOf("bold")
-                                +"Fødselsnummer: "
-                            }
-                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
-                        }
-                        if (!svarbrevRequest.fullmektigFritekst.isNullOrBlank()) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Fullmektig: "
-                                }
-                                +svarbrevRequest.fullmektigFritekst
-                            }
+                            id = "current-date"
+                            classes = setOf("current-date")
+                            + getFormattedDate(currentDate)
                         }
                     }
-                    br {}
+                    h1 { +"Klageinstans orienterer om saksbehandlingen ved begjæring om gjenopptak" }
                     p {
                         +"Vi viser til begjæringen din om gjenopptak av Trygderettens kjennelse som gjelder ${
                             getYtelseDisplayText(

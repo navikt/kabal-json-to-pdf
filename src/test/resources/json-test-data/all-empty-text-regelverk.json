@@ -1,23 +1,5 @@
 [
   {
-    "type": "current-date",
-    "children": [
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "header",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": "Returadresse,\nKlageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo"
-  },
-  {
     "type": "maltekst",
     "section": "section-esel",
     "children": [
@@ -482,16 +464,6 @@
       "name": "Daniel",
       "title": "Avdelingsdirektør/saksbehandler"
     }
-  },
-  {
-    "type": "footer",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass // 0130 Oslo\nTelefon: 55 55 33 33\nnav.no"
   },
   {
     "type": "regelverk",
