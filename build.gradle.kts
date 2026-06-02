@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val mockkVersion = "1.14.9"
+val mockkVersion = "1.14.11"
 val logstashVersion = "9.0"
 val jsoupVersion = "1.22.2"
 val openHtmlToPdfVersion = "1.1.37"
 val kotlinxHtmlVersion = "0.12.0"
 val springDocVersion = "3.0.3"
-val klageKodeverkVersion = "3.2.13"
+val klageKodeverkVersion = "3.2.17"
 
 repositories {
     mavenCentral()
