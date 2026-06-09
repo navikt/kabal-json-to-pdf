@@ -15,6 +15,37 @@
         "type": "tr",
         "children": [
           {
+            "type": "th",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "text": "Overskrift"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "th",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "text": "En annen overskrift"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
             "type": "td",
             "children": [
               {

@@ -141,6 +141,14 @@ class HtmlCreator(
                 document.create.tr()
             }
 
+            "th" -> {
+                document.create.th {
+                    if (map.containsKey("colSpan")) {
+                        attributes["colspan"] = map["colSpan"].toString()
+                    }
+                }
+            }
+
             "td" -> {
                 document.create.td {
                     if (map.containsKey("colSpan")) {
