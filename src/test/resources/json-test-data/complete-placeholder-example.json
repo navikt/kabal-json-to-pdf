@@ -1,23 +1,5 @@
 [
   {
-    "type": "current-date",
-    "children": [
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "header",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": "Header text"
-  },
-  {
     "type": "p",
     "align": "left",
     "children": [
@@ -62,15 +44,5 @@
         "text": ""
       }
     ]
-  },
-  {
-    "type": "footer",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": "Footer text"
   }
 ]

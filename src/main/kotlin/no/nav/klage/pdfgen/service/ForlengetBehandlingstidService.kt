@@ -11,16 +11,6 @@ import java.time.LocalDate
 
 @Service
 class ForlengetBehandlingstidService {
-
-    val enhetHeaderAndFooterMap = mapOf(
-        "4291" to ("Returadresse,\nKlageinstans Oslo, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Oslo // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4293" to ("Returadresse,\nKlageinstans Tønsberg, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Tønsberg // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4250" to ("Returadresse,\nKlageinstans Kristiansand, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Kristiansand // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4294" to ("Returadresse,\nKlageinstans Bergen, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Bergen // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4295" to ("Returadresse,\nKlageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4292" to ("Returadresse,\nKlageinstans Trondheim, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Klageinstans Trondheim // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-    )
-
     fun getForlengetBehandlingstidAsByteArray(
         forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest,
         currentDate: LocalDate = LocalDate.now(),
@@ -39,7 +29,7 @@ class ForlengetBehandlingstidService {
                     style {
                         unsafe {
                             raw(
-                                getCss(footer = enhetHeaderAndFooterMap[forlengetBehandlingstidRequest.avsenderEnhetId]!!.second)
+                                getCss()
                             )
                         }
                     }
@@ -50,17 +40,53 @@ class ForlengetBehandlingstidService {
                     classes = setOf("svarbrev")
                     header {
                         div {
-                            id = "header_text"
-                            +enhetHeaderAndFooterMap[forlengetBehandlingstidRequest.avsenderEnhetId]!!.first
-                        }
-                        div {
                             id = "logo"
-                            img { src = "nav_logo.png" }
+                            img { src = "nav_logo.svg" }
                         }
                     }
                     div {
-                        classes = setOf("current-date")
-                        +"Dato: ${getFormattedDate(currentDate)}"
+                        classes = setOf("saksinfo")
+                        p {
+                            classes = setOf("label-content")
+                            span {
+                                classes = setOf("label")
+                                +"Saken gjelder: "
+                            }
+                            span { +forlengetBehandlingstidRequest.sakenGjelder.name }
+                        }
+                        p {
+                            classes = setOf("label-content")
+                            span {
+                                classes = setOf("label")
+                                +"Fødselsnummer: "
+                            }
+                            span { +forlengetBehandlingstidRequest.sakenGjelder.fnr.toFnrView() }
+                        }
+                        if (forlengetBehandlingstidRequest.klager != null && forlengetBehandlingstidRequest.klager.fnr != forlengetBehandlingstidRequest.sakenGjelder.fnr) {
+                            p {
+                                classes = setOf("label-content")
+                                span {
+                                    classes = setOf("label")
+                                    +"${forlengetBehandlingstidRequest.type.getKlagerDisplay()}: "
+                                }
+                                span { +forlengetBehandlingstidRequest.klager.name }
+                            }
+                        }
+                        if (!forlengetBehandlingstidRequest.fullmektigFritekst.isNullOrBlank()) {
+                            p {
+                                classes = setOf("label-content")
+                                span {
+                                    classes = setOf("label")
+                                    +"Fullmektig: "
+                                }
+                                span { +forlengetBehandlingstidRequest.fullmektigFritekst }
+                            }
+                        }
+                        div {
+                            id = "current-date"
+                            classes = setOf("current-date")
+                            + getFormattedDate(currentDate)
+                        }
                     }
                     h1 {
                         +"Varsel om lengre saksbehandlingstid enn forventet i ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} som gjelder ${
@@ -70,41 +96,6 @@ class ForlengetBehandlingstidService {
                         }"
                     }
 
-                    br {}
-                    p {
-                        div {
-                            span {
-                                classes = setOf("bold")
-                                +"Saken gjelder: "
-                            }
-                            +forlengetBehandlingstidRequest.sakenGjelder.name
-                        }
-                        div {
-                            span {
-                                classes = setOf("bold")
-                                +"Fødselsnummer: "
-                            }
-                            +forlengetBehandlingstidRequest.sakenGjelder.fnr.toFnrView()
-                        }
-                        if (forlengetBehandlingstidRequest.klager != null && forlengetBehandlingstidRequest.klager.fnr != forlengetBehandlingstidRequest.sakenGjelder.fnr) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"${forlengetBehandlingstidRequest.type.getKlagerDisplay()}: "
-                                }
-                                +forlengetBehandlingstidRequest.klager.name
-                            }
-                        }
-                        if (!forlengetBehandlingstidRequest.fullmektigFritekst.isNullOrBlank()) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Fullmektig: "
-                                }
-                                +forlengetBehandlingstidRequest.fullmektigFritekst
-                            }
-                        }
-                    }
 
                     p {
                         +"Klageinstans mottok ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} ${

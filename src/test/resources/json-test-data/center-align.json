@@ -1,71 +1,5 @@
 [
   {
-    "type": "current-date",
-    "children": [
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "header",
-    "threadIds": [],
-    "content": "Returadresse: Klageinstans Tromsø, Postboks 7028 St. Olavs plass, 0130 Oslo",
-    "children": [
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "maltekstseksjon",
-    "section": "section-esel",
-    "textIdList": [
-      "56a279dd-d7b4-4442-972b-1afaf052bb56"
-    ],
-    "language": "nb",
-    "id": "1ec046d9-579e-4867-9d24-bc839a2fd6dc",
-    "query": {
-      "ytelseHjemmelIdList": [
-        "32",
-        "32>696",
-        "GLOBAL>696"
-      ],
-      "utfallIdList": "7",
-      "templateSectionIdList": [
-        "generelt_brev>section-esel",
-        "GLOBAL>section-esel"
-      ]
-    },
-    "children": [
-      {
-        "type": "redigerbar-maltekst",
-        "section": "section-esel",
-        "id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
-        "language": "nb",
-        "_id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
-        "children": [
-          {
-            "type": "h1",
-            "align": "left",
-            "children": [
-              {
-                "type": "placeholder",
-                "placeholder": "Dokumenttittel for generelt brev",
-                "deletable": true,
-                "children": [
-                  {
-                    "text": "​"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
     "type": "p",
     "align": "left",
     "children": [
@@ -127,7 +61,6 @@
             "deletable": false,
             "children": [
               {
-                "bold": true,
                 "text": "Fullmektig"
               }
             ]
@@ -159,6 +92,54 @@
     ]
   },
   {
+    "type": "maltekstseksjon",
+    "section": "section-esel",
+    "textIdList": [
+      "56a279dd-d7b4-4442-972b-1afaf052bb56"
+    ],
+    "language": "nb",
+    "id": "1ec046d9-579e-4867-9d24-bc839a2fd6dc",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "32",
+        "32>696",
+        "GLOBAL>696"
+      ],
+      "utfallIdList": "7",
+      "templateSectionIdList": [
+        "generelt_brev>section-esel",
+        "GLOBAL>section-esel"
+      ]
+    },
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-esel",
+        "id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
+        "language": "nb",
+        "_id": "56a279dd-d7b4-4442-972b-1afaf052bb56",
+        "children": [
+          {
+            "type": "h1",
+            "align": "left",
+            "children": [
+              {
+                "type": "placeholder",
+                "placeholder": "Dokumenttittel for generelt brev",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "type": "p",
     "align": "center",
     "children": [
@@ -177,16 +158,6 @@
       "name": "Kari Nordmann",
       "title": "seniorrådgiver/saksbehandler"
     },
-    "children": [
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "footer",
-    "threadIds": [],
-    "content": "Postadresse: Klageinstans Tromsø // Postboks 7028 St. Olavs plass, 0130 Oslo // Telefon: 55 55 33 33 nav.no",
     "children": [
       {
         "text": ""

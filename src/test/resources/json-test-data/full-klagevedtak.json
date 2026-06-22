@@ -1,0 +1,1369 @@
+[
+  {
+    "type": "saksinfo",
+    "children": [
+      {
+        "type": "label-content",
+        "source": "klagerIfEqualToSakenGjelder.name",
+        "threadIds": [],
+        "result": "ORANSJE VASKEMASKIN\n",
+        "label": "Klager",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "sakenGjelderIfDifferentFromKlager.name",
+        "threadIds": [],
+        "label": "Saken gjelder",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "sakenGjelder.fnr",
+        "threadIds": [],
+        "result": "304495 39172\n",
+        "label": "Fødselsnummer",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "klagerIfDifferentFromSakenGjelder.name",
+        "threadIds": [],
+        "label": "Klager",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "fullmektig",
+        "show": true,
+        "id": "60b82ef9-8a83-4dd4-b32d-dbef162bda2a",
+        "children": [
+          {
+            "type": "placeholder",
+            "placeholder": "Fullmektigetikett",
+            "deletable": false,
+            "children": [
+              {
+                "text": "Fullmektig"
+              }
+            ]
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Fullmektig",
+            "deletable": false,
+            "children": [
+              {
+                "text": "GREI ORD"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "saksnummer",
+        "isInitialized": true,
+        "deletable": false,
+        "children": [
+          {
+            "type": "placeholder",
+            "placeholder": "Saksnummer",
+            "deletable": false,
+            "children": [
+              {
+                "text": "1002LMU"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-esel",
+    "textIdList": [
+      "43c505d0-48c7-4b8c-81fe-37506d7845d9"
+    ],
+    "language": "nb",
+    "id": "17ef81ef-43f2-4620-b7d2-f31069501d28",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-esel",
+        "GLOBAL>section-esel"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-esel",
+        "id": "43c505d0-48c7-4b8c-81fe-37506d7845d9",
+        "language": "nb",
+        "_id": "43c505d0-48c7-4b8c-81fe-37506d7845d9",
+        "children": [
+          {
+            "type": "h1",
+            "children": [
+              {
+                "text": "Klageinstans har fattet vedtak i klagesaken din"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-rev-v2",
+    "textIdList": [
+      "eb8a2f40-28e5-4bdb-ac3d-421358d60ca9",
+      "24ed8793-7f4d-4268-b833-760004476462"
+    ],
+    "language": "nb",
+    "id": "649c6de3-b7a8-4a08-a3c9-4ee72b6557ab",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-rev-v2",
+        "GLOBAL>section-rev-v2"
+      ]
+    },
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-rev-v2",
+        "id": "eb8a2f40-28e5-4bdb-ac3d-421358d60ca9",
+        "language": "nb",
+        "_id": "eb8a2f40-28e5-4bdb-ac3d-421358d60ca9",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "bold": true,
+                "text": "Saken gjelder: "
+              },
+              {
+                "text": "Klagen din "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato",
+                "content": "",
+                "children": [
+                  {
+                    "text": "13/37-1337"
+                  }
+                ]
+              },
+              {
+                "text": " over Nav "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "enhet",
+                "content": "",
+                "children": [
+                  {
+                    "text": "Oslo"
+                  }
+                ]
+              },
+              {
+                "text": " sitt vedtak "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato",
+                "content": "",
+                "children": [
+                  {
+                    "text": "69/69-6969"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-rev-v2",
+        "id": "24ed8793-7f4d-4268-b833-760004476462",
+        "language": "nb",
+        "_id": "24ed8793-7f4d-4268-b833-760004476462",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "bold": true,
+                "text": "Problemstilling:"
+              },
+              {
+                "text": " "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Kort og konsis problemstilling i tråd med det klager ønsker å oppnå med klagen. Eks1: Om du har rett til uføretrygd. Eks2: Om du har rett til høyere utbetaling av sykepenger. Eks3: Om du har rett til arbeidsavklaringspenger fra et tidligere tidspunkt. Eks4: Om du har fått feilutbetalt dagpenger som du må betale tilbake.",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "Om du har fått feilutbetalt dagpenger som du må betale tilbake"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-mår",
+    "textIdList": [
+      "341b6cc0-51de-4d13-b2c2-84b209938ce5",
+      "29ae311f-9a17-486b-bf1f-522559eb122c",
+      "dadba066-2764-43e9-8a33-b95fa9605f00"
+    ],
+    "language": "nb",
+    "id": "8b98e016-8a67-460a-a0d9-9c8f288e6d52",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-mår",
+        "GLOBAL>section-mår"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-mår",
+        "id": "341b6cc0-51de-4d13-b2c2-84b209938ce5",
+        "language": "nb",
+        "_id": "341b6cc0-51de-4d13-b2c2-84b209938ce5",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Vedtak"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mår",
+        "id": "29ae311f-9a17-486b-bf1f-522559eb122c",
+        "language": "nb",
+        "_id": "29ae311f-9a17-486b-bf1f-522559eb122c",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Her formulerer du deg kortfattet og presist, og forklarer så nøyaktig du kan hva omgjøringen går ut på og hvorfor. Dette alternativet bruker du også når underinstansen har avvist klagen, men klageinstansen omgjør avvisningsvedtaket og sender saken tilbake for realitetsbehandling i underinstansen. Eks1: Du har rett til […] fordi […]. Eks2: Du må ikke betale tilbake […] fordi […]. Eks3: Du har rett til å få klagen din på vedtaket om […] behandlet fordi […] ",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "Du må ikke betale tilbake fordi vi har gjort noe feil."
+                  }
+                ]
+              },
+              {
+                "text": " Derfor har vi omgjort vedtaket."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mår",
+        "id": "dadba066-2764-43e9-8a33-b95fa9605f00",
+        "language": "nb",
+        "_id": "dadba066-2764-43e9-8a33-b95fa9605f00",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Vedtaket er gjort etter "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "lov",
+                "content": "",
+                "children": [
+                  {
+                    "text": "Grunnloven"
+                  }
+                ]
+              },
+              {
+                "text": " § "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "hjemmel",
+                "content": "",
+                "children": [
+                  {
+                    "text": "67"
+                  }
+                ]
+              },
+              {
+                "text": " og forvaltningsloven § 34."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 1,
+            "children": [
+              {
+                "text": "Innrykket tekst"
+              }
+            ]
+          },
+          {
+            "type": "ul",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "align": "left",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": "Dette er første punkt i en liste"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "children": [
+                      {
+                        "text": "Og dette er det andre"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ul",
+                    "children": [
+                      {
+                        "type": "li",
+                        "children": [
+                          {
+                            "type": "lic",
+                            "children": [
+                              {
+                                "text": "Dette er rykka inn ett nivå"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "ul",
+                            "children": [
+                              {
+                                "type": "li",
+                                "children": [
+                                  {
+                                    "type": "lic",
+                                    "children": [
+                                      {
+                                        "text": "Og dette er rykka inn enda et nivå!"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Her er det vanlig tekst rett under"
+              }
+            ]
+          },
+          {
+            "type": "ol",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "align": "left",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": "Dette er første punkt i en liste"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "children": [
+                      {
+                        "text": "Og dette er det andre"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ol",
+                    "children": [
+                      {
+                        "type": "li",
+                        "children": [
+                          {
+                            "type": "lic",
+                            "children": [
+                              {
+                                "text": "Dette er rykka inn ett nivå"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "ol",
+                            "children": [
+                              {
+                                "type": "li",
+                                "children": [
+                                  {
+                                    "type": "lic",
+                                    "children": [
+                                      {
+                                        "text": "Og dette er rykka inn enda et nivå!"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-mus",
+    "textIdList": [
+      "47d851d4-3ce9-4d08-8f67-a7e9fd0a6f7a",
+      "548e473d-eccf-4034-8abb-5afb23fc4146"
+    ],
+    "language": "nb",
+    "id": "4fd81d72-0a86-472d-a066-3807ef7a04ea",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-mus",
+        "GLOBAL>section-mus"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-mus",
+        "id": "47d851d4-3ce9-4d08-8f67-a7e9fd0a6f7a",
+        "language": "nb",
+        "_id": "47d851d4-3ce9-4d08-8f67-a7e9fd0a6f7a",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Begrunnelsen vår"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "548e473d-eccf-4034-8abb-5afb23fc4146",
+        "language": "nb",
+        "_id": "548e473d-eccf-4034-8abb-5afb23fc4146",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Du klager på "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Beskriv hovedpoengene i klagerens argumentasjon og nevn eventuelle bevis klageren viser til som støtte for sin påstand",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "det aller meste."
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": ""
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Forklar kort og presist hva reglene sier og skriv begrunnelse. Du finner hjelpetekst for hvordan å skrive begrunnelse under gode formuleringer. ",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "Det er bare rett og rimelig."
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Vi har derfor "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "fyll ut",
+                "deletable": true,
+                "children": [
+                  {
+                    "text": "gitt deg medhold"
+                  }
+                ]
+              },
+              {
+                "text": "."
+              }
+            ]
+          },
+          {
+            "type": "h1",
+            "align": "left",
+            "children": [
+              {
+                "text": "Overskrift 1 (skal kun brukes i starten av brevet)"
+              }
+            ]
+          },
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Overskrift 2"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Brødtekst."
+              }
+            ]
+          },
+          {
+            "type": "h3",
+            "children": [
+              {
+                "text": "Overskrift 3"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Brødtekst."
+              }
+            ]
+          },
+          {
+            "type": "h3",
+            "children": [
+              {
+                "text": "Overskrift 4"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Brødtekst."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "indent": 1,
+            "children": [
+              {
+                "text": "Innrykket brødtekst"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "indent": 2,
+            "children": [
+              {
+                "text": "Brødtekst som er rykka inn enda et nivå."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "right",
+            "children": [
+              {
+                "text": "Høyrestilt tekst"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "center",
+            "children": [
+              {
+                "text": "Midtstilt tekst"
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "colSizes": [
+              168,
+              51,
+              205,
+              181
+            ],
+            "children": [
+              {
+                "type": "tr",
+                "children": [
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "a"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "XKiO5R8fCV"
+                  },
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "b"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "vhK0kFObuo"
+                  },
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "c"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "bijlFTM3HT"
+                  },
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "d"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "-9zkVWJrLa"
+                  }
+                ],
+                "id": "QtyqWxcQhF"
+              },
+              {
+                "type": "tr",
+                "children": [
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "aaaaaaaaaaaaaaaaa"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "lsAwz8rbCD"
+                  },
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "bbbbbb"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "IFlFAWB9zJ"
+                  },
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "c"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "MLlhGhv3sM"
+                  },
+                  {
+                    "type": "td",
+                    "attributes": {},
+                    "children": [
+                      {
+                        "type": "p",
+                        "align": "left",
+                        "children": [
+                          {
+                            "text": "d"
+                          }
+                        ]
+                      }
+                    ],
+                    "id": "au8RQXMtf4"
+                  }
+                ],
+                "id": "6Xbi2Bcz8f"
+              }
+            ],
+            "id": "fy1nVOfwsX"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-ape",
+    "textIdList": [
+      "ee59eaaf-09a1-4353-b5cf-fbc29bd6c685"
+    ],
+    "language": "nb",
+    "id": "67aea54c-5fc6-4701-828d-cfb5c68d2fc4",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-ape",
+        "GLOBAL>section-ape"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-ape",
+        "id": "ee59eaaf-09a1-4353-b5cf-fbc29bd6c685",
+        "language": "nb",
+        "_id": "ee59eaaf-09a1-4353-b5cf-fbc29bd6c685",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Du har rett til å anke"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom frem til deg. Du finner informasjon og skjema for innsending på "
+              },
+              {
+                "underline": true,
+                "text": "www.nav.no/klage"
+              },
+              {
+                "text": ". Du kan også anke ved å logge deg inn på "
+              },
+              {
+                "underline": true,
+                "text": "mine-klager.nav.no"
+              },
+              {
+                "text": ", gå inn på saken og velge \"Send anke på klagevedtak\"."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Anken må være underskrevet av deg."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "I trygdesaker må du først anke til Trygderetten før du kan ta saken videre til lagmannsretten."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-gris",
+    "textIdList": [
+      "41f894ef-7517-4fc4-a32b-dd10ab6df453",
+      "049072b6-7766-45dd-accc-abf2a560698e",
+      "461b0719-f6ee-4575-bae1-7e25074deac7"
+    ],
+    "language": "nb",
+    "id": "dea64ca2-acd0-4c04-a5bc-692e186bec5c",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-gris",
+        "GLOBAL>section-gris"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-gris",
+        "id": "41f894ef-7517-4fc4-a32b-dd10ab6df453",
+        "language": "nb",
+        "_id": "41f894ef-7517-4fc4-a32b-dd10ab6df453",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Informasjon om dekning av sakskostnader"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-gris",
+        "id": "049072b6-7766-45dd-accc-abf2a560698e",
+        "language": "nb",
+        "_id": "049072b6-7766-45dd-accc-abf2a560698e",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Vi har gjort om vedtaket til din fordel. Du kan derfor ha rett til å få dekket vesentlige kostnader som har vært nødvendige for å få endret vedtaket. Dette går fram av forvaltningsloven § 36."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-gris",
+        "id": "461b0719-f6ee-4575-bae1-7e25074deac7",
+        "language": "nb",
+        "_id": "461b0719-f6ee-4575-bae1-7e25074deac7",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til Arbeids- og velferdsdirektoratet Klageinstans sakskostnader, postboks 7028 St. Olavs Plass, 0130 Oslo. "
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-sel",
+    "textIdList": [
+      "1350e59e-62f6-4160-9535-693a69c08a9f",
+      "80062f28-535d-46b6-bc84-2352bb4c0a84",
+      "57d14f27-2cee-4fe9-af4d-3aed32d03e9d",
+      "6994a9cb-4f43-4055-bbbd-f79a6791561f"
+    ],
+    "language": "nb",
+    "id": "a8ad054b-4301-4d27-9995-aa3e4ddec903",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "3",
+        "3>1000.008.013",
+        "GLOBAL>1000.008.013"
+      ],
+      "utfallIdList": "4",
+      "templateSectionIdList": [
+        "klagevedtak-v2>section-sel",
+        "GLOBAL>section-sel"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-sel",
+        "id": "1350e59e-62f6-4160-9535-693a69c08a9f",
+        "language": "nb",
+        "_id": "1350e59e-62f6-4160-9535-693a69c08a9f",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Du har rett til innsyn"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Du har rett til å se dokumentene i saken din. Dette følger av forvaltningsloven § 18. Du kan lese mer om innsynsretten på nav.no/personvernerklaering."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-sel",
+        "id": "80062f28-535d-46b6-bc84-2352bb4c0a84",
+        "language": "nb",
+        "_id": "80062f28-535d-46b6-bc84-2352bb4c0a84",
+        "children": [
+          {
+            "type": "h2",
+            "align": "left",
+            "children": [
+              {
+                "text": "Du har rettigheter knyttet til personopplysningene dine "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Du finner informasjon om hvordan Nav behandler personopplysningene dine, og hvilke rettigheter du har, på nav.no/personvernerklaering. "
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-sel",
+        "id": "57d14f27-2cee-4fe9-af4d-3aed32d03e9d",
+        "language": "nb",
+        "_id": "57d14f27-2cee-4fe9-af4d-3aed32d03e9d",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "bold": true,
+                "text": "Du har rett til å få hjelp fra andre"
+              },
+              {
+                "text": " "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Du kan be om hjelp fra andre under hele saksbehandlingen, for eksempel fra en advokat, rettshjelper, en organisasjon du er medlem av, eller en myndig person over 18 år. Dette følger av forvaltningsloven § 12. Hvis den som hjelper deg ikke er advokat, må du gi denne personen skriftlig fullmakt. Bruk skjemaet du finner på nav.no/fullmakt. "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Informasjon om fri rettshjelp får du hos Statsforvalteren eller advokat."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-sel",
+        "id": "6994a9cb-4f43-4055-bbbd-f79a6791561f",
+        "language": "nb",
+        "_id": "6994a9cb-4f43-4055-bbbd-f79a6791561f",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Har du spørsmål?"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Du finner mer informasjon på nav.no."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "På nav.no/kontakt kan du chatte eller skrive til oss."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Hvis du ikke finner svar på nav.no, kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.\n\n\nMed hilsen\nArbeids- og velferdsdirektoratet Klageinstans"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "signature",
+    "enabled": true,
+    "useShortName": false,
+    "includeMedunderskriver": true,
+    "useSuffix": true,
+    "threadIds": [],
+    "medunderskriver": {
+      "name": "Kari Nordmann",
+      "title": "seniorrådgiver"
+    },
+    "saksbehandler": {
+      "name": "Daniel Eriksson",
+      "title": "seniorrådgiver/saksbehandler"
+    },
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "regelverk",
+    "section": "section-gnu",
+    "children": [
+      {
+        "type": "page-break",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "maltekstseksjon",
+        "section": "section-gnu",
+        "textIdList": [
+          "fc865df9-d880-4bcc-a6d5-c31d461532b3",
+          "7f07b0ad-4297-4f19-ab9f-dbdfb90611b1"
+        ],
+        "language": "nb",
+        "id": "fef08462-e7c0-44cd-8da0-29ed26386fa1",
+        "query": {
+          "ytelseHjemmelIdList": [
+            "3",
+            "3>1000.008.013",
+            "GLOBAL>1000.008.013"
+          ],
+          "utfallIdList": "4",
+          "templateSectionIdList": [
+            "klagevedtak-v2>section-gnu",
+            "GLOBAL>section-gnu"
+          ]
+        },
+        "children": [
+          {
+            "type": "maltekst",
+            "section": "section-gnu",
+            "id": "fc865df9-d880-4bcc-a6d5-c31d461532b3",
+            "language": "nb",
+            "_id": "fc865df9-d880-4bcc-a6d5-c31d461532b3",
+            "children": [
+              {
+                "type": "h2",
+                "children": [
+                  {
+                    "text": "Regelverket som gjelder i saken"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "maltekst",
+            "section": "section-gnu",
+            "id": "7f07b0ad-4297-4f19-ab9f-dbdfb90611b1",
+            "language": "nb",
+            "_id": "7f07b0ad-4297-4f19-ab9f-dbdfb90611b1",
+            "children": [
+              {
+                "type": "p",
+                "align": "left",
+                "children": [
+                  {
+                    "underline": true,
+                    "text": "Forvaltningsloven § 34:"
+                  }
+                ]
+              },
+              {
+                "type": "p",
+                "align": "left",
+                "indent": 1,
+                "children": [
+                  {
+                    "text": "«Dersom vilkårene for å behandle klagen ikke foreligger, skal klageinstansen avvise saken, jfr. dog § 31. Klageinstansen er ikke bundet av at underinstansen har ansett vilkårene for å foreligge."
+                  }
+                ]
+              },
+              {
+                "type": "p",
+                "align": "left",
+                "indent": 1,
+                "children": [
+                  {
+                    "text": "Tas klagen under behandling, kan klageinstansen prøve alle sider av saken og herunder ta hensyn til nye omstendigheter. Den skal vurdere de synspunkter som klageren kommer med, og kan også ta opp forhold som ikke er berørt av ham. Der statlig organ er klageinstans for vedtak truffet av en kommune eller fylkeskommune, skal klageinstansen legge stor vekt på hensynet til det kommunale selvstyre ved prøving av det frie skjønn. Det skal fremgå av vedtaket hvordan klageinstansen har vektlagt hensynet til det kommunale selvstyret."
+                  }
+                ]
+              },
+              {
+                "type": "p",
+                "align": "left",
+                "indent": 1,
+                "children": [
+                  {
+                    "text": "Vedtaket kan ikke endres til skade for klageren, med mindre dennes interesser finnes å måtte vike for omsynet til andre privatpersoner eller offentlige interesser. Melding om slik endring må være sendt klageren innen 3 måneder etter at underinstansen mottok klagen. Begrensningene i første og annet punktum gjelder likevel ikke når vedtaket også er påklaget av en annen klager, og dennes klage finnes begrunnet."
+                  }
+                ]
+              },
+              {
+                "type": "p",
+                "align": "left",
+                "indent": 1,
+                "children": [
+                  {
+                    "text": "Klageinstansen kan selv treffe nytt vedtak i saken eller oppheve det og sende saken tilbake til underinstansen til helt eller delvis ny behandling.»"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "regelverk-container",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

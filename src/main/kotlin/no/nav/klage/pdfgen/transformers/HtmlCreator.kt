@@ -29,17 +29,12 @@ class HtmlCreator(
                 id = "body"
                 header {
                     div {
-                        id = "header_text"
-                    }
-                    div {
                         id = "logo"
-                        img { src = "nav_logo.png" }
+                        img { src = "nav_logo.svg" }
                     }
                 }
             }
         }
-
-    private var footer = ""
 
     private fun getTexts(map: Map<String, *>): List<String> {
         val texts = mutableListOf<String>()
@@ -85,7 +80,7 @@ class HtmlCreator(
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
             val alignment = if (map["align"] == "right") "right" else "left"
-            inlineStyles += "margin-$alignment: ${24 * indent}pt"
+            inlineStyles += "margin-$alignment: ${20 * indent}px"
         }
 
         if (elementType != "page-break") {
@@ -113,7 +108,7 @@ class HtmlCreator(
                                 val width = if (colSizeInPx == 0) {
                                     "auto"
                                 } else {
-                                    (colSizeInPx.coerceAtLeast(48) * pxToPtRatio).toString() + "pt"
+                                    (colSizeInPx.coerceAtLeast(48) * pxRatio).toString() + "px"
                                 }
                                 col {
                                     style = "width: ${width};"
@@ -136,7 +131,7 @@ class HtmlCreator(
             "tr" -> {
                 if (map.containsKey("size")) {
                     val heightInPx = map["size"] as Int
-                    inlineStyles += "height: ${(heightInPx * pxToPtRatio)}pt;"
+                    inlineStyles += "height: ${heightInPx}px;"
                 }
                 document.create.tr()
             }
@@ -164,7 +159,20 @@ class HtmlCreator(
                 }
             }
 
-            "maltekst", "redigerbar-maltekst", "regelverk", "maltekstseksjon" -> return loopOverChildren(children)
+            // Create space between saksinfo and next paragraph in legacy templates
+            "maltekstseksjon" -> {
+                return if (map["section"] == "section-rev-v2") {
+                    val wrapper = document.create.div {
+                        this.classes = setOf("after-saksinfo")
+                    }
+                    loopOverChildren(children).forEach { wrapper.appendChild(it) }
+                    listOf(wrapper)
+                } else {
+                    loopOverChildren(children)
+                }
+            }
+
+            "maltekst", "redigerbar-maltekst", "regelverk" -> return loopOverChildren(children)
 
             "regelverk-container" -> {
                 if (validationMode) {
@@ -186,12 +194,14 @@ class HtmlCreator(
                     return emptyList()
                 }
 
-                return listOf(document.create.span {
-                    b {
+                return listOf(document.create.p {
+                    classes = setOf("label-content")
+                    span {
+                        classes = setOf("label")
                         +"$label"
                         +": "
                     }
-                    +"$result"
+                    span { +"$result" }
                 })
             }
 
@@ -200,12 +210,11 @@ class HtmlCreator(
                     emptyList()
                 } else {
                     listOf(document.create.div {
-                        style = "margin-top: 24pt;"
-                        classes = setOf("wrapper")
+                        classes = setOf("signature")
                         if (map.containsKey("medunderskriver")) {
                             val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
                             div {
-                                classes = setOf("column")
+                                classes = setOf("signature-column")
                                 div { +medunderskriver["name"].toString() }
                                 if (medunderskriver["title"] != null) {
                                     div { +medunderskriver["title"]!!.toString() }
@@ -215,7 +224,7 @@ class HtmlCreator(
                         if (map.containsKey("saksbehandler")) {
                             val saksbehandler = map["saksbehandler"] as Map<String, Map<String, *>>
                             div {
-                                classes = setOf("column")
+                                classes = setOf("signature-column")
                                 div { +saksbehandler["name"].toString() }
                                 if (saksbehandler["title"] != null) {
                                     div { +saksbehandler["title"]!!.toString() }
@@ -236,40 +245,68 @@ class HtmlCreator(
                 val value = children[1]["children"] as List<Map<String, *>>
 
                 val elements = mutableListOf<Element>()
-                elements += createLeafElement(map = key[0])
-                elements += document.create.span {
-                    classes = setOf("bold")
-                    +": "
+
+                val p = document.create.p {
+                    classes = setOf("label-content")
                 }
-                elements += createLeafElement(map = value[0])
-                elements += document.create.br {}
+
+                val labelMap = key[0].toMutableMap().apply {
+                    this["text"] = "${this["text"]}:"
+                }
+
+                p.appendChild(createLeafElement(labelMap, mutableSetOf("label")))
+                p.appendChild(createLeafElement(map = value[0]))
+
+                elements += p
 
                 return elements
             }
 
             "saksnummer" -> {
                 val elements = mutableListOf<Element>()
-                elements += document.create.span {
-                    classes = setOf("bold")
-                    +"Saksnummer: "
+
+                val children = createElementsWithPossiblyChildren(map = children[0])
+
+                val p = document.create.p {
+                    classes = setOf("label-content")
+                    span {
+                        classes = setOf("label")
+                        +"Saksnummer: "
+                    }
                 }
-                elements += createElementsWithPossiblyChildren(map = children[0])
-                elements += document.create.br {}
+
+                children.forEach {
+                    p.appendChild(it)
+                }
+
+                elements += p
 
                 return elements
             }
 
-            "current-date" -> {
-                return listOf(document.create.div {
+            "saksinfo" -> {
+                val saksinfo = document.create.div { classes = setOf("saksinfo") }
+
+                val saksinfoChildren = map["children"] as List<Map<String, *>>
+                loopOverChildren(saksinfoChildren).forEach { saksinfo.appendChild(it) }
+
+                saksinfo.appendChild(document.create.div {
                     classes = setOf("current-date")
-                    +"Dato: ${getFormattedDate(currentDate)}"
+                    +getFormattedDate(currentDate)
                 })
+
+                return listOf(saksinfo)
             }
 
-            "empty-void" -> document.create.div()
+            "empty-void" -> return emptyList()
 
             else -> {
-                logger.warn("unknown element type: $elementType")
+                when (elementType) {
+                    "header" -> logger.info("legacy element type: header")
+                    "footer" -> logger.info("legacy element type: footer")
+                    else -> logger.warn("unknown element type: $elementType")
+                }
+
                 document.create.div()
             }
         }
@@ -331,12 +368,11 @@ class HtmlCreator(
             processElement(it)
         }
 
-        //add css when we have a footer set
         val head = document.create.head {
             style {
                 unsafe {
                     raw(
-                        getCss(footer)
+                        getCss()
                     )
                 }
             }
@@ -348,10 +384,20 @@ class HtmlCreator(
 
     private fun processElement(map: Map<String, *>) {
         when (map["type"]) {
-            "header" -> setHeaderText(map)
-            "footer" -> setFooter(map)
+            "current-date" -> setCurrentDate()
             else -> addElementWithPossiblyChildren(map)
         }
+    }
+
+    private fun setCurrentDate() {
+        val body = document.getElementById("body")
+        body.appendChild(document.create.div {
+            classes = setOf("saksinfo")
+            div {
+                classes = setOf("current-date")
+                +getFormattedDate(currentDate)
+            }
+        })
     }
 
     private fun placeholderTextMissingInChildren(map: Map<String, *>): Boolean {
@@ -364,14 +410,6 @@ class HtmlCreator(
         return combinedText.trim('​').trim().isEmpty()
     }
 
-    private fun setHeaderText(map: Map<String, *>) {
-        val span = document.getElementById("header_text")
-        span.textContent = map["content"]?.toString() ?: " "
-    }
-
-    private fun setFooter(map: Map<String, *>) {
-        footer = map["content"]?.toString()?.replace("\n", "\\A") ?: ""
-    }
 
     private fun isElement(node: Map<String, *>): Boolean {
         //and not currentDate
@@ -379,4 +417,14 @@ class HtmlCreator(
     }
 }
 
-const val pxToPtRatio = 0.75
+// Inline padding in both PDF and smart editor
+const val paddingInlinePx = 64.0
+
+// Content width in kabal-json-to-pdf: 595 - 64 * 2
+const val pdfContentWidthPx = 595.0 - paddingInlinePx * 2
+
+// Content width in smart editor (MAX_TABLE_WIDTH = SHEET_WIDTH_PX - PADDING_INLINE_PX * 2 = 800 - 64 * 2)
+const val smartEditorContentWidthPx = 800.0 - paddingInlinePx * 2
+
+// Ratio between content widths. Used for converting smart editor table column widths to PDF widths.
+const val pxRatio = pdfContentWidthPx / smartEditorContentWidthPx
