@@ -27,19 +27,12 @@ class PDFGenService {
     }
 
     private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false, currentDate: LocalDate): Document {
-        validateHeaderFooter(list)
         val c = HtmlCreator(
             dataList = list,
             validationMode = validationMode,
             currentDate = currentDate,
         )
         return c.getDoc()
-    }
-
-    private fun validateHeaderFooter(list: List<Map<String, *>>) {
-        if (list.any { it["type"] == "header" }.xor(list.any { it["type"] == "footer" })) {
-            throw RuntimeException("Both a header and a footer must be defined.")
-        }
     }
 
 }
