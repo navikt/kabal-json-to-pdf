@@ -262,27 +262,12 @@ class HtmlCreator(
                 return elements
             }
 
-            "saksnummer" -> {
-                val elements = mutableListOf<Element>()
+            "saksnummer" -> return createSaksnummerElement(childMap = children[0], label = "Saksnummer: ")
 
-                val children = createElementsWithPossiblyChildren(map = children[0])
-
-                val p = document.create.p {
-                    classes = setOf("label-content")
-                    span {
-                        classes = setOf("label")
-                        +"Saksnummer: "
-                    }
-                }
-
-                children.forEach {
-                    p.appendChild(it)
-                }
-
-                elements += p
-
-                return elements
-            }
+            "arena-saksnummer" -> return createSaksnummerElement(
+                childMap = children[0],
+                label = "Saksnummer fra Arena: "
+            )
 
             "saksinfo" -> {
                 val saksinfo = document.create.div { classes = setOf("saksinfo") }
@@ -323,6 +308,28 @@ class HtmlCreator(
         }
 
         return listOf(element)
+    }
+
+    private fun createSaksnummerElement(childMap: Map<String, *>, label: String): List<Element> {
+        val elements = mutableListOf<Element>()
+
+        val children = createElementsWithPossiblyChildren(map = childMap)
+
+        val p = document.create.p {
+            classes = setOf("label-content")
+            span {
+                classes = setOf("label")
+                +label
+            }
+        }
+
+        children.forEach {
+            p.appendChild(it)
+        }
+
+        elements += p
+
+        return elements
     }
 
     private fun loopOverChildren(
