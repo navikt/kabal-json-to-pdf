@@ -14,13 +14,13 @@ private fun calculateNumberWidth(number: String): Double {
 const val PX_TO_PT_RATIO = 0.75
 const val TEXT_WIDTH_PX = 18.2833 // Width of " av " at 10pt in px
 const val TEXT_WIDTH_PT = TEXT_WIDTH_PX * PX_TO_PT_RATIO // Convert px to pt
-const val PADDING = 12.0 // Padding in pt
-const val SPACING = 10.0 // Extra spacing in pt
+const val PADDING_PT = 12.0 // Padding in pt
+const val SPACING_PT = 10.0 // Extra spacing in pt
 
 @Language("css")
 fun getVedleggsoversiktCss(totalCount: Int): String {
     // Calculate width needed for the last counter text like "999 av 999"
-    val lastCounterWidth = calculateNumberWidth(totalCount.toString(10)) * PX_TO_PT_RATIO * 2 + TEXT_WIDTH_PT + PADDING + SPACING
+    val lastCounterWidth = calculateNumberWidth(totalCount.toString(10)) * PX_TO_PT_RATIO * 2 + TEXT_WIDTH_PT + PADDING_PT + SPACING_PT
     val marginLeft = lastCounterWidth + 2
 
     return """
