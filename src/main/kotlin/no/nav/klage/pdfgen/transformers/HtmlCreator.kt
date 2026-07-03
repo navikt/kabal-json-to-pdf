@@ -80,7 +80,7 @@ class HtmlCreator(
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
             val alignment = if (map["align"] == "right") "right" else "left"
-            inlineStyles += "margin-$alignment: ${20 * indent}px"
+            inlineStyles += "margin-$alignment: ${20 * indent}pt"
         }
 
         if (elementType != "page-break") {
@@ -108,7 +108,7 @@ class HtmlCreator(
                                 val width = if (colSizeInPx == 0) {
                                     "auto"
                                 } else {
-                                    (colSizeInPx.coerceAtLeast(48) * pxRatio).toString() + "px"
+                                    (colSizeInPx.coerceAtLeast(48) * editorPxToPdfPtRatio).toString() + "pt"
                                 }
                                 col {
                                     style = "width: ${width};"
@@ -131,7 +131,7 @@ class HtmlCreator(
             "tr" -> {
                 if (map.containsKey("size")) {
                     val heightInPx = map["size"] as Int
-                    inlineStyles += "height: ${heightInPx}px;"
+                    inlineStyles += "height: ${heightInPx * editorPxToPdfPtRatio}pt;"
                 }
                 document.create.tr()
             }
@@ -417,14 +417,21 @@ class HtmlCreator(
     }
 }
 
-// Inline padding in both PDF and smart editor
-const val paddingInlinePx = 64.0
-
-// Content width in kabal-json-to-pdf: 595 - 64 * 2
-const val pdfContentWidthPx = 595.0 - paddingInlinePx * 2
+// PDF page content width in pt (A4 width 595pt - 64pt padding on each side, matching @page in Css.kt).
+// Note: this is pt, not px - openhtmltopdf's CSS "px" is a 96dpi web pixel (1px = 0.75pt), while the
+// visuelle retningslinjer for brev design guideline's "px" values are Figma pixels. Figma locks PDF
+// export to a 1x scale (its "72dpi" default for asset exports), so 1 Figma pixel = 1/72in. openhtmltopdf
+// specifies 1 pt as exactly 1/72in too (the standard PDF point), so 1 Figma pixel = 1 openhtmltopdf pt.
+// Mixing up Figma px with openhtmltopdf's 96dpi px is what caused pages to render at 75% of true A4 size.
+const val pdfPaddingInlinePt = 64.0
+const val pdfContentWidthPt = 595.0 - pdfPaddingInlinePt * 2
 
 // Content width in smart editor (MAX_TABLE_WIDTH = SHEET_WIDTH_PX - PADDING_INLINE_PX * 2 = 800 - 64 * 2)
-const val smartEditorContentWidthPx = 800.0 - paddingInlinePx * 2
+// This one genuinely is browser px (96dpi), since the smart editor renders in an actual browser.
+// It's a coincidence that the numeral (64) matches pdfPaddingInlinePt above - they are not the same
+// unit, and could diverge independently (e.g. if the smart editor's on-screen padding ever changes).
+const val smartEditorPaddingInlinePx = 64.0
+const val smartEditorContentWidthPx = 800.0 - smartEditorPaddingInlinePx * 2
 
-// Ratio between content widths. Used for converting smart editor table column widths to PDF widths.
-const val pxRatio = pdfContentWidthPx / smartEditorContentWidthPx
+// Ratio for converting a smart editor measurement (browser px) into the equivalent PDF measurement (pt).
+const val editorPxToPdfPtRatio = pdfContentWidthPt / smartEditorContentWidthPx

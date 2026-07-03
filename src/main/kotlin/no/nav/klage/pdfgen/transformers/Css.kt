@@ -9,7 +9,7 @@ fun getCss() = """
         font-weight: 400;
         letter-spacing: 0;
         white-space: pre-wrap;
-        font-size: 11px;
+        font-size: 11pt;
     }
     *, ::before, ::after {
       box-sizing: inherit;
@@ -19,39 +19,39 @@ fun getCss() = """
       color: black;
     }
     .signature-column {
-      font-size: 11px;
+      font-size: 11pt;
       display: inline-block;
       width: 50%;
     }
     .signature {
-      margin-top: 32px;
-      margin-bottom: 40px;
+      margin-top: 32pt;
+      margin-bottom: 40pt;
       page-break-before: avoid;
     }
     
     h1 {
-       font-size: 16px;
-       letter-spacing: 0.3px;
-       line-height: 20px;
-       margin-top: 48px;
-       margin-bottom: 26px;
+       font-size: 16pt;
+       letter-spacing: 0.3pt;
+       line-height: 20pt;
+       margin-top: 48pt;
+       margin-bottom: 26pt;
     }
     h2 {
-        font-size: 13px;
-        letter-spacing: 0.25px;
+        font-size: 13pt;
+        letter-spacing: 0.25pt;
     }
     h3 {
-        font-size: 12px;
-        letter-spacing: 0.2px;
+        font-size: 12pt;
+        letter-spacing: 0.2pt;
     }
     h4 {
-        font-size: 11px;
-        letter-spacing: 0.1px;
+        font-size: 11pt;
+        letter-spacing: 0.1pt;
     }
     h2, h3, h4 {
         margin-bottom: 1em;
-        line-height: 16px;
-        margin-top: 26px;
+        line-height: 16pt;
+        margin-top: 26pt;
     }
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
@@ -59,7 +59,7 @@ fun getCss() = """
     }
     
     header {
-        margin-bottom: 48px;
+        margin-bottom: 48pt;
     }
     
     /* Clearfix */
@@ -70,8 +70,8 @@ fun getCss() = """
     }
     
     #logo img {
-        height: 16px;
-        width: 50px;
+        height: 16pt;
+        width: 50pt;
     }
     
    .current-date {
@@ -84,7 +84,7 @@ fun getCss() = """
     
     .saksinfo {
        /* For legacy cases where saksinfo has no other children than the absolutely positioned current-date */
-       min-height: 16px;
+       min-height: 16pt;
        position: relative;
     }
     
@@ -99,17 +99,17 @@ fun getCss() = """
     
     .label-content .label {
        display: inline-block;
-       width: 150px;
+       width: 150pt;
     }
     
     /* Create space between saksinfo and next paragraph in legacy templates */
     .after-saksinfo {
-        margin-top: 26px;
+        margin-top: 26pt;
     }
     
     p {
         margin-bottom: 1em;
-        line-height: 16px;
+        line-height: 16pt;
     }
     .placeholder-text {
         background-color: #EFA89D;
@@ -147,16 +147,16 @@ fun getCss() = """
         -fs-border-rendering: no-bevel;
     }
     td {
-        border: 1px solid #c7cbd1;
+        border: 1pt solid #c7cbd1;
         word-wrap: break-word;
         max-width: 100%;
         vertical-align: top;
         text-align: left;
         background-color: transparent;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-top: 4pt;
+        padding-bottom: 4pt;
+        padding-left: 8pt;
+        padding-right: 8pt;
     }
     tr:nth-child(odd) {
       background-color: #f5f6f7
@@ -182,7 +182,7 @@ fun getCss() = """
     ol, ul {
       margin-bottom: 1em;
       margin-left: 2em;
-      line-height: 16px;
+      line-height: 16pt;
     }
     
     ul {
@@ -226,18 +226,17 @@ fun getCss() = """
     }
 
     @page {
-        size: 595px 842px;
-        margin: 64px;
-        margin-bottom: 42px;
+        size: 595pt 842pt;
+        margin: 64pt;
+        margin-bottom: 42pt;
         padding: 0;
-        padding-bottom: 74px;
+        padding-bottom: 74pt;
 
         @bottom-right {
             font-family: "Source Sans Pro" !important;
-            font-size: 9px;
+            font-size: 9pt;
             content: "Side " counter(page) " av " counter(pages);
             vertical-align: top;
         }
     }   
     """.trimIndent()
-
