@@ -21,14 +21,14 @@ fun getCss() = """
     .signature-column {
       font-size: 11pt;
       display: inline-block;
-      width: 50%;
+      width: 49%;
     }
     .signature {
       margin-top: 32pt;
       margin-bottom: 40pt;
       page-break-before: avoid;
     }
-    
+
     h1 {
        font-size: 16pt;
        letter-spacing: 0.3pt;
@@ -57,23 +57,23 @@ fun getCss() = """
         font-weight: 600;
         page-break-after: avoid;
     }
-    
+
     header {
         margin-bottom: 48pt;
     }
-    
+
     /* Clearfix */
     header:after{
         clear: both;
         content: "";
         display: block;
     }
-    
+
     #logo img {
         height: 16pt;
         width: 50pt;
     }
-    
+
    .current-date {
         white-space: nowrap;
         text-align: right;
@@ -81,32 +81,32 @@ fun getCss() = """
         bottom: 0;
         right: 0;
     }
-    
+
     .saksinfo {
        /* For legacy cases where saksinfo has no other children than the absolutely positioned current-date */
        min-height: 16pt;
        position: relative;
     }
-    
+
     /* Override bold items in legacy saksinfo - text should never be bold in saksinfo */
     .label-content .bold {
        font-weight: normal;
     }
-    
+
     .label-content {
        margin: 0;
     }
-    
+
     .label-content .label {
        display: inline-block;
        width: 150pt;
     }
-    
+
     /* Create space between saksinfo and next paragraph in legacy templates */
     .after-saksinfo {
         margin-top: 26pt;
     }
-    
+
     p {
         margin-bottom: 1em;
         line-height: 16pt;
@@ -130,11 +130,11 @@ fun getCss() = """
     .alignLeft {
         text-align: left;
     }
-    
+
     .alignCenter {
         text-align: center;
     }
-    
+
     .pageBreak {
         page-break-after: always;
     }
@@ -170,57 +170,57 @@ fun getCss() = """
     td > * {
       margin-top: 0;
     }
-    
+
     td > *:last-child {
       margin-bottom: 0;
     }
-    
+
     td > span {
       margin-bottom: 0;
     }
-    
+
     ol, ul {
       margin-bottom: 1em;
       margin-left: 2em;
       line-height: 16pt;
     }
-    
+
     ul {
         list-style-type: disc;
     }
-    
+
     ul ul {
         list-style-type: circle;
     }
-    
+
     ul ul ul {
         list-style-type: square;
     }
-    
+
     ul ul ul ul {
         list-style-type: disc;
     }
-    
+
     ul ul ul ul ul {
         list-style-type: circle;
     }
-    
+
     ul ul ul ul ul ul {
         list-style-type: square;
     }
-    
+
     ul ul ul ul ul ul ul {
         list-style-type: disc;
     }
-    
+
     ul ul ul ul ul ul ul ul {
         list-style-type: circle;
     }
-    
+
     ul ul ul ul ul ul ul ul ul {
         list-style-type: square;
     }
-    
+
     li > ul, li > ol {
       margin-left: 1em;
     }
@@ -238,5 +238,5 @@ fun getCss() = """
             content: "Side " counter(page) " av " counter(pages);
             vertical-align: top;
         }
-    }   
+    }
     """.trimIndent()
