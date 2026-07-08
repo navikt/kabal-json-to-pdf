@@ -424,21 +424,11 @@ class HtmlCreator(
     }
 }
 
-// PDF page content width in pt (A4 width 595pt - 64pt padding on each side, matching @page in Css.kt).
-// Note: this is pt, not px - openhtmltopdf's CSS "px" is a 96dpi web pixel (1px = 0.75pt), while the
-// visuelle retningslinjer for brev design guideline's "px" values are Figma pixels. Figma locks PDF
-// export to a 1x scale (its "72dpi" default for asset exports), so 1 Figma pixel = 1/72in. openhtmltopdf
-// specifies 1 pt as exactly 1/72in too (the standard PDF point), so 1 Figma pixel = 1 openhtmltopdf pt.
-// Mixing up Figma px with openhtmltopdf's 96dpi px is what caused pages to render at 75% of true A4 size.
-const val pdfPaddingInlinePt = 64.0
-const val pdfContentWidthPt = 595.0 - pdfPaddingInlinePt * 2
-
-// Content width in smart editor (MAX_TABLE_WIDTH = SHEET_WIDTH_PX - PADDING_INLINE_PX * 2 = 800 - 64 * 2)
-// This one genuinely is browser px (96dpi), since the smart editor renders in an actual browser.
-// It's a coincidence that the numeral (64) matches pdfPaddingInlinePt above - they are not the same
-// unit, and could diverge independently (e.g. if the smart editor's on-screen padding ever changes).
-const val smartEditorPaddingInlinePx = 64.0
-const val smartEditorContentWidthPx = 800.0 - smartEditorPaddingInlinePx * 2
-
 // Ratio for converting a smart editor measurement (browser px) into the equivalent PDF measurement (pt).
-const val editorPxToPdfPtRatio = pdfContentWidthPt / smartEditorContentWidthPx
+//
+// The smart editor renders its sheet at genuine 96dpi browser px (see SHEET_WIDTH_PT/ptToPx in the
+// frontend's get-scaled-em.ts), while openhtmltopdf's CSS "px" is a 96dpi web pixel too, but we emit
+// "pt" units directly, and openhtmltopdf's pt is the standard PDF point (1/72in). Since both sides
+// derive their pixel sizes from the same pt-based sheet dimensions (595pt wide, 64pt inline padding),
+// converting a browser px back to pt is just the fixed 96dpi -> 72dpi factor: 1px = 72/96 pt = 0.75pt.
+const val editorPxToPdfPtRatio = 0.75
