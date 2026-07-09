@@ -49,7 +49,7 @@ fun getCss() = """
         letter-spacing: 0.1pt;
     }
     h2, h3, h4 {
-        margin-bottom: 1em;
+        margin-bottom: 6pt;
         line-height: 16pt;
         margin-top: 26pt;
     }
