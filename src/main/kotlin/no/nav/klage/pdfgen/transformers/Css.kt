@@ -86,6 +86,7 @@ fun getCss() = """
        /* For legacy cases where saksinfo has no other children than the absolutely positioned current-date */
        min-height: 16pt;
        position: relative;
+       margin-bottom: 48pt;
     }
 
     /* Override bold items in legacy saksinfo - text should never be bold in saksinfo */

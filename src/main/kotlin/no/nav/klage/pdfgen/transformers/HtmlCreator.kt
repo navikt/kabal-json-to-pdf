@@ -285,13 +285,23 @@ class HtmlCreator(
 
             "empty-void" -> return emptyList()
 
-            else -> {
-                when (elementType) {
-                    "header" -> logger.info("legacy element type: header")
-                    "footer" -> logger.info("legacy element type: footer")
-                    else -> logger.warn("unknown element type: $elementType")
-                }
+            // Legacy topptekst/bunntekst - content was already never rendered (only "content"
+            // field, which is never read). Must return emptyList() rather than an empty div:
+            // even an empty div ends up with a leftover FEFF-only text node from
+            // createLeafElement, which is enough "real" content to block margin collapsing
+            // between whatever precedes and follows it.
+            "header" -> {
+                logger.info("legacy element type: header")
+                return emptyList()
+            }
 
+            "footer" -> {
+                logger.info("legacy element type: footer")
+                return emptyList()
+            }
+
+            else -> {
+                logger.warn("unknown element type: $elementType")
                 document.create.div()
             }
         }
