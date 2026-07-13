@@ -262,10 +262,10 @@ class HtmlCreator(
                 return elements
             }
 
-            "saksnummer" -> return createSaksnummerElement(childMap = children[0], label = "Saksnummer: ")
+            "saksnummer" -> return createSaksnummerElement(children = children, label = "Saksnummer: ")
 
             "arena-saksnummer" -> return createSaksnummerElement(
-                childMap = children[0],
+                children = children,
                 label = "Saksnummer fra Arena: "
             )
 
@@ -320,10 +320,15 @@ class HtmlCreator(
         return listOf(element)
     }
 
-    private fun createSaksnummerElement(childMap: Map<String, *>, label: String): List<Element> {
+    private fun createSaksnummerElement(children: List<Map<String, *>>, label: String): List<Element> {
         val elements = mutableListOf<Element>()
 
-        val children = createElementsWithPossiblyChildren(map = childMap)
+        // The placeholder is the actual saksnummer element. It may be surrounded by empty
+        // Slate cursor-anchor text nodes (e.g. {"text": ""}), so we find it rather than assuming
+        // a fixed position.
+        val placeholderMap = children.first { isElement(it) }
+
+        val placeholderElements = createElementsWithPossiblyChildren(map = placeholderMap)
 
         val p = document.create.p {
             classes = setOf("label-content")
@@ -333,7 +338,7 @@ class HtmlCreator(
             }
         }
 
-        children.forEach {
+        placeholderElements.forEach {
             p.appendChild(it)
         }
 
