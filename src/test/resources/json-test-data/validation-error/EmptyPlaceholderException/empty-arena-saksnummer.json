@@ -1,0 +1,30 @@
+[
+  {
+    "type": "saksinfo",
+    "children": [
+      {
+        "type": "arena-saksnummer",
+        "isInitialized": true,
+        "deletable": false,
+        "children": [
+          {
+            "text": ""
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Saksnummer fra Arena",
+            "deletable": false,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "text": ""
+          }
+        ]
+      }
+    ]
+  }
+]
