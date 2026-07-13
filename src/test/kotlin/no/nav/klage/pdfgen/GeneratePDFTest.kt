@@ -50,7 +50,9 @@ class GeneratePDFTest {
 
     @TestFactory
     fun `json files that fail validation`(): List<DynamicTest> =
-        (validationErrorDir.listFiles { it.isDirectory }?.sortedBy { it.name } ?: emptyList())
+        requireDirectory(validationErrorDir)
+            .listFiles { it.isDirectory }!!
+            .sortedBy { it.name }
             .flatMap { exceptionDir ->
                 val exceptionClass = exceptionsByName[exceptionDir.name]
                     ?: error(
@@ -71,7 +73,7 @@ class GeneratePDFTest {
 
     @TestFactory
     fun `json files that pass validation`(): List<DynamicTest> =
-        jsonFilesIn(validationSuccessDir).map { file ->
+        jsonFilesIn(requireDirectory(validationSuccessDir)).map { file ->
             dynamicTest(file.nameWithoutExtension) {
                 val jsonData = file.readText()
 
@@ -81,6 +83,18 @@ class GeneratePDFTest {
                 comparePdf("validation-success/${file.nameWithoutExtension}", data, outputSubfolder)
             }
         }
+
+    /**
+     * Fails loudly if [dir] doesn't exist or isn't a directory, instead of letting
+     * `File.listFiles()` silently return null and the test factory silently produce 0 tests.
+     */
+    private fun requireDirectory(dir: File): File {
+        check(dir.isDirectory) {
+            "Expected test data directory does not exist: '${dir.path}'. " +
+                "If it was renamed or moved, update ${this::class.simpleName} accordingly."
+        }
+        return dir
+    }
 
     private fun jsonFilesIn(dir: File): List<File> =
         (dir.listFiles { f -> f.isFile && f.extension == "json" } ?: emptyArray())
