@@ -10,9 +10,11 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateForlengetBehandlingstidPDFTest {
 
+    private val outputSubfolder = javaClass.simpleName
+
     @BeforeAll
     fun emptyFileDiffFolder() {
-        cleanOutputFolder()
+        cleanOutputFolder(outputSubfolder)
     }
 
     @Test
@@ -36,7 +38,7 @@ class GenerateForlengetBehandlingstidPDFTest {
             ),
             currentDate = TEST_DATE,
         )
-        comparePdf("forlengetbehandlingstid", data)
+        comparePdf("forlengetbehandlingstid", data, outputSubfolder)
     }
 
 }

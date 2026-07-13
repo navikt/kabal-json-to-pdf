@@ -10,9 +10,11 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateSvarbrevPDFTest {
 
+    private val outputSubfolder = javaClass.simpleName
+
     @BeforeAll
     fun emptyFileDiffFolder() {
-        cleanOutputFolder()
+        cleanOutputFolder(outputSubfolder)
     }
 
     @Test
@@ -35,7 +37,7 @@ class GenerateSvarbrevPDFTest {
             ),
             currentDate = TEST_DATE,
         )
-        comparePdf("svarbrev_klage_full", data)
+        comparePdf("svarbrev_klage_full", data, outputSubfolder)
     }
 
     @Test
@@ -58,7 +60,7 @@ class GenerateSvarbrevPDFTest {
             ),
             currentDate = TEST_DATE,
         )
-        comparePdf("svarbrev_anke_full", data)
+        comparePdf("svarbrev_anke_full", data, outputSubfolder)
     }
 
     @Test
@@ -81,7 +83,7 @@ class GenerateSvarbrevPDFTest {
             ),
             currentDate = TEST_DATE,
         )
-        comparePdf("svarbrev_gjenopptak_full", data)
+        comparePdf("svarbrev_gjenopptak_full", data, outputSubfolder)
     }
 
 }
