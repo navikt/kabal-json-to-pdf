@@ -1,0 +1,30 @@
+[
+  {
+    "type": "saksinfo",
+    "children": [
+      {
+        "type": "saksnummer",
+        "isInitialized": true,
+        "deletable": false,
+        "children": [
+          {
+            "text": ""
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Saksnummer",
+            "deletable": false,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "text": ""
+          }
+        ]
+      }
+    ]
+  }
+]
