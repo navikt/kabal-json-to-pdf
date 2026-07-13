@@ -66,6 +66,7 @@ fun comparePdf(resource: String, actualPdfBytes: ByteArray, outputSubfolder: Str
         System.err.println("For test case ($resource) writing failure artefacts to '$outputFolder'")
         Files.createDirectories(outputFolder)
         Files.write(outputFolder.resolve("actual.pdf"), actualPdfBytes)
+        Files.write(outputFolder.resolve("expected.pdf"), expectedPdfBytes)
     }
 
     for (result in problems) {
