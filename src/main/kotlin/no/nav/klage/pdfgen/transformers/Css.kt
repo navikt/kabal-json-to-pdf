@@ -18,6 +18,16 @@ fun getCss() = """
       margin: 0;
       color: black;
     }
+    /* The last top-level element in the document (whatever it is - a paragraph, a
+       heading, the signature, etc.) must not carry a trailing margin-bottom. Any
+       such margin still counts toward the page's content height, so if the content
+       lands close enough to the page boundary, that trailing margin alone can spill
+       onto an otherwise completely empty extra page. #body > *:last-child has higher
+       specificity than the plain element/class selectors below, so this wins
+       regardless of source order. */
+    #body > *:last-child {
+      margin-bottom: 0;
+    }
     .signature-column {
       font-size: 11pt;
       display: inline-block;
