@@ -1,0 +1,303 @@
+[
+  {
+    "type": "saksinfo",
+    "children": [
+      {
+        "type": "label-content",
+        "source": "klagerIfEqualToSakenGjelder.name",
+        "threadIds": [],
+        "result": "FATTET ØRN MUSKEL\n",
+        "label": "Den ankende part",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "sakenGjelderIfDifferentFromKlager.name",
+        "threadIds": [],
+        "label": "Saken gjelder",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "sakenGjelder.fnr",
+        "threadIds": [],
+        "result": "148288 97927\n",
+        "label": "Fødselsnummer",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "klagerIfDifferentFromSakenGjelder.name",
+        "threadIds": [],
+        "label": "Den ankende part",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "fullmektig",
+        "show": false,
+        "children": [
+          {
+            "text": ""
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Fullmektigetikett",
+            "deletable": false,
+            "children": [
+              {
+                "text": "Fullmektig"
+              }
+            ]
+          },
+          {
+            "text": ""
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Fullmektig",
+            "deletable": false,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "label-content",
+        "source": "ankemotpart",
+        "threadIds": [],
+        "result": "Arbeids- og velferdsdirektoratet Klageinstans\n",
+        "label": "Ankemotpart",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "saksnummer",
+        "isInitialized": true,
+        "deletable": false,
+        "children": [
+          {
+            "text": ""
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Saksnummer",
+            "deletable": false,
+            "children": [
+              {
+                "text": "10695768"
+              }
+            ]
+          },
+          {
+            "text": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-esel",
+    "textIdList": [
+      "ae654f03-649f-436b-a437-6d2bf6c70102"
+    ],
+    "language": "nb",
+    "id": "071b3123-d9d7-4b88-a742-67aa2b05edb2",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "16",
+        "16>232",
+        "GLOBAL>232"
+      ],
+      "utfallIdList": "12",
+      "templateSectionIdList": [
+        "ettersending-til-trygderetten>section-esel",
+        "GLOBAL>section-esel"
+      ]
+    },
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-esel",
+        "id": "ae654f03-649f-436b-a437-6d2bf6c70102",
+        "language": "nb",
+        "_id": "ae654f03-649f-436b-a437-6d2bf6c70102",
+        "children": [
+          {
+            "type": "h1",
+            "align": "left",
+            "children": [
+              {
+                "text": "Ettersending til Trygderetten"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-rev-v2",
+    "textIdList": [
+      "cbf18ed8-f297-46fd-809a-f9461999b79d"
+    ],
+    "language": "nb",
+    "id": "a074982c-48f7-4198-94f6-b891fed9341f",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "16",
+        "16>232",
+        "GLOBAL>232"
+      ],
+      "utfallIdList": "12",
+      "templateSectionIdList": [
+        "ettersending-til-trygderetten>section-rev-v2",
+        "GLOBAL>section-rev-v2"
+      ]
+    },
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-rev-v2",
+        "id": "cbf18ed8-f297-46fd-809a-f9461999b79d",
+        "language": "nb",
+        "_id": "cbf18ed8-f297-46fd-809a-f9461999b79d",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Saksnummer hos Trygderetten: 2026/846. "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Vi viser til oversendelsesbrev datert 4. februar 2026.\nOversendelsesbrevet ble sendt til Trygderetten den 18. februar 2026. Trygderetten har i brev 25. juni\n2026 opplyst om at de vurderer å avvise anken som følge av manglende rettslig interesse, og bedt\nklageinstansen om å komme med eventuelle merknader."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Klageinstansen er enig i at anken kan avvises på grunn av manglende rettslig interesse."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Sykepengegrunnlaget er etter folketrygdloven begrenset til 6G, og en eventuell endring i tråd med\nankende parts syn vil derfor uansett ikke kunne medføre økt sykepengeutbetaling. Anken gjelder\ndermed ikke et forhold som kan påvirke partens rettsstilling."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-hai",
+    "textIdList": [
+      "56a7516b-434e-485d-a2be-876e4d8cc3e3"
+    ],
+    "language": "nb",
+    "id": "ed0d6bb9-31e5-46b4-8ca9-918da9a6b83a",
+    "query": {
+      "ytelseHjemmelIdList": [
+        "16",
+        "16>232",
+        "GLOBAL>232"
+      ],
+      "utfallIdList": "12",
+      "templateSectionIdList": [
+        "ettersending-til-trygderetten>section-hai",
+        "GLOBAL>section-hai"
+      ]
+    },
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-hai",
+        "id": "56a7516b-434e-485d-a2be-876e4d8cc3e3",
+        "language": "nb",
+        "_id": "56a7516b-434e-485d-a2be-876e4d8cc3e3",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Vi vil bemerke at vurderingen av rettslig interesse etter trygderettsloven ikke fullt ut sammenfaller\nmed vurderingen etter forvaltningsloven. Etter forvaltningsloven vil en person som saken direkte\ngjelder som det klare utgangspunkt være å anse som part, og dermed ha krav på klagebehandling.\nTerskelen for å avvise en klage i forvaltningen på grunn av manglende rettslig interesse er derfor\nsvært høy. Dette er bakgrunnen for at klageinstans som hovedregel ikke avviser saker på dette\ngrunnlaget, selv om utfallet av klagebehandlingen ikke vil kunne endre partens rettsstilling"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Med hilsen\nArbeids- og velferdsdirektoratet Klageinstans"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "signature",
+    "enabled": true,
+    "useShortName": false,
+    "includeMedunderskriver": false,
+    "useSuffix": true,
+    "threadIds": [],
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "saksbehandler": {
+      "name": "Christian Skrøvseth",
+      "title": "avdelingsdirektør/saksbehandler"
+    }
+  }
+]
