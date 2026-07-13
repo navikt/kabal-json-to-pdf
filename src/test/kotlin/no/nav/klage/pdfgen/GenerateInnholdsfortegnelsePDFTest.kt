@@ -13,9 +13,11 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateInnholdsfortegnelsePDFTest {
 
+    private val outputSubfolder = javaClass.simpleName
+
     @BeforeAll
     fun emptyFileDiffFolder() {
-        cleanOutputFolder()
+        cleanOutputFolder(outputSubfolder)
     }
 
     @Test
@@ -75,6 +77,6 @@ class GenerateInnholdsfortegnelsePDFTest {
                 ),
             ),
         ))
-        comparePdf("vedleggsoversikt", data)
+        comparePdf("vedleggsoversikt", data, outputSubfolder)
     }
 }

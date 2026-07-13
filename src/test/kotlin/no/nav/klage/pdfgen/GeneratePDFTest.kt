@@ -3,130 +3,86 @@ package no.nav.klage.pdfgen
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.PDFGenService
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.DynamicTest
+import org.junit.jupiter.api.DynamicTest.dynamicTest
+import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.assertThrows
 import java.io.File
 
-
+/**
+ * Test cases are driven entirely by the JSON files found under
+ * `src/test/resources/json-test-data`. Every file is both:
+ *
+ * 1. validated with `validateDocumentContent`, and
+ * 2. rendered with `getPDFAsByteArray` and compared against its expected snapshot under
+ *    `expected-pdf/`, which mirrors this folder structure.
+ *
+ * Files are split into two folders based on the validation outcome:
+ *
+ * - `validation-error/<Exception>/` -> `validateDocumentContent` must throw `<Exception>`.
+ * - `validation-success/`           -> `validateDocumentContent` must complete without throwing.
+ *
+ * To add a new test case, just drop a JSON file into the relevant folder, with a matching
+ * `expected-pdf/<same folder>/<name>.pdf` - no new test method needed.
+ */
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class GeneratePDF {
+class GeneratePDFTest {
+
+    private val validationErrorDir = File("$TEST_JSON_TEST_DATA_PATH/validation-error")
+    private val validationSuccessDir = File("$TEST_JSON_TEST_DATA_PATH/validation-success")
+
+    // Exceptions expected under validation-error/<folder name>/*.json.
+    // Add new entries here when introducing a new exception type as a subfolder.
+    private val exceptionsByName = mapOf(
+        EmptyPlaceholderException::class.simpleName to EmptyPlaceholderException::class.java,
+        EmptyRegelverkException::class.simpleName to EmptyRegelverkException::class.java,
+    )
+
+    private val outputSubfolder = javaClass.simpleName
 
     @BeforeAll
     fun emptyFileDiffFolder() {
-        cleanOutputFolder()
+        cleanOutputFolder(outputSubfolder)
     }
 
-    @Test
-    fun `generate pdf with center-align`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/center-align.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("center-align", data)
-    }
+    @TestFactory
+    fun `json files that fail validation`(): List<DynamicTest> =
+        (validationErrorDir.listFiles { it.isDirectory }?.sortedBy { it.name } ?: emptyList())
+            .flatMap { exceptionDir ->
+                val exceptionClass = exceptionsByName[exceptionDir.name]
+                    ?: error(
+                        "No exception class registered for folder '${exceptionDir.name}'. " +
+                            "Add it to `exceptionsByName` in ${this::class.simpleName}."
+                    )
+                jsonFilesIn(exceptionDir).map { file ->
+                    dynamicTest(file.nameWithoutExtension) {
+                        val jsonData = file.readText()
 
-    @Test
-    fun `generate pdf from table input`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/tables.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("tables", data)
-    }
+                        assertThrows(exceptionClass) { PDFGenService().validateDocumentContent(jsonData) }
 
-    @Test
-    fun `generate pdf with placeholder examples`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/incomplete-placeholder-example.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("incomplete-placeholder-example", data)
-    }
+                        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
+                        comparePdf("validation-error/${exceptionDir.name}/${file.nameWithoutExtension}", data, outputSubfolder)
+                    }
+                }
+            }
 
-    @Test
-    fun `generate pdf with redigerbar maltekst`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/redigerbar-maltekst.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("redigerbar-maltekst", data)
-    }
+    @TestFactory
+    fun `json files that pass validation`(): List<DynamicTest> =
+        jsonFilesIn(validationSuccessDir).map { file ->
+            dynamicTest(file.nameWithoutExtension) {
+                val jsonData = file.readText()
 
-    @Test
-    fun `validate pdf with incomplete placeholder throws exception`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/incomplete-placeholder-example.json").readText()
-        assertThrows<EmptyPlaceholderException> { PDFGenService().validateDocumentContent(jsonData) }
-    }
+                PDFGenService().validateDocumentContent(jsonData)
 
-    @Test
-    fun `validate pdf with complete placeholders passes`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/complete-placeholder-example.json").readText()
-        PDFGenService().validateDocumentContent(jsonData)
-    }
+                val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
+                comparePdf("validation-success/${file.nameWithoutExtension}", data, outputSubfolder)
+            }
+        }
 
-    @Test
-    fun `validate pdf with incomplete regelverk throws exception`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/empty-regelverk-container.json").readText()
-        assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
-    }
-
-    @Test
-    fun `validate pdf with text somewhere in regelverk passes`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/not-all-empty-text-regelverk.json").readText()
-        PDFGenService().validateDocumentContent(jsonData)
-    }
-
-    @Test
-    fun `validate pdf with only empty texts in regelverk throws exception`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/all-empty-text-regelverk.json").readText()
-        assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
-    }
-
-    @Test
-    fun `validate pdf with full klagevedtak`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/full-klagevedtak.json").readText()
-        assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
-    }
-
-    @Test
-    fun `validate pdf with legacy klagevedtak`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/legacy-klagevedtak.json").readText()
-        assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
-    }
-
-    @Test
-    fun `tilsvarsbrev med oversendelsesbrev`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/tilsvarsbrev-med-oversendelsesbrev.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("tilsvarsbrev-med-oversendelsesbrev", data)
-    }
-
-    @Test
-    fun `placeholder with newline as its only content`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/placeholder-with-newline-only.json").readText()
-        assertThrows<EmptyPlaceholderException> { PDFGenService().validateDocumentContent(jsonData) }
-    }
-
-    @Test
-    fun `placeholder with newline text node, but with other text nodes with content`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/placeholder-with-newline.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("placeholder-with-newline", data)
-    }
-
-    @Test
-    fun `nested list`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/nested-list.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("nested-list", data)
-    }
-
-    @Test
-    fun `full klagevedtak`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/full-klagevedtak.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("full-klagevedtak", data)
-    }
-
-    @Test
-    fun `legacy klagevedtak with current-date, topptekst, bunntekst and unwrapped saksinfo`() {
-        val jsonData = File("$TEST_JSON_TEST_DATA_PATH/legacy-klagevedtak.json").readText()
-        val data = PDFGenService().getPDFAsByteArray(json = jsonData, currentDate = TEST_DATE)
-        comparePdf("legacy-klagevedtak", data)
-    }
+    private fun jsonFilesIn(dir: File): List<File> =
+        (dir.listFiles { f -> f.isFile && f.extension == "json" } ?: emptyArray())
+            .sortedBy { it.name }
 }
