@@ -1,6 +1,7 @@
 package no.nav.klage.pdfgen.service
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
 import no.nav.klage.pdfgen.transformers.HtmlCreator
 import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
@@ -18,12 +19,13 @@ class PDFGenService {
         return createPDFA(doc)
     }
 
-    fun validateDocumentContent(json: String) {
-        getHTMLDocument(
-            list = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
+    fun validateDocumentContent(json: String): Set<DocumentValidationResponse.DocumentValidationError> {
+        val c = HtmlCreator(
+            dataList = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
             validationMode = true,
             currentDate = LocalDate.now(),
         )
+        return c.getValidationErrors()
     }
 
     private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false, currentDate: LocalDate): Document {
