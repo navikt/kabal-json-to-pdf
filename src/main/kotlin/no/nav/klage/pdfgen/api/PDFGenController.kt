@@ -6,8 +6,6 @@ import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
-import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
-import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.ForlengetBehandlingstidService
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
@@ -24,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 
 @RestController
 @Tag(name = "kabal-json-to-pdf", description = "Create PDF from JSON")
@@ -154,25 +152,9 @@ class PDFGenController(
         logger.debug("${::validate.name} called. See body in team-logs")
         teamLogger.debug("validate() called. Received json: {}", json)
 
-        return try {
-            pdfGenService.validateDocumentContent(json)
-            DocumentValidationResponse()
-        } catch (epe: EmptyPlaceholderException) {
-            DocumentValidationResponse(
-                errors = listOf(
-                    DocumentValidationResponse.DocumentValidationError(
-                        type = "EMPTY_PLACEHOLDERS"
-                    )
-                )
-            )
-        } catch (ere: EmptyRegelverkException) {
-            DocumentValidationResponse(
-                errors = listOf(
-                    DocumentValidationResponse.DocumentValidationError(
-                        type = "EMPTY_REGELVERK"
-                    )
-                )
-            )
-        }
+        val errorTypes = pdfGenService.validateDocumentContent(json)
+        return DocumentValidationResponse(
+            errors = errorTypes.toList()
+        )
     }
 }

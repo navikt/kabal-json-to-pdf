@@ -6,10 +6,10 @@ import java.time.LocalDate
 data class DocumentValidationResponse(
     val errors: List<DocumentValidationError> = emptyList()
 ) {
-    data class DocumentValidationError(
-        val type: String,
-        val paths: List<List<Int>> = emptyList()
-    )
+    enum class DocumentValidationError {
+        EMPTY_PLACEHOLDER,
+        EMPTY_REGELVERK,
+    }
 }
 
 data class InnholdsfortegnelseRequest(

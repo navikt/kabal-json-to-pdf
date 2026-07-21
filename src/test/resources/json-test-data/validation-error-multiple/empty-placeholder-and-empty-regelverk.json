@@ -1,0 +1,60 @@
+[
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "text": " "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "PLASSHOLDER",
+        "children": [
+          {
+            "text": "\u200B"
+          },
+          {
+            "text": " "
+          },
+          {
+            "text": null
+          }
+        ]
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "regelverk",
+    "children": [
+      {
+        "type": "page-break",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-gnu",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Regelverket som gjelder i saken"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "regelverk-container",
+        "children": []
+      }
+    ]
+  }
+]

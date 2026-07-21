@@ -3,8 +3,7 @@ package no.nav.klage.pdfgen.transformers
 import kotlinx.html.*
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
-import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
-import no.nav.klage.pdfgen.exception.EmptyRegelverkException
+import no.nav.klage.pdfgen.api.view.DocumentValidationResponse.DocumentValidationError
 import no.nav.klage.pdfgen.util.getFormattedDate
 import no.nav.klage.pdfgen.util.getLogger
 import org.w3c.dom.Document
@@ -22,6 +21,9 @@ class HtmlCreator(
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
     }
+
+    private val validationErrors = mutableSetOf<DocumentValidationError>()
+
 
     private val document: Document = createHTMLDocument()
         .html {
@@ -149,11 +151,10 @@ class HtmlCreator(
             "placeholder" -> {
                 if (placeholderTextMissingInChildren(map)) {
                     if (validationMode) {
-                        throw EmptyPlaceholderException("Placeholder error")
-                    } else {
-                        val text = map["placeholder"]
-                        return listOf(createLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text")))
+                        validationErrors.add(DocumentValidationError.EMPTY_PLACEHOLDER)
                     }
+                    val text = map["placeholder"]
+                    return listOf(createLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text")))
                 } else {
                     return loopOverChildren(children)
                 }
@@ -175,12 +176,8 @@ class HtmlCreator(
             "maltekst", "redigerbar-maltekst", "regelverk" -> return loopOverChildren(children)
 
             "regelverk-container" -> {
-                if (validationMode) {
-                    if (children.isEmpty()) {
-                        throw EmptyRegelverkException("Empty regelverk")
-                    } else if (getTexts(map).isEmpty()) {
-                        throw EmptyRegelverkException("Empty regelverk")
-                    }
+                if (validationMode && (children.isEmpty() || getTexts(map).isEmpty())) {
+                    validationErrors.add(DocumentValidationError.EMPTY_REGELVERK)
                 }
 
                 return loopOverChildren(children)
@@ -383,6 +380,13 @@ class HtmlCreator(
             classes = inputClasses
             +text
         }
+    }
+
+    fun getValidationErrors(): Set<DocumentValidationError> {
+        dataList.forEach {
+            processElement(it)
+        }
+        return validationErrors
     }
 
     fun getDoc(): Document {
