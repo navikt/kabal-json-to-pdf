@@ -91,13 +91,16 @@ data class ForlengetBehandlingstidRequest(
     enum class Type {
         KLAGE,
         ANKE,
-        OMGJOERINGSKRAV;
+        OMGJOERINGSKRAV,
+        BEGJAERING_OM_GJENOPPTAK,
+        ;
 
         fun getSakstypeDisplayName(): String {
             return when (this) {
                 KLAGE -> "klagen"
                 ANKE -> "anken"
                 OMGJOERINGSKRAV -> "omgjøringskravet"
+                BEGJAERING_OM_GJENOPPTAK -> "gjenopptaksbegjæringen"
             }
         }
 
@@ -106,6 +109,7 @@ data class ForlengetBehandlingstidRequest(
                 KLAGE -> "din"
                 ANKE -> "din"
                 OMGJOERINGSKRAV -> "ditt"
+                BEGJAERING_OM_GJENOPPTAK -> "din"
             }
         }
 
@@ -114,6 +118,7 @@ data class ForlengetBehandlingstidRequest(
                 KLAGE -> "Klager"
                 ANKE -> "Den ankende part"
                 OMGJOERINGSKRAV -> "Den som krever omgjøring"
+                BEGJAERING_OM_GJENOPPTAK -> "Den som krever gjenopptak"
             }
         }
     }
