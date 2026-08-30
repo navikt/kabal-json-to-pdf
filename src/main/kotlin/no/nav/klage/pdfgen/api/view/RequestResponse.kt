@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.LocalDate
 
 data class DocumentValidationResponse(
-    val errors: List<DocumentValidationError> = emptyList()
+    val errors: List<DocumentValidationError> = emptyList(),
 ) {
     enum class DocumentValidationError {
         EMPTY_PLACEHOLDER,
@@ -18,22 +18,22 @@ data class InnholdsfortegnelseRequest(
     val documents: List<Document>,
 ) {
     data class Document(
-      val tittel: String,
-      val journalpostMetadataList: List<JournalpostMetadata>,
+        val tittel: String,
+        val journalpostMetadataList: List<JournalpostMetadata>,
     ) {
-      data class JournalpostMetadata(
-        val tema: String,
-        val dato: LocalDate,
-        val avsenderMottaker: String,
-        val saksnummer: String,
-        val type: Type,
-      ) {
-        enum class Type {
-            I,
-            U,
-            N,
+        data class JournalpostMetadata(
+            val tema: String,
+            val dato: LocalDate,
+            val avsenderMottaker: String,
+            val saksnummer: String,
+            val type: Type,
+        ) {
+            enum class Type {
+                I,
+                U,
+                N,
+            }
         }
-      }
     }
 }
 
@@ -95,31 +95,28 @@ data class ForlengetBehandlingstidRequest(
         BEGJAERING_OM_GJENOPPTAK,
         ;
 
-        fun getSakstypeDisplayName(): String {
-            return when (this) {
+        fun getSakstypeDisplayName(): String =
+            when (this) {
                 KLAGE -> "klagen"
                 ANKE -> "anken"
                 OMGJOERINGSKRAV -> "omgjøringskravet"
                 BEGJAERING_OM_GJENOPPTAK -> "gjenopptaksbegjæringen"
             }
-        }
 
-        fun getSakstypePossessive(): String {
-            return when (this) {
+        fun getSakstypePossessive(): String =
+            when (this) {
                 KLAGE -> "din"
                 ANKE -> "din"
                 OMGJOERINGSKRAV -> "ditt"
                 BEGJAERING_OM_GJENOPPTAK -> "din"
             }
-        }
 
-        fun getKlagerDisplay(): String {
-            return when (this) {
+        fun getKlagerDisplay(): String =
+            when (this) {
                 KLAGE -> "Klager"
                 ANKE -> "Den ankende part"
                 OMGJOERINGSKRAV -> "Den som krever omgjøring"
                 BEGJAERING_OM_GJENOPPTAK -> "Den som krever gjenopptak"
             }
-        }
     }
 }

@@ -27,7 +27,11 @@ val TEST_DATE: LocalDate = LocalDate.of(2025, 6, 11)
  * "expected-pdf/validation-success/tables.pdf", and its failure artefacts (if any) are written
  * under "test-output/<outputSubfolder>/validation-success/tables/".
  */
-fun comparePdf(resource: String, actualPdfBytes: ByteArray, outputSubfolder: String) {
+fun comparePdf(
+    resource: String,
+    actualPdfBytes: ByteArray,
+    outputSubfolder: String,
+) {
     // NIO's Path parser treats "/" as a valid separator on every platform (including Windows),
     // so [resource] can be resolved directly against a base path without manually splitting it
     // into a directory and a file name first.
@@ -43,25 +47,30 @@ fun comparePdf(resource: String, actualPdfBytes: ByteArray, outputSubfolder: Str
     if (!Files.exists(pathToFile)) {
         fail(
             "No expected PDF found for resource '$resource'.\n" +
-                    "Expected file:  $pathToFile\n" +
-                    "To create it, review the generated PDF and, if it looks correct, copy it into place:\n" +
-                    "  cp $generatedPdfPath $pathToFile"
+                "Expected file:  $pathToFile\n" +
+                "To create it, review the generated PDF and, if it looks correct, copy it into place:\n" +
+                "  cp $generatedPdfPath $pathToFile",
         )
     }
 
     val expectedPdfBytes = Files.readAllBytes(pathToFile)
 
-    val problems = PdfVisualTester.comparePdfDocuments(
-        expectedPdfBytes,
-        actualPdfBytes,
-        resource,
-        false
-    )
+    val problems =
+        PdfVisualTester.comparePdfDocuments(
+            expectedPdfBytes,
+            actualPdfBytes,
+            resource,
+            false,
+        )
 
     if (!problems.isEmpty()) {
         System.err.println("Found problems with test case ($resource):")
-        System.err.println(problems.stream().map { p: PdfCompareResult? -> p!!.logMessage }
-            .collect(Collectors.joining("\n    ", "[\n    ", "\n]")))
+        System.err.println(
+            problems
+                .stream()
+                .map { p: PdfCompareResult? -> p!!.logMessage }
+                .collect(Collectors.joining("\n    ", "[\n    ", "\n]")),
+        )
 
         System.err.println("For test case ($resource) writing failure artefacts to '$outputFolder'")
         Files.createDirectories(outputFolder)
@@ -72,16 +81,19 @@ fun comparePdf(resource: String, actualPdfBytes: ByteArray, outputSubfolder: Str
     for (result in problems) {
         if (result.testImages != null) {
             ImageIO.write(
-                result.testImages.createDiff(), "png",
-                outputFolder.resolve("${result.pageNumber}-diff.png").toFile()
+                result.testImages.createDiff(),
+                "png",
+                outputFolder.resolve("${result.pageNumber}-diff.png").toFile(),
             )
             ImageIO.write(
-                result.testImages.actual, "png",
-                outputFolder.resolve("${result.pageNumber}-actual.png").toFile()
+                result.testImages.actual,
+                "png",
+                outputFolder.resolve("${result.pageNumber}-actual.png").toFile(),
             )
             ImageIO.write(
-                result.testImages.expected, "png",
-                outputFolder.resolve("${result.pageNumber}-expected.png").toFile()
+                result.testImages.expected,
+                "png",
+                outputFolder.resolve("${result.pageNumber}-expected.png").toFile(),
             )
         }
     }

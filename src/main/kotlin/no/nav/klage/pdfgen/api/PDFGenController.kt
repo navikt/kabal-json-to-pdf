@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Locale
 
 @RestController
 @Tag(name = "kabal-json-to-pdf", description = "Create PDF from JSON")
@@ -30,9 +30,8 @@ class PDFGenController(
     private val pdfGenService: PDFGenService,
     private val innholdsfortegnelseService: InnholdsfortegnelseService,
     private val svarbrevService: SvarbrevService,
-    private val forlengetBehandlingstidService: ForlengetBehandlingstidService
+    private val forlengetBehandlingstidService: ForlengetBehandlingstidService,
 ) {
-
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
@@ -41,12 +40,12 @@ class PDFGenController(
 
     @Operation(
         summary = "Generate pdf from json",
-        description = "Generate pdf from json"
+        description = "Generate pdf from json",
     )
     @ResponseBody
     @PostMapping("/topdf")
     fun toPDF(
-        @RequestBody json: String
+        @RequestBody json: String,
     ): ResponseEntity<ByteArray> {
         logger.debug("toPDF() called. See body in team-logs")
         teamLogger.debug("toPDF() called. Received json: {}", json)
@@ -59,18 +58,18 @@ class PDFGenController(
         return ResponseEntity(
             data,
             responseHeaders,
-            HttpStatus.OK
+            HttpStatus.OK,
         )
     }
 
     @Operation(
         summary = "Generate pdf from json",
-        description = "Generate pdf from json"
+        description = "Generate pdf from json",
     )
     @ResponseBody
     @PostMapping("/toinnholdsfortegnelse")
     fun toInnholdsfortegnelsePDFV2(
-    @RequestBody input: InnholdsfortegnelseRequest,
+        @RequestBody input: InnholdsfortegnelseRequest,
     ): ResponseEntity<ByteArray> {
         logger.debug("toInnholdsfortegnelsePDF() called. See body in team-logs")
         teamLogger.debug("toInnholdsfortegnelsePDF() called. Received input: {}", input)
@@ -80,22 +79,22 @@ class PDFGenController(
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
 
-        val DATE_FORMAT =
+        val dateFormat =
             DateTimeFormatter.ofPattern("dd. MMM yyyy", Locale.forLanguageTag("nb-NO")).withZone(ZoneId.of("Europe/Oslo"))
 
-        val filename = "vedleggsoversikt til \"${input.parentTitle}\", ${input.parentDate.format(DATE_FORMAT)}"
+        val filename = "vedleggsoversikt til \"${input.parentTitle}\", ${input.parentDate.format(dateFormat)}"
 
         responseHeaders.add("Content-Disposition", "inline; filename=$filename.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
-            HttpStatus.OK
+            HttpStatus.OK,
         )
     }
 
     @Operation(
         summary = "Generate svarbrev",
-        description = "Generate svarbrev"
+        description = "Generate svarbrev",
     )
     @ResponseBody
     @PostMapping("/svarbrev")
@@ -113,13 +112,13 @@ class PDFGenController(
         return ResponseEntity(
             data,
             responseHeaders,
-            HttpStatus.OK
+            HttpStatus.OK,
         )
     }
 
     @Operation(
         summary = "Generate forlenget behandlingstid letter",
-        description = "Generate forlenget behandlingstid letter"
+        description = "Generate forlenget behandlingstid letter",
     )
     @ResponseBody
     @PostMapping("/forlengetbehandlingstid")
@@ -137,24 +136,24 @@ class PDFGenController(
         return ResponseEntity(
             data,
             responseHeaders,
-            HttpStatus.OK
+            HttpStatus.OK,
         )
     }
 
     @Operation(
         summary = "Validate pdf input",
-        description = "Validate pdf input"
+        description = "Validate pdf input",
     )
     @PostMapping("/validate")
     fun validate(
-        @RequestBody json: String
+        @RequestBody json: String,
     ): DocumentValidationResponse {
         logger.debug("${::validate.name} called. See body in team-logs")
         teamLogger.debug("validate() called. Received json: {}", json)
 
         val errorTypes = pdfGenService.validateDocumentContent(json)
         return DocumentValidationResponse(
-            errors = errorTypes.toList()
+            errors = errorTypes.toList(),
         )
     }
 }

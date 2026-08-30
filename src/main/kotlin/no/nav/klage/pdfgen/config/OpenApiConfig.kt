@@ -7,13 +7,12 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class OpenApiConfig {
-
     @Bean
-    fun apiInternal(): GroupedOpenApi {
-        return GroupedOpenApi.builder()
+    fun apiInternal(): GroupedOpenApi =
+        GroupedOpenApi
+            .builder()
             .group("standard")
             .packagesToScan(PDFGenController::class.java.packageName)
             .pathsToMatch("/**")
             .build()
-    }
 }
