@@ -1,10 +1,30 @@
 package no.nav.klage.pdfgen.service
 
-import kotlinx.html.*
+import kotlinx.html.BODY
+import kotlinx.html.body
+import kotlinx.html.br
+import kotlinx.html.classes
+import kotlinx.html.div
 import kotlinx.html.dom.createHTMLDocument
+import kotlinx.html.h1
+import kotlinx.html.h2
+import kotlinx.html.head
+import kotlinx.html.header
+import kotlinx.html.html
+import kotlinx.html.id
+import kotlinx.html.img
+import kotlinx.html.p
+import kotlinx.html.span
+import kotlinx.html.style
+import kotlinx.html.title
+import kotlinx.html.unsafe
 import no.nav.klage.pdfgen.api.view.ForlengetBehandlingstidRequest
 import no.nav.klage.pdfgen.transformers.getCss
-import no.nav.klage.pdfgen.util.*
+import no.nav.klage.pdfgen.util.createPDFA
+import no.nav.klage.pdfgen.util.getBehandlingstidText
+import no.nav.klage.pdfgen.util.getFormattedDate
+import no.nav.klage.pdfgen.util.getYtelseDisplayText
+import no.nav.klage.pdfgen.util.toFnrView
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.time.LocalDate
@@ -15,21 +35,25 @@ class ForlengetBehandlingstidService {
         forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest,
         currentDate: LocalDate = LocalDate.now(),
     ): ByteArray {
-        val doc = getHTMLDocument(
-            forlengetBehandlingstidRequest = forlengetBehandlingstidRequest,
-            currentDate = currentDate,
-        )
+        val doc =
+            getHTMLDocument(
+                forlengetBehandlingstidRequest = forlengetBehandlingstidRequest,
+                currentDate = currentDate,
+            )
         return createPDFA(doc)
     }
 
-    private fun getHTMLDocument(forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest, currentDate: LocalDate): Document {
-        return createHTMLDocument()
+    private fun getHTMLDocument(
+        forlengetBehandlingstidRequest: ForlengetBehandlingstidRequest,
+        currentDate: LocalDate,
+    ): Document =
+        createHTMLDocument()
             .html {
                 head {
                     style {
                         unsafe {
                             raw(
-                                getCss()
+                                getCss(),
                             )
                         }
                     }
@@ -62,7 +86,9 @@ class ForlengetBehandlingstidService {
                             }
                             span { +forlengetBehandlingstidRequest.sakenGjelder.fnr.toFnrView() }
                         }
-                        if (forlengetBehandlingstidRequest.klager != null && forlengetBehandlingstidRequest.klager.fnr != forlengetBehandlingstidRequest.sakenGjelder.fnr) {
+                        if (forlengetBehandlingstidRequest.klager != null &&
+                            forlengetBehandlingstidRequest.klager.fnr != forlengetBehandlingstidRequest.sakenGjelder.fnr
+                        ) {
                             p {
                                 classes = setOf("label-content")
                                 span {
@@ -85,24 +111,21 @@ class ForlengetBehandlingstidService {
                         div {
                             id = "current-date"
                             classes = setOf("current-date")
-                            + getFormattedDate(currentDate)
+                            +getFormattedDate(currentDate)
                         }
                     }
                     h1 {
-                        +"Varsel om lengre saksbehandlingstid enn forventet i ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} som gjelder ${
-                            getYtelseDisplayText(
-                                ytelseId = forlengetBehandlingstidRequest.ytelseId
-                            )
-                        }"
+                        val sakstype = forlengetBehandlingstidRequest.type.getSakstypeDisplayName()
+                        val sakstypePossessive = forlengetBehandlingstidRequest.type.getSakstypePossessive()
+                        val ytelse = getYtelseDisplayText(ytelseId = forlengetBehandlingstidRequest.ytelseId)
+                        +"Varsel om lengre saksbehandlingstid enn forventet i $sakstype $sakstypePossessive som gjelder $ytelse"
                     }
 
-
                     p {
-                        +"Klageinstans mottok ${forlengetBehandlingstidRequest.type.getSakstypeDisplayName()} ${forlengetBehandlingstidRequest.type.getSakstypePossessive()} ${
-                            getFormattedDate(
-                                forlengetBehandlingstidRequest.mottattKlageinstans
-                            )
-                        }."
+                        val sakstype = forlengetBehandlingstidRequest.type.getSakstypeDisplayName()
+                        val sakstypePossessive = forlengetBehandlingstidRequest.type.getSakstypePossessive()
+                        val mottattDato = getFormattedDate(forlengetBehandlingstidRequest.mottattKlageinstans)
+                        +"Klageinstans mottok $sakstype $sakstypePossessive $mottattDato."
                     }
 
                     cleanupInputNewParagraph(forlengetBehandlingstidRequest.previousBehandlingstidInfo)
@@ -116,7 +139,7 @@ class ForlengetBehandlingstidService {
                             getBehandlingstidText(
                                 behandlingstidUnitTypeId = forlengetBehandlingstidRequest.behandlingstidUnitTypeId,
                                 behandlingstidUnits = forlengetBehandlingstidRequest.behandlingstidUnits,
-                                behandlingstidDate = forlengetBehandlingstidRequest.behandlingstidDate
+                                behandlingstidDate = forlengetBehandlingstidRequest.behandlingstidDate,
                             )
                         }"
                         if (forlengetBehandlingstidRequest.behandlingstidDate != null) {
@@ -132,13 +155,23 @@ class ForlengetBehandlingstidService {
 
                     h2 { +"Du må melde fra om endringer" }
                     p {
-                        +"Vi ber deg holde oss orientert om forhold som kan ha betydning for avgjørelsen av saken din. Det vil si endringer i for eksempel i medisinske forhold, arbeid, inntekt, sivilstand og liknende."
+                        +(
+                            "Vi ber deg holde oss orientert om forhold som kan ha betydning for avgjørelsen av saken din. Det vil si " +
+                                "endringer i for eksempel i medisinske forhold, arbeid, inntekt, sivilstand og liknende."
+                        )
                     }
                     p {
-                        +"Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding der."
+                        +(
+                            "Hvis du ønsker å ettersende dokumentasjon kan du logge deg inn på mine-klager.nav.no, gå inn på saken " +
+                                "og velge \"Ettersend dokumentasjon\". Du kan også gå inn på nav.no/kontakt og sende skriftlig melding " +
+                                "der."
+                        )
                     }
                     p {
-                        +"Om du ikke ønsker å logge deg inn på nav.no kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                        +(
+                            "Om du ikke ønsker å logge deg inn på nav.no kan du gå til nav.no/klage og trykke på \"Ettersend " +
+                                "dokumentasjon\" for det saken gjelder."
+                        )
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {
@@ -156,11 +189,8 @@ class ForlengetBehandlingstidService {
                     }
                 }
             }
-    }
 
-    private fun BODY.cleanupInputNewParagraph(
-        inputString: String?,
-    ) {
+    private fun BODY.cleanupInputNewParagraph(inputString: String?) {
         if (!inputString.isNullOrBlank()) {
             p {
                 +inputString.trim()
@@ -171,9 +201,7 @@ class ForlengetBehandlingstidService {
         }
     }
 
-    private fun BODY.cleanupInput(
-        inputString: String?,
-    ) {
+    private fun BODY.cleanupInput(inputString: String?) {
         if (!inputString.isNullOrBlank()) {
             +inputString.trim()
             if (inputString.trim().last() != '.') {

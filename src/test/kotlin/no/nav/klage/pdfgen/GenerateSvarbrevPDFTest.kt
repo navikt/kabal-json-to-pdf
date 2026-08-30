@@ -9,7 +9,6 @@ import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GenerateSvarbrevPDFTest {
-
     private val outputSubfolder = javaClass.simpleName
 
     @BeforeAll
@@ -19,71 +18,76 @@ class GenerateSvarbrevPDFTest {
 
     @Test
     fun `generate pdf from full input`() {
-        val data = SvarbrevService().getSvarbrevAsByteArray(
-            SvarbrevRequest(
-                title = "Svarbrev",
-                sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
-                klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
-                ytelseId = "31",
-                fullmektigFritekst = "Fullmektig Fritekst",
-                ankeReceivedDate = TEST_DATE,
-                receivedDate = TEST_DATE,
-                behandlingstidUnits = 12,
-                behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
-                avsenderEnhetId = "4291",
-                type = SvarbrevRequest.Type.KLAGE,
-                initialCustomText = null,
-                customText = "Litt ekstra fritekst.",
-            ),
-            currentDate = TEST_DATE,
-        )
-        comparePdf("svarbrev_klage_full", data, outputSubfolder)
+        val data =
+            SvarbrevService().getSvarbrevAsByteArray(
+                svarbrevRequest =
+                    SvarbrevRequest(
+                        title = "Svarbrev",
+                        sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
+                        klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
+                        ytelseId = "31",
+                        fullmektigFritekst = "Fullmektig Fritekst",
+                        ankeReceivedDate = TEST_DATE,
+                        receivedDate = TEST_DATE,
+                        behandlingstidUnits = 12,
+                        behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
+                        avsenderEnhetId = "4291",
+                        type = SvarbrevRequest.Type.KLAGE,
+                        initialCustomText = null,
+                        customText = "Litt ekstra fritekst.",
+                    ),
+                currentDate = TEST_DATE,
+            )
+        comparePdf(resource = "svarbrev_klage_full", actualPdfBytes = data, outputSubfolder = outputSubfolder)
     }
 
     @Test
     fun `generate pdf from full anke input`() {
-        val data = SvarbrevService().getSvarbrevAsByteArray(
-            SvarbrevRequest(
-                title = "Svarbrev og hei og hei",
-                sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
-                klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
-                ytelseId = "3",
-                fullmektigFritekst = "Fullmektig fritekst",
-                ankeReceivedDate = null,
-                receivedDate = TEST_DATE,
-                behandlingstidUnits = 12,
-                behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
-                avsenderEnhetId = "4291",
-                type = SvarbrevRequest.Type.ANKE,
-                initialCustomText = "Her har vi lagt inn litt ekstra informasjon.",
-                customText = null,
-            ),
-            currentDate = TEST_DATE,
-        )
-        comparePdf("svarbrev_anke_full", data, outputSubfolder)
+        val data =
+            SvarbrevService().getSvarbrevAsByteArray(
+                svarbrevRequest =
+                    SvarbrevRequest(
+                        title = "Svarbrev og hei og hei",
+                        sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
+                        klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
+                        ytelseId = "3",
+                        fullmektigFritekst = "Fullmektig fritekst",
+                        ankeReceivedDate = null,
+                        receivedDate = TEST_DATE,
+                        behandlingstidUnits = 12,
+                        behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
+                        avsenderEnhetId = "4291",
+                        type = SvarbrevRequest.Type.ANKE,
+                        initialCustomText = "Her har vi lagt inn litt ekstra informasjon.",
+                        customText = null,
+                    ),
+                currentDate = TEST_DATE,
+            )
+        comparePdf(resource = "svarbrev_anke_full", actualPdfBytes = data, outputSubfolder = outputSubfolder)
     }
 
     @Test
     fun `generate begjæring om gjenopptak svarbrev`() {
-        val data = SvarbrevService().getSvarbrevAsByteArray(
-            SvarbrevRequest(
-                title = "Svarbrev",
-                sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
-                klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
-                ytelseId = "31",
-                fullmektigFritekst = "Fullmektig Fritekst",
-                ankeReceivedDate = TEST_DATE,
-                receivedDate = TEST_DATE,
-                behandlingstidUnits = 12,
-                behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
-                avsenderEnhetId = "4291",
-                type = SvarbrevRequest.Type.BEGJAERING_OM_GJENOPPTAK,
-                initialCustomText = null,
-                customText = null,
-            ),
-            currentDate = TEST_DATE,
-        )
-        comparePdf("svarbrev_gjenopptak_full", data, outputSubfolder)
+        val data =
+            SvarbrevService().getSvarbrevAsByteArray(
+                svarbrevRequest =
+                    SvarbrevRequest(
+                        title = "Svarbrev",
+                        sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
+                        klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
+                        ytelseId = "31",
+                        fullmektigFritekst = "Fullmektig Fritekst",
+                        ankeReceivedDate = TEST_DATE,
+                        receivedDate = TEST_DATE,
+                        behandlingstidUnits = 12,
+                        behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
+                        avsenderEnhetId = "4291",
+                        type = SvarbrevRequest.Type.BEGJAERING_OM_GJENOPPTAK,
+                        initialCustomText = null,
+                        customText = null,
+                    ),
+                currentDate = TEST_DATE,
+            )
+        comparePdf(resource = "svarbrev_gjenopptak_full", actualPdfBytes = data, outputSubfolder = outputSubfolder)
     }
-
 }

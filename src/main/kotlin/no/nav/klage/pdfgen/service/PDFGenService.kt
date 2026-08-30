@@ -10,31 +10,39 @@ import java.time.LocalDate
 
 @Service
 class PDFGenService {
-
-    fun getPDFAsByteArray(json: String, currentDate: LocalDate = LocalDate.now()): ByteArray {
-        val doc = getHTMLDocument(
-            list = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
-            currentDate = currentDate,
-        )
+    fun getPDFAsByteArray(
+        json: String,
+        currentDate: LocalDate = LocalDate.now(),
+    ): ByteArray {
+        val doc =
+            getHTMLDocument(
+                list = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
+                currentDate = currentDate,
+            )
         return createPDFA(doc)
     }
 
     fun validateDocumentContent(json: String): Set<DocumentValidationResponse.DocumentValidationError> {
-        val c = HtmlCreator(
-            dataList = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
-            validationMode = true,
-            currentDate = LocalDate.now(),
-        )
+        val c =
+            HtmlCreator(
+                dataList = jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>,
+                validationMode = true,
+                currentDate = LocalDate.now(),
+            )
         return c.getValidationErrors()
     }
 
-    private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false, currentDate: LocalDate): Document {
-        val c = HtmlCreator(
-            dataList = list,
-            validationMode = validationMode,
-            currentDate = currentDate,
-        )
+    private fun getHTMLDocument(
+        list: List<Map<String, *>>,
+        validationMode: Boolean = false,
+        currentDate: LocalDate,
+    ): Document {
+        val c =
+            HtmlCreator(
+                dataList = list,
+                validationMode = validationMode,
+                currentDate = currentDate,
+            )
         return c.getDoc()
     }
-
 }

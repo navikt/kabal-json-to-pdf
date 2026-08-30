@@ -28,11 +28,10 @@ fun createPDFA(w3doc: Document): ByteArray {
                         font.family,
                         font.weight,
                         font.style,
-                        font.subset
+                        font.subset,
                     )
                 }
-            }
-            .useColorProfile(colorprofile)
+            }.useColorProfile(colorprofile)
             .useSVGDrawer(BatikSVGDrawer())
             .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
             .withW3cDocument(w3doc, baseUri)
@@ -43,16 +42,16 @@ fun createPDFA(w3doc: Document): ByteArray {
     }
 }
 
-private fun fontsWithTTF(): List<FontWithSupplier> {
-    return fonts.map { font ->
+private fun fontsWithTTF(): List<FontWithSupplier> =
+    fonts.map { font ->
         getFontWithTTF(font = font)
     }
-}
 
 private fun getFontWithTTF(font: FontMetadata): FontWithSupplier {
-    val ttf = TTFParser().parseEmbedded(
-        ClassPathResource("/fonts/${font.path}").inputStream
-    )
+    val ttf =
+        TTFParser().parseEmbedded(
+            ClassPathResource("/fonts/${font.path}").inputStream,
+        )
     ttf.isEnableGsub = false
 
     return FontWithSupplier(
