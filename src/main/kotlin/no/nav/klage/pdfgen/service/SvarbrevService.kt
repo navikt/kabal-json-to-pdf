@@ -143,7 +143,7 @@ class SvarbrevService {
                             +getFormattedDate(currentDate)
                         }
                     }
-                    h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
+                    h1 { +"Klageinstans orienterer om saksbehandlingen av klagen din" }
                     p {
                         +"Vi skal behandle klagen din som gjelder ${
                             getYtelseDisplayText(
@@ -307,7 +307,7 @@ class SvarbrevService {
                         }
                     }
                     h1 {
-                        +"Nav orienterer om saksbehandlingen av anken din som gjelder ${
+                        +"Klageinstans orienterer om saksbehandlingen av anken din som gjelder ${
                             getYtelseDisplayText(
                                 ytelseId = svarbrevRequest.ytelseId,
                             )
