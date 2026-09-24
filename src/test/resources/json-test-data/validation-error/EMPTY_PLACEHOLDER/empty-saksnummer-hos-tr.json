@@ -1,0 +1,30 @@
+[
+  {
+    "type": "saksinfo",
+    "children": [
+      {
+        "type": "saksnummer-hos-tr",
+        "isInitialized": true,
+        "deletable": false,
+        "children": [
+          {
+            "text": ""
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Saksnummer hos Trygderetten",
+            "deletable": false,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "text": ""
+          }
+        ]
+      }
+    ]
+  }
+]
