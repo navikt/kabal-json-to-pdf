@@ -329,6 +329,13 @@ class HtmlCreator(
                     )
                 }
 
+                "saksnummer-hos-tr" -> {
+                    return createSaksnummerElement(
+                        children = children,
+                        label = "Saksnummer hos Trygderetten: ",
+                    )
+                }
+
                 "saksinfo" -> {
                     val saksinfo = document.create.div { classes = setOf("saksinfo") }
 
