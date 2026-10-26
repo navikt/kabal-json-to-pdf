@@ -8,7 +8,7 @@ val ktlintVersion = "1.8.0"
 val mockkVersion = "1.14.11"
 val logstashVersion = "9.0"
 val jsoupVersion = "1.23.2"
-val openHtmlToPdfVersion = "1.1.93"
+val openHtmlToPdfVersion = "1.1.100"
 val kotlinxHtmlVersion = "0.12.0"
 val springDocVersion = "3.1.1"
 val klageKodeverkVersion = "3.3.8"
@@ -19,7 +19,7 @@ repositories {
 }
 
 plugins {
-    val kotlinVersion = "2.4.20"
+    val kotlinVersion = "2.4.21"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
     id("org.springframework.boot") version "4.1.2"
@@ -31,7 +31,7 @@ plugins {
 apply(plugin = "io.spring.dependency-management")
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
