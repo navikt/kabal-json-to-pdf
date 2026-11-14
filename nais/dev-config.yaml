@@ -4,5 +4,5 @@ externalHosts:
 springProfile: dev
 envs:
   - name: JAVA_TOOL_OPTIONS
-    value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 --enable-native-access=ALL-UNNAMED
 tenant: trygdeetaten.no

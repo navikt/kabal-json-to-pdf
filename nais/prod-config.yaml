@@ -3,3 +3,6 @@ ingresses:
 externalHosts:
 springProfile: prod
 tenant: nav.no
+envs:
+  - name: JAVA_TOOL_OPTIONS
+    value: --enable-native-access=ALL-UNNAMED
